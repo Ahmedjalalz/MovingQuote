@@ -32,23 +32,39 @@ const ASSURANCES = [
   },
 ];
 
-export function App() {
-  const [pathname, setPathname] = useState(() => {
-    if (typeof window !== "undefined") {
-      return window.location.pathname.toLowerCase();
-    }
-    return "/";
-  });
+function checkIsUnityRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
 
+  return (
+    path.startsWith("/unitywasteremovals") ||
+    path.startsWith("/unity") ||
+    hash.includes("unitywasteremovals") ||
+    hash.includes("unity") ||
+    params.get("page") === "unitywasteremovals" ||
+    params.get("page") === "unity" ||
+    params.get("route") === "unitywasteremovals" ||
+    params.get("route") === "unity"
+  );
+}
+
+export function App() {
+  const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
 
   useEffect(() => {
     const handleLocationChange = () => {
-      setPathname(window.location.pathname.toLowerCase());
+      setIsUnity(checkIsUnityRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
-    return () => window.removeEventListener("popstate", handleLocationChange);
+    window.addEventListener("hashchange", handleLocationChange);
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+      window.removeEventListener("hashchange", handleLocationChange);
+    };
   }, []);
 
   useEffect(() => {
@@ -86,7 +102,7 @@ export function App() {
   };
 
   // Route: /unitywasteremovals
-  if (pathname.startsWith("/unitywasteremovals")) {
+  if (isUnity) {
     return <UnityWasteQuotePage />;
   }
 
@@ -161,6 +177,12 @@ export function App() {
                     <span>Looking for UK Waste Clearances?</span>
                     <a
                       href="/unitywasteremovals"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState({}, "", "/unitywasteremovals");
+                        setIsUnity(true);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
                       className="font-bold text-accent hover:underline flex items-center gap-1"
                     >
                       <span>Unity Waste Removals →</span>
