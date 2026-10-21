@@ -1,5 +1,7 @@
 {
   "name": "moving-quote",
+  "version": "1.0.0",
+  "description": "A modern moving quotation web application for Auckland and New Zealand moves",
   "private": true,
   "sideEffects": false,
   "type": "module",

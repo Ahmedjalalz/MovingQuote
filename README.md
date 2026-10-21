@@ -1,13 +1,13 @@
-# Paul Movers — Quote Application
+# Moving Quote Application
 
-A standalone moving quotation application inspired directly by the Paul Movers Auckland quote flow.
+A modern, responsive moving quotation web application for Auckland and New Zealand moves.
 
 ## Features
-- **Accurate Brand & Styling**: Matching Paul Movers cyan/blue brand colors, navy surface tokens, accent orange highlights, Plus Jakarta Sans display typography, and Manrope body font.
+- **Design System & Theme**: Cyan/blue brand colors, navy surface tokens, accent orange highlights, Plus Jakarta Sans display typography, and Manrope body font.
 - **Full Quote Wizard**:
   - Moving Services and Junk/Property Clearance mode switching
   - Multi-select services popover with badge indicators & counters
-  - Move size selector
+  - Themed Move Size selector
   - New Zealand places & addresses autocomplete (Auckland suburbs, regions, streets)
   - Date picker with calendar popover
   - Contact details (Phone, Email, Contact Preference)
@@ -16,8 +16,8 @@ A standalone moving quotation application inspired directly by the Paul Movers A
   - Success submission confirmation card with summary breakdown and option to submit another request
 - **Trust Assurances & WINZ Card**:
   - WINZ Quotes Available badge with interactive tooltip
-  - Reviewed by real person, 100% Free & No Obligation, Single-step form cards
-  - Direct call card (021 100 9045)
+  - Reviewed by a real person, 100% Free & No Obligation, Single-step form cards
+  - Direct contact & consultation card
 - **Responsive Header & Footer**:
   - Official brand logo assets (WebP/PNG)
   - Smooth scroll transitions & mobile menu drawer
