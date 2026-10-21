@@ -17,7 +17,7 @@ export const quoteSchema = z.object({
   isWinsQuote: z.boolean().optional().default(false),
   isWinzQuote: z.boolean().optional().default(false),
   notes: z.string().optional().default(""),
-  preferredContact: z.enum(["phone", "email"]).optional().default("phone"),
+  preferredContact: z.enum(["phone", "email", "whatsapp"]).optional().default("phone"),
 });
 
 export type QuoteEnquiryPayload = z.input<typeof quoteSchema>;

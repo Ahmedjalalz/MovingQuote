@@ -6,6 +6,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Toaster } from "@/components/ui/sonner";
+import { UnityWasteQuotePage } from "@/pages/UnityWasteQuotePage";
 
 const ASSURANCES = [
   {
@@ -32,7 +33,23 @@ const ASSURANCES = [
 ];
 
 export function App() {
+  const [pathname, setPathname] = useState(() => {
+    if (typeof window !== "undefined") {
+      return window.location.pathname.toLowerCase();
+    }
+    return "/";
+  });
+
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      setPathname(window.location.pathname.toLowerCase());
+    };
+
+    window.addEventListener("popstate", handleLocationChange);
+    return () => window.removeEventListener("popstate", handleLocationChange);
+  }, []);
 
   useEffect(() => {
     try {
@@ -68,6 +85,12 @@ export function App() {
     }
   };
 
+  // Route: /unitywasteremovals
+  if (pathname.startsWith("/unitywasteremovals")) {
+    return <UnityWasteQuotePage />;
+  }
+
+  // Default Route: Paul Movers Quote Page
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground antialiased selection:bg-brand selection:text-brand-foreground">
       <SiteHeader />
@@ -130,6 +153,17 @@ export function App() {
                       className="mt-5 inline-flex border-b border-accent pb-1 text-sm font-semibold hover:text-accent transition-colors"
                     >
                       021 100 9045
+                    </a>
+                  </div>
+
+                  {/* Route Link to Unity Waste */}
+                  <div className="mt-4 p-4 rounded-2xl border border-border/80 bg-secondary/50 text-xs text-foreground/80 flex items-center justify-between">
+                    <span>Looking for UK Waste Clearances?</span>
+                    <a
+                      href="/unitywasteremovals"
+                      className="font-bold text-accent hover:underline flex items-center gap-1"
+                    >
+                      <span>Unity Waste Removals →</span>
                     </a>
                   </div>
                 </div>

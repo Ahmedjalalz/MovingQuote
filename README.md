@@ -1,26 +1,27 @@
-# Moving Quote Application
+# Moving & Waste Removal Quote Applications
 
-A modern, responsive moving quotation web application for Auckland and New Zealand moves.
+A modern, responsive quotation web application featuring customized workflows for moving and property waste clearance services.
 
-## Features
-- **Design System & Theme**: Cyan/blue brand colors, navy surface tokens, accent orange highlights, Plus Jakarta Sans display typography, and Manrope body font.
-- **Full Quote Wizard**:
-  - Moving Services and Junk/Property Clearance mode switching
-  - Multi-select services popover with badge indicators & counters
-  - Themed Move Size selector
-  - New Zealand places & addresses autocomplete (Auckland suburbs, regions, streets)
-  - Date picker with calendar popover
-  - Contact details (Phone, Email, Contact Preference)
-  - Move notes & property access details
-  - Form validation with clear feedback
-  - Success submission confirmation card with summary breakdown and option to submit another request
-- **Trust Assurances & WINZ Card**:
-  - WINZ Quotes Available badge with interactive tooltip
-  - Reviewed by a real person, 100% Free & No Obligation, Single-step form cards
-  - Direct contact & consultation card
-- **Responsive Header & Footer**:
-  - Official brand logo assets (WebP/PNG)
-  - Smooth scroll transitions & mobile menu drawer
+## Routes & Pages
+
+### 1. Main Quote Page (`/`)
+- **Focus**: Residential & commercial moving and junk removals.
+- **Brand & Theme**: Cyan/blue brand colors, navy surface tokens, and accent orange highlights.
+- **Features**: Multi-service selection popover, move size picker, NZ location autocomplete, calendar date picker, and trust assurances.
+
+### 2. Unity Waste Removals Quote Page (`/unitywasteremovals`)
+- **Focus**: UK Domestic & commercial property clearances and waste management ([Unity Waste Removals UK](https://unitywasteremovals.co.uk/)).
+- **Brand & Theme**: Unity purple (`#b96be8`), dark charcoal, and emerald green eco-highlights matching the official website.
+- **UK-Specific Clearances**:
+  - **Domestic**: House, Flat, Loft, Garage, Shed, Probate & Bereavement, End of Tenancy, Hoarder clearances, and bulky items.
+  - **Commercial**: Office relocations, retail strip-outs, warehouse clearances, and trade debris.
+  - **Load Sizes**: 1/4, 1/2, 3/4, Full Van Load, and custom commercial sites.
+- **Accreditations & Assurances** (replaces WINZ with UK regulations):
+  - **Environment Agency Licensed**: Upper-Tier registered waste carrier with official waste transfer notes.
+  - **Green Apple Award Winners**: Dedicated eco-friendly landfill diversion and recycling commitment.
+  - **Hands-On Skip Hire Alternative**: Heavy lifting and sweep-up included without needing skip permits.
+- **UK Address & Postcode Autocomplete**: Tailored for Ellesmere Port, Chester, Wirral, Cheshire, Merseyside, and UK postcodes.
+- **Direct Contact Options**: Phone calls and direct WhatsApp messaging support (`01244 566348` / `07940 771690`).
 
 ## Getting Started
 
