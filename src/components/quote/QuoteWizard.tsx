@@ -217,7 +217,7 @@ export function QuoteWizard({
     return (
       <div
         className={cn(
-          "rounded-[2rem] border border-border bg-card p-6 shadow-soft md:p-12 animate-in fade-in zoom-in-95 duration-500",
+          "rounded-[2rem] border border-border bg-card p-4 sm:p-6 md:p-12 shadow-soft animate-in fade-in zoom-in-95 duration-500",
           className,
         )}
       >
@@ -226,8 +226,8 @@ export function QuoteWizard({
             <Check className="size-6 text-accent" />
           </span>
         </div>
-        <h2 className="display-md mt-6">Thanks — we&apos;ve received your request!</h2>
-        <p className="mt-4 max-w-xl leading-relaxed text-foreground/80">
+        <h2 className="display-md mt-6 text-xl sm:text-2xl md:text-3xl">Thanks — we&apos;ve received your request!</h2>
+        <p className="mt-4 max-w-xl text-xs sm:text-sm leading-relaxed text-foreground/80">
           A member of the Paul Movers team will review your enquiry and get in touch with you
           shortly with a clear, fixed-price quote and availability.
         </p>
@@ -291,7 +291,7 @@ export function QuoteWizard({
   return (
     <div
       className={cn(
-        "relative rounded-[2rem] border border-border bg-card p-6 shadow-soft transition-all duration-300 md:p-10",
+        "relative rounded-[2rem] border border-border bg-card p-4 sm:p-6 md:p-10 shadow-soft transition-all duration-300",
         className,
       )}
     >
@@ -409,7 +409,7 @@ export function QuoteWizard({
                 <PopoverContent
                   align="start"
                   sideOffset={6}
-                  className="w-[calc(100vw-3rem)] sm:w-[380px] max-w-[420px] p-0 rounded-2xl border border-border bg-card shadow-lift overflow-hidden z-50"
+                  className="w-[calc(100vw-2.5rem)] sm:w-[380px] max-w-[420px] p-0 rounded-2xl border border-border bg-card shadow-lift overflow-hidden z-50"
                 >
                   <div className="p-3 border-b border-border bg-secondary/40 flex items-center justify-between">
                     <span className="text-xs font-semibold text-foreground">
@@ -620,7 +620,7 @@ export function QuoteWizard({
                 </button>
               </PopoverTrigger>
               <PopoverContent
-                className="w-auto p-2 rounded-2xl border border-border bg-popover shadow-lift"
+                className="w-auto p-2 rounded-2xl border border-border bg-popover shadow-lift max-w-[calc(100vw-2rem)] overflow-hidden"
                 align="start"
               >
                 <Calendar
@@ -649,7 +649,7 @@ export function QuoteWizard({
                 }}
                 placeholder="021 100 9045"
                 className={cn(
-                  "mt-2.5 w-full rounded-2xl border bg-background px-4 py-4 text-sm outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
+                  "mt-2.5 w-full rounded-2xl border bg-background px-4 py-3.5 sm:py-4 text-base sm:text-sm outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
                   errors.phone ? "border-destructive" : "border-input",
                 )}
               />
@@ -673,7 +673,7 @@ export function QuoteWizard({
                 }}
                 placeholder="you@example.co.nz"
                 className={cn(
-                  "mt-2.5 w-full rounded-2xl border bg-background px-4 py-4 text-sm outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
+                  "mt-2.5 w-full rounded-2xl border bg-background px-4 py-3.5 sm:py-4 text-base sm:text-sm outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
                   errors.email ? "border-destructive" : "border-input",
                 )}
               />
@@ -691,7 +691,7 @@ export function QuoteWizard({
               <span className="text-accent">*</span>
             </span>
             <div className="mt-2 space-y-2.5">
-              <p className="text-sm leading-relaxed text-foreground font-medium">
+              <p className="text-xs sm:text-sm leading-relaxed text-foreground font-medium">
                 {isMovingMode
                   ? "Please provide details of your house or office move in the box below, including the items to be moved, property access, stairs or steps, floor level, lift availability, parking conditions, and any other information that may help us prepare an accurate fixed-price quote."
                   : "Please provide details of the junk, unwanted furniture or property clearance items in the box below, including item types, property access, stairs/driveway, and any heavy items to help us prepare an accurate fixed-price quote."}
@@ -709,7 +709,7 @@ export function QuoteWizard({
                     : "Type additional junk or clearance details here..."
                 }
                 className={cn(
-                  "w-full resize-none rounded-2xl border bg-background px-4 py-3.5 text-sm leading-relaxed outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
+                  "w-full resize-none rounded-2xl border bg-background px-4 py-3.5 text-base sm:text-sm leading-relaxed outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
                   errors.notes ? "border-destructive" : "border-input",
                 )}
               />
@@ -724,7 +724,7 @@ export function QuoteWizard({
           <button
             type="submit"
             disabled={submitting}
-            className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2.5 rounded-full bg-accent px-7 py-3.5 sm:px-8 sm:py-4 text-sm font-bold text-accent-foreground shadow-md transition-all duration-300 hover:gap-3.5 hover:bg-accent/90 hover:shadow-lg disabled:opacity-70 cursor-pointer"
+            className="group w-full sm:w-auto inline-flex shrink-0 items-center justify-center gap-2.5 rounded-full bg-accent px-6 py-4 sm:px-8 text-sm font-bold text-accent-foreground shadow-md transition-all duration-300 hover:gap-3.5 hover:bg-accent/90 hover:shadow-lg disabled:opacity-70 cursor-pointer"
           >
             {submitting ? (
               <Loader2 className="size-4 animate-spin shrink-0" />
@@ -740,7 +740,7 @@ export function QuoteWizard({
             </span>
           </button>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-foreground">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-2 text-xs font-semibold text-foreground">
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
               <Check className="size-3.5 text-accent shrink-0" strokeWidth={2.5} />
               <span>Fixed Price</span>

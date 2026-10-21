@@ -116,7 +116,7 @@ export function LocationField({ label, placeholder, value, onChange, error }: Lo
             setOpen(true);
           }}
           className={cn(
-            "w-full rounded-2xl border bg-background py-4 pr-10 pl-11 text-sm outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
+            "w-full rounded-2xl border bg-background py-3.5 sm:py-4 pr-10 pl-11 text-base sm:text-sm outline-none transition-all duration-300 placeholder:text-foreground/65 focus:border-accent focus:ring-4 focus:ring-accent/12",
             error ? "border-destructive" : "border-input",
           )}
         />
@@ -132,7 +132,7 @@ export function LocationField({ label, placeholder, value, onChange, error }: Lo
         <div
           role="listbox"
           aria-label="Address suggestions"
-          className="absolute z-50 mt-1 max-h-64 w-full overflow-auto rounded-2xl border border-border bg-card p-1.5 shadow-lift animate-in fade-in zoom-in-95 duration-150"
+          className="absolute z-50 mt-1 max-h-52 sm:max-h-64 w-full max-w-[calc(100vw-2rem)] overflow-auto rounded-2xl border border-border bg-card p-1.5 shadow-lift animate-in fade-in zoom-in-95 duration-150"
         >
           {isFetching && suggestions.length === 0 ? (
             <div className="flex items-center gap-2.5 px-3 py-3 text-xs text-foreground/80">

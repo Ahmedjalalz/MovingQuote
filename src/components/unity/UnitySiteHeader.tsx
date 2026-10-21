@@ -8,8 +8,8 @@ export function UnitySiteHeader() {
     <header className="sticky top-0 z-50 bg-white shadow-xs">
       {/* Top Banner */}
       <div className="bg-gray-900 text-gray-200 py-2 text-xs">
-        <div className="container mx-auto px-4 flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-6">
+        <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-1.5 text-center sm:text-left">
+          <div className="flex items-center gap-4 sm:gap-6">
             <a
               href="tel:+441244566348"
               className="flex items-center gap-1.5 hover:text-[#b96be8] transition-colors"
@@ -22,9 +22,9 @@ export function UnitySiteHeader() {
               <span>56 Oliver Ln, Great Sutton, Ellesmere Port CH66 3NU</span>
             </div>
           </div>
-          <div className="text-[0.6875rem] font-semibold text-emerald-400 flex items-center gap-1.5">
+          <div className="text-[0.6875rem] font-semibold text-emerald-400 flex items-center justify-center gap-1.5">
             <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            <span>Environment Agency Licensed &amp; Green Apple Award Winners</span>
+            <span>Environment Agency Licensed &amp; Green Apple Award</span>
           </div>
         </div>
       </div>
@@ -70,7 +70,16 @@ export function UnitySiteHeader() {
           </nav>
 
           {/* Actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Quick mobile call button */}
+            <a
+              href="tel:+441244566348"
+              className="grid size-10 place-items-center rounded-xl bg-[#b96be8] text-white md:hidden shadow-xs hover:bg-[#a249d9] transition-colors"
+              aria-label="Call Unity Waste Removal"
+            >
+              <Phone className="size-4 shrink-0" fill="currentColor" />
+            </a>
+
             <a
               href="tel:+441244566348"
               className="relative group hidden md:inline-flex items-center gap-2 px-7 py-2.5 bg-[#b96be8] -skew-x-[30deg] text-white hover:bg-black hover:text-white transition-all duration-200 ease-in-out shadow-sm leading-none"

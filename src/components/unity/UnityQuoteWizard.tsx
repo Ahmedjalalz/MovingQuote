@@ -187,7 +187,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
     return (
       <div
         className={cn(
-          "rounded-3xl border border-gray-100 bg-white p-6 shadow-2xl md:p-12 animate-in fade-in zoom-in-95 duration-500",
+          "rounded-3xl border border-gray-100 bg-white p-4 sm:p-6 md:p-12 shadow-2xl animate-in fade-in zoom-in-95 duration-500",
           className,
         )}
       >
@@ -199,10 +199,10 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
             Request Received
           </span>
         </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mt-5">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mt-5">
           Thank you — we&apos;ve received your clearance enquiry!
         </h2>
-        <p className="mt-3 max-w-xl leading-relaxed text-gray-600 text-sm sm:text-base">
+        <p className="mt-3 max-w-xl leading-relaxed text-gray-600 text-xs sm:text-sm md:text-base">
           A member of the Unity Waste Removal team will review your details and get back to you
           promptly with a competitive, fixed-price quote.
         </p>
@@ -267,7 +267,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
   return (
     <div
       className={cn(
-        "relative rounded-3xl border border-gray-100 bg-white p-6 shadow-2xl transition-all duration-300 md:p-10",
+        "relative rounded-3xl border border-gray-100 bg-white p-4 sm:p-6 md:p-10 shadow-2xl transition-all duration-300",
         className,
       )}
     >
@@ -392,7 +392,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
                 <PopoverContent
                   align="start"
                   sideOffset={6}
-                  className="w-[calc(100vw-3rem)] sm:w-[380px] max-w-[420px] p-0 rounded-2xl border border-gray-100 bg-white shadow-2xl overflow-hidden z-50"
+                  className="w-[calc(100vw-2.5rem)] sm:w-[380px] max-w-[420px] p-0 rounded-2xl border border-gray-100 bg-white shadow-2xl overflow-hidden z-50"
                 >
                   <div className="p-3 border-b border-gray-100 bg-purple-50/50 flex items-center justify-between">
                     <span className="text-xs font-bold text-gray-800">
@@ -568,7 +568,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
                 </button>
               </PopoverTrigger>
               <PopoverContent
-                className="w-auto p-2 rounded-2xl border border-gray-100 bg-white shadow-2xl"
+                className="w-auto p-2 rounded-2xl border border-gray-100 bg-white shadow-2xl max-w-[calc(100vw-2rem)] overflow-hidden"
                 align="start"
               >
                 <Calendar
@@ -597,7 +597,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
                 }}
                 placeholder="01244 566348 / 07940 771690"
                 className={cn(
-                  "mt-2.5 w-full rounded-2xl border bg-white px-4 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
+                  "mt-2.5 w-full rounded-2xl border bg-white px-4 py-3.5 sm:py-4 text-base sm:text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
                   errors.phone ? "border-red-500" : "border-gray-200",
                 )}
               />
@@ -621,7 +621,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
                 }}
                 placeholder="you@example.co.uk"
                 className={cn(
-                  "mt-2.5 w-full rounded-2xl border bg-white px-4 py-4 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
+                  "mt-2.5 w-full rounded-2xl border bg-white px-4 py-3.5 sm:py-4 text-base sm:text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
                   errors.email ? "border-red-500" : "border-gray-200",
                 )}
               />
@@ -651,7 +651,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
                 }}
                 placeholder="e.g. 1 x 3-seater sofa, old washing machine, ~15 bags of garage clutter. Good driveway parking right outside..."
                 className={cn(
-                  "w-full resize-none rounded-2xl border bg-white px-4 py-3.5 text-sm leading-relaxed outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
+                  "w-full resize-none rounded-2xl border bg-white px-4 py-3.5 text-base sm:text-sm leading-relaxed outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
                   errors.notes ? "border-red-500" : "border-gray-200",
                 )}
               />
@@ -667,7 +667,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
           <button
             type="submit"
             disabled={submitting}
-            className="group inline-flex shrink-0 whitespace-nowrap items-center justify-center gap-2.5 rounded-full bg-[#b96be8] px-8 py-4 text-sm font-bold text-white shadow-lg shadow-purple-500/25 transition-all duration-300 hover:gap-3.5 hover:bg-[#a249d9] hover:shadow-xl hover:shadow-purple-500/35 disabled:opacity-70 cursor-pointer"
+            className="group w-full sm:w-auto inline-flex shrink-0 items-center justify-center gap-2.5 rounded-full bg-[#b96be8] px-6 py-4 sm:px-8 text-sm font-bold text-white shadow-lg shadow-purple-500/25 transition-all duration-300 hover:gap-3.5 hover:bg-[#a249d9] hover:shadow-xl hover:shadow-purple-500/35 disabled:opacity-70 cursor-pointer"
           >
             {submitting ? (
               <Loader2 className="size-4 animate-spin shrink-0" />
@@ -679,7 +679,7 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
             </span>
           </button>
 
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-bold text-gray-700">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-2 text-xs font-bold text-gray-700">
             <span className="inline-flex items-center gap-1.5 whitespace-nowrap">
               <Check className="size-4 text-[#10b981] shrink-0" strokeWidth={3} />
               <span>Fixed Price Guarantee</span>

@@ -37,17 +37,17 @@ export function UnityWasteQuotePage() {
 
       <main className="flex-1">
         {/* Hero banner */}
-        <section className="bg-gradient-to-b from-purple-50/60 to-slate-50 py-10 md:py-14 border-b border-purple-100/50">
+        <section className="bg-gradient-to-b from-purple-50/60 to-slate-50 py-8 sm:py-10 md:py-14 border-b border-purple-100/50">
           <div className="container mx-auto px-4 max-w-6xl">
             <div className="text-center max-w-2xl mx-auto">
-              <span className="inline-flex items-center gap-2 rounded-full bg-[#b96be8]/15 px-4 py-1.5 text-xs font-bold text-[#b96be8] uppercase tracking-wider">
+              <span className="inline-flex items-center gap-2 rounded-full bg-[#b96be8]/15 px-3.5 py-1 text-xs font-bold text-[#b96be8] uppercase tracking-wider">
                 <span className="size-2 rounded-full bg-[#b96be8] animate-pulse" />
                 Licensed UK Waste Management
               </span>
-              <h1 className="mt-3 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
+              <h1 className="mt-3 text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900">
                 Get a Free Waste Removal Quote
               </h1>
-              <p className="mt-3 text-sm sm:text-base text-gray-600 leading-relaxed font-medium">
+              <p className="mt-2.5 text-xs sm:text-base text-gray-600 leading-relaxed font-medium">
                 Professional property clearances, trade waste, and junk removals across Ellesmere Port, Chester, The Wirral, and Cheshire.
               </p>
             </div>
@@ -55,9 +55,9 @@ export function UnityWasteQuotePage() {
         </section>
 
         {/* Form & Assurances section */}
-        <section id="quote-form" className="py-12 md:py-16">
+        <section id="quote-form" className="py-8 sm:py-12 md:py-16">
           <div className="container mx-auto px-4 max-w-6xl">
-            <div className="grid gap-10 lg:grid-cols-[1.55fr_1fr] lg:gap-14">
+            <div className="grid gap-8 lg:grid-cols-[1.55fr_1fr] lg:gap-14">
               <Reveal>
                 <UnityQuoteWizard />
               </Reveal>
@@ -67,11 +67,11 @@ export function UnityWasteQuotePage() {
                   <h3 className="text-xs font-bold tracking-widest text-gray-400 uppercase">
                     Why Choose Unity Waste
                   </h3>
-                  <ul className="grid gap-4">
+                  <ul className="grid gap-3.5 sm:gap-4">
                     {UNITY_ASSURANCES.map(({ icon: Icon, title, body, isLicensed, isEco }) => (
                       <li
                         key={title}
-                        className="rounded-3xl border border-gray-100 bg-white p-6 shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl"
+                        className="rounded-3xl border border-gray-100 bg-white p-5 sm:p-6 shadow-xl transition-all duration-300 hover:-translate-y-0.5 hover:shadow-2xl"
                       >
                         <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-purple-50">
                           <Icon
@@ -93,21 +93,21 @@ export function UnityWasteQuotePage() {
                   </ul>
 
                   {/* Direct Call Box */}
-                  <div className="mt-8 rounded-3xl bg-gray-950 p-7 text-white shadow-2xl border border-gray-800">
+                  <div className="mt-6 sm:mt-8 rounded-3xl bg-gray-950 p-5 sm:p-7 text-white shadow-2xl border border-gray-800">
                     <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#b96be8] uppercase tracking-wider">
                       <MessageSquare className="size-3.5" />
                       <span>Prefer To Talk Or Send Photos?</span>
                     </span>
-                    <h3 className="mt-2 text-xl font-bold tracking-tight text-white">
+                    <h3 className="mt-2 text-lg sm:text-xl font-bold tracking-tight text-white">
                       Get an Instant Quote on the Phone
                     </h3>
                     <p className="mt-2 text-xs sm:text-sm leading-relaxed text-gray-400 font-medium">
                       Some jobs are easier to explain out loud or show with a quick photo. Give our friendly team a call or send photos on WhatsApp for an immediate price estimate.
                     </p>
-                    <div className="mt-5 flex flex-wrap gap-3">
+                    <div className="mt-5 flex flex-col sm:flex-row gap-2.5 sm:gap-3">
                       <a
                         href="tel:+441244566348"
-                        className="inline-flex items-center gap-2 rounded-full bg-[#b96be8] px-5 py-2.5 text-xs font-bold text-white shadow-md hover:bg-[#a249d9] transition-colors"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-[#b96be8] px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-[#a249d9] transition-colors w-full sm:w-auto"
                       >
                         <Phone className="size-3.5" />
                         <span>01244 566348</span>
@@ -116,7 +116,7 @@ export function UnityWasteQuotePage() {
                         href="https://wa.me/447940771690"
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-5 py-2.5 text-xs font-bold text-white shadow-md hover:bg-emerald-500 transition-colors"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 py-3 text-xs font-bold text-white shadow-md hover:bg-emerald-500 transition-colors w-full sm:w-auto"
                       >
                         <MessageSquare className="size-3.5" />
                         <span>WhatsApp: 07940 771690</span>

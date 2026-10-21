@@ -116,7 +116,7 @@ export function UnityLocationField({ label, placeholder, value, onChange, error 
             setOpen(true);
           }}
           className={cn(
-            "w-full rounded-2xl border bg-white py-4 pr-10 pl-11 text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
+            "w-full rounded-2xl border bg-white py-3.5 sm:py-4 pr-10 pl-11 text-base sm:text-sm outline-none transition-all duration-300 placeholder:text-gray-400 focus:border-[#b96be8] focus:ring-4 focus:ring-[#b96be8]/15",
             error ? "border-red-500" : "border-gray-200",
           )}
         />
@@ -132,7 +132,7 @@ export function UnityLocationField({ label, placeholder, value, onChange, error 
         <div
           role="listbox"
           aria-label="Address suggestions"
-          className="absolute z-50 mt-1 max-h-64 w-full overflow-auto rounded-2xl border border-gray-100 bg-white p-1.5 shadow-2xl animate-in fade-in zoom-in-95 duration-150"
+          className="absolute z-50 mt-1 max-h-52 sm:max-h-64 w-full max-w-[calc(100vw-2rem)] overflow-auto rounded-2xl border border-gray-100 bg-white p-1.5 shadow-2xl animate-in fade-in zoom-in-95 duration-150"
         >
           {isFetching && suggestions.length === 0 ? (
             <div className="flex items-center gap-2.5 px-3 py-3 text-xs text-gray-600">

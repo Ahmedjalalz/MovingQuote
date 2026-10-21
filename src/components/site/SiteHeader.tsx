@@ -79,6 +79,15 @@ export function SiteHeader() {
           </nav>
 
           <div className="flex items-center gap-2">
+            {/* Quick mobile call button */}
+            <a
+              href="tel:+64211009045"
+              className="grid size-11 place-items-center rounded-full bg-accent text-accent-foreground md:hidden shadow-xs"
+              aria-label="Call Paul Movers"
+            >
+              <Phone className="size-4" />
+            </a>
+
             <a
               href="tel:+64211009045"
               className="group hidden items-center gap-2 rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 hover:-translate-y-0.5 md:inline-flex btn-brand"
