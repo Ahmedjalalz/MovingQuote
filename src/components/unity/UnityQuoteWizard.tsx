@@ -272,41 +272,41 @@ export function UnityQuoteWizard({ className }: UnityQuoteWizardProps) {
       )}
     >
       {/* Mode Switcher */}
-      <div className="mb-6 flex rounded-2xl bg-gray-100 p-1.5 border border-gray-200">
+      <div className="mb-6 grid grid-cols-2 gap-1.5 rounded-2xl bg-gray-100/90 p-1.5 border border-gray-200">
         <button
           type="button"
           onClick={() => setMode("domestic")}
           className={cn(
-            "flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
+            "w-full min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer text-center",
             isDomestic
-              ? "bg-white text-gray-900 shadow-sm border border-gray-200"
-              : "text-gray-600 hover:text-gray-900",
+              ? "bg-white text-gray-900 shadow-sm border border-gray-200/80"
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-200/50",
           )}
         >
-          <Trash2 className="size-4 text-[#b96be8]" />
-          <span>Domestic Clearances</span>
+          <Trash2 className="size-4 shrink-0 text-[#b96be8]" />
+          <span className="leading-tight">Domestic Clearances</span>
         </button>
         <button
           type="button"
           onClick={() => setMode("commercial")}
           className={cn(
-            "flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer",
+            "w-full min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer text-center",
             !isDomestic
-              ? "bg-white text-gray-900 shadow-sm border border-gray-200"
-              : "text-gray-600 hover:text-gray-900",
+              ? "bg-white text-gray-900 shadow-sm border border-gray-200/80"
+              : "text-gray-600 hover:text-gray-900 hover:bg-gray-200/50",
           )}
         >
-          <Truck className="size-4 text-[#b96be8]" />
-          <span>Commercial &amp; Trade</span>
+          <Truck className="size-4 shrink-0 text-[#b96be8]" />
+          <span className="leading-tight">Commercial &amp; Trade</span>
         </button>
       </div>
 
       {/* Header */}
       <div className="flex flex-col gap-3 pb-6 border-b border-gray-100 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-50 px-3 py-1 text-xs font-bold text-[#b96be8] border border-purple-100 uppercase tracking-wider">
-            <Leaf className="size-3.5 text-[#10b981]" />
-            <span>Environment Agency Licensed Carrier</span>
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-purple-50 px-2.5 sm:px-3 py-1 text-[0.6875rem] sm:text-xs font-bold text-[#b96be8] border border-purple-100 uppercase tracking-wide">
+            <Leaf className="size-3.5 shrink-0 text-emerald-500" />
+            <span className="leading-none">Environment Agency Licensed Carrier</span>
           </span>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-gray-900 mt-2">
             {isDomestic ? "Domestic Clearance Quote" : "Commercial Waste Quote"}

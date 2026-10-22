@@ -296,32 +296,32 @@ export function QuoteWizard({
       )}
     >
       {showModeSwitcher && onModeChange && (
-        <div className="mb-6 flex rounded-2xl bg-secondary/60 p-1.5 border border-border">
+        <div className="mb-6 grid grid-cols-2 gap-1.5 rounded-2xl bg-secondary/60 p-1.5 border border-border">
           <button
             type="button"
             onClick={() => onModeChange("moving")}
             className={cn(
-              "flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer",
+              "w-full min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer text-center",
               isMovingMode
                 ? "bg-background text-foreground shadow-xs border border-border"
-                : "text-foreground/85 hover:text-foreground",
+                : "text-foreground/85 hover:text-foreground hover:bg-secondary/40",
             )}
           >
-            <Truck className="size-4 text-accent" />
-            <span>Moving Services</span>
+            <Truck className="size-4 shrink-0 text-accent" />
+            <span className="leading-tight">Moving Services</span>
           </button>
           <button
             type="button"
             onClick={() => onModeChange("junk")}
             className={cn(
-              "flex-1 flex items-center justify-center gap-2 rounded-xl py-2.5 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer",
+              "w-full min-h-[44px] flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl px-2 sm:px-4 py-2 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer text-center",
               !isMovingMode
                 ? "bg-background text-foreground shadow-xs border border-border"
-                : "text-foreground/85 hover:text-foreground",
+                : "text-foreground/85 hover:text-foreground hover:bg-secondary/40",
             )}
           >
-            <Trash2 className="size-4 text-accent" />
-            <span>Junk &amp; Property Removals</span>
+            <Trash2 className="size-4 shrink-0 text-accent" />
+            <span className="leading-tight">Junk &amp; Removals</span>
           </button>
         </div>
       )}
