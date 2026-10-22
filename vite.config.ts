@@ -3,27 +3,38 @@ import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
 import fs from "fs";
+import { fileURLToPath } from "url";
 
-function generateSpaFallbacks(): Plugin {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+function copyFallbacks(): Plugin {
   return {
-    name: "generate-spa-fallbacks",
+    name: "copy-fallbacks",
     closeBundle() {
-      const distDir = path.resolve(import.meta.dirname, "./dist");
-      const indexPath = path.join(distDir, "index.html");
-      if (fs.existsSync(indexPath)) {
-        const unityDir = path.join(distDir, "unitywasteremovals");
-        fs.mkdirSync(unityDir, { recursive: true });
-        fs.copyFileSync(indexPath, path.join(unityDir, "index.html"));
+      const distDir = path.resolve(__dirname, "./dist");
+      const unityIndex = path.join(distDir, "unitywasteremovals", "index.html");
+      const unityHtml = path.join(distDir, "unitywasteremovals.html");
+      if (fs.existsSync(unityIndex)) {
+        fs.copyFileSync(unityIndex, unityHtml);
       }
     },
   };
 }
 
 export default defineConfig({
-  plugins: [react(), tailwindcss(), generateSpaFallbacks()],
+  plugins: [react(), tailwindcss(), copyFallbacks()],
   resolve: {
     alias: {
-      "@": path.resolve(import.meta.dirname, "./src"),
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+  build: {
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, "index.html"),
+        unitywasteremovals: path.resolve(__dirname, "unitywasteremovals/index.html"),
+      },
     },
   },
   server: {

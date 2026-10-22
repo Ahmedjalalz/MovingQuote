@@ -1,5 +1,16 @@
 {
+  "framework": "vite",
+  "cleanUrls": true,
+  "trailingSlash": false,
   "rewrites": [
+    {
+      "source": "/unitywasteremovals",
+      "destination": "/unitywasteremovals/index.html"
+    },
+    {
+      "source": "/unitywasteremovals/(.*)",
+      "destination": "/unitywasteremovals/index.html"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
