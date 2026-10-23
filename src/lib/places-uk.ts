@@ -4,8 +4,37 @@ export type UkPlaceSuggestion = {
   secondary: string;
 };
 
-// Core local coverage: Ellesmere Port, Wirral, Chester, Cheshire, Merseyside & North Wales
+// Core local coverage: Cambridgeshire (Cambridge, Waterbeach, Ely, etc.), Cheshire, Wirral, and UK Nationwide
 export const UK_COMMON_PLACES: Array<{ name: string; area: string; county: string; postcode?: string }> = [
+  // Cambridge & Cambridgeshire (Aldhouse & Smith home region)
+  { name: "Waterbeach", area: "Waterbeach", county: "Cambridgeshire", postcode: "CB25" },
+  { name: "Cambridge City Centre", area: "Cambridge", county: "Cambridgeshire", postcode: "CB1 / CB2" },
+  { name: "Chesterton", area: "Cambridge", county: "Cambridgeshire", postcode: "CB4" },
+  { name: "Cherry Hinton", area: "Cambridge", county: "Cambridgeshire", postcode: "CB1" },
+  { name: "Trumpington", area: "Cambridge", county: "Cambridgeshire", postcode: "CB2" },
+  { name: "Newnham", area: "Cambridge", county: "Cambridgeshire", postcode: "CB3" },
+  { name: "Girton", area: "Cambridge", county: "Cambridgeshire", postcode: "CB3" },
+  { name: "Histon & Impington", area: "Histon", county: "Cambridgeshire", postcode: "CB24" },
+  { name: "Milton", area: "Cambridge", county: "Cambridgeshire", postcode: "CB24" },
+  { name: "Cottenham", area: "Cottenham", county: "Cambridgeshire", postcode: "CB24" },
+  { name: "Ely", area: "Ely", county: "Cambridgeshire", postcode: "CB6" },
+  { name: "Newmarket", area: "Newmarket", county: "Suffolk / Cambridgeshire", postcode: "CB8" },
+  { name: "Huntingdon", area: "Huntingdon", county: "Cambridgeshire", postcode: "PE29" },
+  { name: "St Neots", area: "St Neots", county: "Cambridgeshire", postcode: "PE19" },
+  { name: "St Ives", area: "St Ives", county: "Cambridgeshire", postcode: "PE27" },
+  { name: "Royston", area: "Royston", county: "Hertfordshire", postcode: "SG8" },
+  { name: "Saffron Walden", area: "Saffron Walden", county: "Essex", postcode: "CB10" },
+  { name: "Great Shelford", area: "Shelford", county: "Cambridgeshire", postcode: "CB22" },
+  { name: "Sawston", area: "Sawston", county: "Cambridgeshire", postcode: "CB22" },
+  { name: "Fulbourn", area: "Fulbourn", county: "Cambridgeshire", postcode: "CB21" },
+  { name: "Cambourne", area: "Cambourne", county: "Cambridgeshire", postcode: "CB23" },
+  { name: "Bar Hill", area: "Bar Hill", county: "Cambridgeshire", postcode: "CB23" },
+  { name: "Bury St Edmunds", area: "Bury St Edmunds", county: "Suffolk", postcode: "IP33" },
+  { name: "Haverhill", area: "Haverhill", county: "Suffolk", postcode: "CB9" },
+  { name: "Peterborough", area: "Peterborough", county: "Cambridgeshire", postcode: "PE1" },
+  { name: "London", area: "Greater London", county: "London", postcode: "WC / EC / SW" },
+  { name: "Oxford", area: "Oxford", county: "Oxfordshire", postcode: "OX1" },
+
   // Ellesmere Port & South Wirral
   { name: "Great Sutton", area: "Ellesmere Port", county: "Cheshire West", postcode: "CH66" },
   { name: "Whitby", area: "Ellesmere Port", county: "Cheshire West", postcode: "CH65" },

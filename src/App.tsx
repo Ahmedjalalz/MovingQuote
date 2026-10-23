@@ -7,6 +7,7 @@ import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 import { Toaster } from "@/components/ui/sonner";
 import { UnityWasteQuotePage } from "@/pages/UnityWasteQuotePage";
+import { AldhouseAndSmithQuotePage } from "@/pages/AldhouseAndSmithQuotePage";
 
 const ASSURANCES = [
   {
@@ -50,13 +51,33 @@ function checkIsUnityRoute(): boolean {
   );
 }
 
+function checkIsAldhouseRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/aldhouseandsmith") ||
+    path.startsWith("/aldhouse") ||
+    hash.includes("aldhouseandsmith") ||
+    hash.includes("aldhouse") ||
+    params.get("page") === "aldhouseandsmith" ||
+    params.get("page") === "aldhouse" ||
+    params.get("route") === "aldhouseandsmith" ||
+    params.get("route") === "aldhouse"
+  );
+}
+
 export function App() {
   const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
+  const [isAldhouse, setIsAldhouse] = useState(checkIsAldhouseRoute);
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
 
   useEffect(() => {
     const handleLocationChange = () => {
       setIsUnity(checkIsUnityRoute());
+      setIsAldhouse(checkIsAldhouseRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
@@ -100,6 +121,11 @@ export function App() {
       // fallback
     }
   };
+
+  // Route: /aldhouseandsmith
+  if (isAldhouse) {
+    return <AldhouseAndSmithQuotePage />;
+  }
 
   // Route: /unitywasteremovals
   if (isUnity) {
@@ -172,8 +198,26 @@ export function App() {
                     </a>
                   </div>
 
-                  {/* Route Link to Unity Waste */}
+                  {/* Route Link to Aldhouse & Smith */}
                   <div className="mt-4 p-4 rounded-2xl border border-border/80 bg-secondary/50 text-xs text-foreground/80 flex items-center justify-between">
+                    <span>Looking for Cambridge Removals &amp; Storage?</span>
+                    <a
+                      href="/aldhouseandsmith"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState({}, "", "/aldhouseandsmith");
+                        setIsAldhouse(true);
+                        setIsUnity(false);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="font-bold text-accent hover:underline flex items-center gap-1"
+                    >
+                      <span>Aldhouse &amp; Smith →</span>
+                    </a>
+                  </div>
+
+                  {/* Route Link to Unity Waste */}
+                  <div className="mt-3 p-4 rounded-2xl border border-border/80 bg-secondary/50 text-xs text-foreground/80 flex items-center justify-between">
                     <span>Looking for UK Waste Clearances?</span>
                     <a
                       href="/unitywasteremovals"
@@ -181,6 +225,7 @@ export function App() {
                         e.preventDefault();
                         window.history.pushState({}, "", "/unitywasteremovals");
                         setIsUnity(true);
+                        setIsAldhouse(false);
                         window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
                       className="font-bold text-accent hover:underline flex items-center gap-1"

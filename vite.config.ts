@@ -18,6 +18,11 @@ function copyFallbacks(): Plugin {
       if (fs.existsSync(unityIndex)) {
         fs.copyFileSync(unityIndex, unityHtml);
       }
+      const aldhouseIndex = path.join(distDir, "aldhouseandsmith", "index.html");
+      const aldhouseHtml = path.join(distDir, "aldhouseandsmith.html");
+      if (fs.existsSync(aldhouseIndex)) {
+        fs.copyFileSync(aldhouseIndex, aldhouseHtml);
+      }
     },
   };
 }
@@ -34,6 +39,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, "index.html"),
         unitywasteremovals: path.resolve(__dirname, "unitywasteremovals/index.html"),
+        aldhouseandsmith: path.resolve(__dirname, "aldhouseandsmith/index.html"),
       },
     },
   },
