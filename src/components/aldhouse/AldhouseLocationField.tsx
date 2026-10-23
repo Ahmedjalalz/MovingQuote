@@ -108,8 +108,8 @@ export function AldhouseLocationField({
 
   return (
     <div ref={wrapperRef} className={cn("relative w-full flex flex-col justify-between", className)}>
-      {/* Label Row with fixed min-height for uniform alignment */}
-      <div className="flex items-center justify-between min-h-[1.5rem] mb-1.5">
+      {/* Label Row with Consistent Height and Baseline */}
+      <div className="flex items-center justify-between min-h-[1.75rem] mb-2">
         <label htmlFor={inputId} className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
           {label}
         </label>
@@ -121,7 +121,7 @@ export function AldhouseLocationField({
         </div>
       </div>
 
-      {/* Input Row */}
+      {/* Input Box with Comfortable Height and Internal Padding */}
       <div className="relative">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
           <MapPin className="size-4 text-[#368b9a]" />
@@ -146,9 +146,9 @@ export function AldhouseLocationField({
           onKeyDown={handleKeyDown}
           placeholder={placeholder}
           className={cn(
-            "h-11 w-full rounded-xl border bg-white pl-10 pr-9 text-xs sm:text-sm text-slate-900 transition-all shadow-2xs font-normal",
-            readOnly ? "bg-slate-50 text-slate-700 cursor-not-allowed border-slate-200" : "border-slate-200 hover:border-slate-300",
-            "placeholder:text-slate-400 focus:border-[#368b9a] focus:outline-none focus:ring-2 focus:ring-[#9bdce6]/40",
+            "h-12 w-full rounded-xl border bg-white pl-11 pr-10 text-sm text-slate-900 transition-all shadow-2xs font-normal",
+            readOnly ? "bg-slate-50/80 text-slate-700 cursor-not-allowed border-slate-200" : "border-slate-200 hover:border-slate-300",
+            "placeholder:text-slate-400 focus:border-[#368b9a] focus:outline-none focus:ring-3 focus:ring-[#9bdce6]/35",
             error && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
           )}
         />
@@ -160,7 +160,7 @@ export function AldhouseLocationField({
               onChange("");
               setOpen(false);
             }}
-            className="absolute inset-y-0 right-0 flex items-center pr-3 text-slate-400 hover:text-slate-600 transition-colors"
+            className="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
             title="Clear"
           >
             <X className="size-4" />
@@ -168,12 +168,12 @@ export function AldhouseLocationField({
         )}
       </div>
 
-      {error && <p className="text-[0.6875rem] font-medium text-red-600 mt-1">{error}</p>}
+      {error && <p className="text-xs font-medium text-red-600 mt-1.5">{error}</p>}
 
       {showPanel && (
-        <div className="absolute z-50 left-0 right-0 top-full mt-1.5 max-h-60 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl">
+        <div className="absolute z-50 left-0 right-0 top-full mt-2 max-h-60 overflow-y-auto rounded-xl border border-slate-200 bg-white p-2 shadow-2xl">
           {isFetching ? (
-            <div className="flex items-center justify-center gap-2 py-4 text-xs font-medium text-slate-500">
+            <div className="flex items-center justify-center gap-2.5 py-4 text-xs font-medium text-slate-500">
               <Loader2 className="size-4 animate-spin text-[#368b9a]" />
               <span>Searching UK addresses &amp; postcodes...</span>
             </div>
@@ -185,7 +185,7 @@ export function AldhouseLocationField({
                     type="button"
                     onClick={() => handleSelect(item)}
                     className={cn(
-                      "flex w-full items-start gap-2.5 rounded-lg px-3 py-2 text-left text-xs transition-colors cursor-pointer",
+                      "flex w-full items-start gap-3 rounded-lg px-3.5 py-2.5 text-left text-xs transition-colors cursor-pointer",
                       selectedIndex === idx
                         ? "bg-[#0c2229] text-white"
                         : "hover:bg-[#eefafc] text-slate-800"
@@ -201,7 +201,7 @@ export function AldhouseLocationField({
                       <span className="font-semibold block truncate">{item.primary}</span>
                       <span
                         className={cn(
-                          "block truncate text-[0.6875rem]",
+                          "block truncate text-[0.6875rem] mt-0.5",
                           selectedIndex === idx ? "text-slate-200" : "text-slate-500"
                         )}
                       >

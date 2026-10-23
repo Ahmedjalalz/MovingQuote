@@ -274,34 +274,34 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
 
   if (done) {
     return (
-      <div className={cn("rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-10 shadow-xl", className)}>
+      <div className={cn("rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-10 md:p-12 shadow-xl", className)}>
         <div className="mx-auto max-w-lg text-center space-y-6">
-          <div className="mx-auto inline-flex size-16 items-center justify-center rounded-2xl bg-[#eefafc] text-[#368b9a] ring-8 ring-[#9bdce6]/20">
+          <div className="mx-auto inline-flex size-16 items-center justify-center rounded-2xl bg-[#eefafc] text-[#368b9a] ring-8 ring-[#9bdce6]/25">
             <FileCheck2 className="size-8" />
           </div>
 
-          <div className="space-y-2">
+          <div className="space-y-2.5">
             <span className="text-xs font-bold uppercase tracking-wider text-[#368b9a]">
               Aldhouse &amp; Smith Ltd • Cambridge
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0c2229]">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0c2229] tracking-tight">
               Quote Request Received
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
               Thank you, <strong className="text-slate-900">{name || "Customer"}</strong>. Our Cambridge removals team will review your requirements and provide an accurate, fixed-price quotation.
             </p>
           </div>
 
-          <div className="rounded-2xl border border-slate-200 bg-[#eefafc]/40 p-5 text-left text-xs space-y-2.5">
-            <div className="flex justify-between border-b border-slate-200/60 pb-2">
+          <div className="rounded-2xl border border-slate-200 bg-[#eefafc]/40 p-5 text-left text-xs space-y-3">
+            <div className="flex justify-between border-b border-slate-200/60 pb-2.5">
               <span className="text-slate-500 font-medium">Services:</span>
               <span className="font-semibold text-slate-900 text-right">{selectedServices.slice(0, 2).join(", ")}</span>
             </div>
-            <div className="flex justify-between border-b border-slate-200/60 pb-2">
+            <div className="flex justify-between border-b border-slate-200/60 pb-2.5">
               <span className="text-slate-500 font-medium">Pick-Up:</span>
               <span className="font-semibold text-slate-900 truncate max-w-[200px]">{pickup}</span>
             </div>
-            <div className="flex justify-between border-b border-slate-200/60 pb-2">
+            <div className="flex justify-between border-b border-slate-200/60 pb-2.5">
               <span className="text-slate-500 font-medium">Destination:</span>
               <span className="font-semibold text-slate-900 truncate max-w-[200px]">
                 {isIntoStorage ? "Aldhouse & Smith Storage (Waterbeach)" : dropoff}
@@ -313,7 +313,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
             </div>
           </div>
 
-          <div className="space-y-3 pt-1">
+          <div className="space-y-3 pt-2">
             <p className="text-xs text-slate-500">
               Need immediate advice or want to arrange an in-person home survey?
             </p>
@@ -356,40 +356,40 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
   return (
     <div
       className={cn(
-        "rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-8 md:p-9 shadow-xl",
+        "rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-9 md:p-10 shadow-xl",
         className
       )}
     >
-      <form onSubmit={handleSubmit} noValidate className="space-y-7">
-        {/* Header */}
-        <div className="border-b border-slate-100 pb-5 space-y-1.5">
+      <form onSubmit={handleSubmit} noValidate className="space-y-8">
+        {/* Header with Spacious Vertical Rhythm */}
+        <div className="border-b border-slate-100 pb-6 space-y-2">
           <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#368b9a]">
             <Sparkles className="size-3.5 text-[#368b9a]" />
             <span>Cambridge Removals &amp; Storage • Free Quotation</span>
           </div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl font-extrabold text-[#0c2229] tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#0c2229] tracking-tight">
             Request a Free Fixed-Price Quote
           </h2>
-          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal">
+          <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-normal max-w-xl">
             Complete your move details below for an accurate, fixed quotation from our Cambridge team. Zero obligation.
           </p>
         </div>
 
-        {/* Section 1: Category Selector */}
-        <div className="space-y-2.5">
+        {/* Section 1: Category Selector (Spacious Cards, Not Crammed) */}
+        <div className="space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-[#0c2229]">
               Step 1 • Service Category
             </span>
-            <span className="text-[0.6875rem] text-slate-500">Choose type of service</span>
+            <span className="text-[0.6875rem] text-slate-500 font-normal">Choose moving type</span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             {[
               { id: "domestic" as Mode, label: "Domestic", icon: Home, desc: "Houses & Flats" },
               { id: "commercial" as Mode, label: "Commercial", icon: Building2, desc: "Offices & Labs" },
               { id: "storage" as Mode, label: "Storage", icon: Warehouse, desc: "Safe Waterbeach" },
-              { id: "piano" as Mode, label: "Piano & Antiques", icon: Music, desc: "Specialist Moves" },
+              { id: "piano" as Mode, label: "Piano & Antiques", icon: Music, desc: "Specialist Care" },
             ].map((item) => {
               const Icon = item.icon;
               const isSelected = mode === item.id;
@@ -399,15 +399,15 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                   type="button"
                   onClick={() => handleModeSelect(item.id)}
                   className={cn(
-                    "flex flex-col items-center justify-center p-3 rounded-2xl border text-center transition-all duration-200 cursor-pointer h-20",
+                    "flex flex-col items-center justify-center p-3.5 sm:p-4 rounded-2xl border text-center transition-all duration-200 cursor-pointer min-h-[92px]",
                     isSelected
                       ? "border-[#0c2229] bg-[#0c2229] text-white shadow-md scale-[1.01]"
                       : "border-slate-200 bg-slate-50/70 text-slate-700 hover:bg-[#eefafc] hover:border-[#9bdce6]"
                   )}
                 >
-                  <Icon className={cn("size-4.5 mb-1 shrink-0", isSelected ? "text-[#9bdce6]" : "text-[#368b9a]")} />
-                  <span className="text-xs font-bold leading-tight">{item.label}</span>
-                  <span className={cn("text-[0.625rem] leading-tight mt-0.5", isSelected ? "text-slate-300" : "text-slate-500")}>
+                  <Icon className={cn("size-5 mb-1.5 shrink-0", isSelected ? "text-[#9bdce6]" : "text-[#368b9a]")} />
+                  <span className="text-xs sm:text-sm font-bold leading-snug">{item.label}</span>
+                  <span className={cn("text-[0.6875rem] leading-tight mt-1", isSelected ? "text-slate-300" : "text-slate-500")}>
                     {item.desc}
                   </span>
                 </button>
@@ -417,8 +417,8 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
         </div>
 
         {/* Section 2: Required Services Popover (Matching Base Project Exactly) */}
-        <div>
-          <div className="flex items-center justify-between">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between min-h-[1.75rem] mb-1">
             <label
               id="quote-service-label"
               className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]"
@@ -436,18 +436,18 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
             )}
           </div>
 
-          <div className="relative mt-2">
+          <div className="relative">
             <Popover open={servicesOpen} onOpenChange={setServicesOpen}>
               <PopoverTrigger asChild>
                 <button
                   type="button"
                   aria-labelledby="quote-service-label"
                   className={cn(
-                    "flex w-full items-center justify-between rounded-2xl border bg-white px-4 py-3.5 text-left text-xs sm:text-sm font-medium outline-none transition-all duration-200 hover:border-[#368b9a] focus:border-[#368b9a] focus:ring-4 focus:ring-[#9bdce6]/25 cursor-pointer shadow-2xs",
+                    "flex h-12 w-full items-center justify-between rounded-xl border bg-white px-4 text-left text-sm font-medium outline-none transition-all duration-200 hover:border-[#368b9a] focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35 cursor-pointer shadow-2xs",
                     errors.service ? "border-red-500" : "border-slate-200",
                   )}
                 >
-                  <div className="flex flex-1 items-center gap-2 overflow-hidden pr-2">
+                  <div className="flex flex-1 items-center gap-2.5 overflow-hidden pr-2">
                     {selectedServices.length === 0 ? (
                       <span className="text-slate-400 font-normal">
                         Select services (you can select multiple)...
@@ -457,11 +457,11 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                         {selectedServices[0]}
                       </span>
                     ) : (
-                      <div className="flex items-center gap-1.5 truncate">
+                      <div className="flex items-center gap-2 truncate">
                         <span className="truncate text-slate-900 font-semibold">
                           {selectedServices[0]}
                         </span>
-                        <span className="shrink-0 rounded-full bg-[#9bdce6]/30 border border-[#9bdce6] px-2 py-0.5 text-xs font-bold text-[#0c2229]">
+                        <span className="shrink-0 rounded-full bg-[#9bdce6]/35 border border-[#9bdce6] px-2.5 py-0.5 text-xs font-bold text-[#0c2229]">
                           +{selectedServices.length - 1} more
                         </span>
                       </div>
@@ -482,7 +482,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                 className="w-[calc(100vw-2.5rem)] sm:w-[420px] max-w-[460px] p-0 rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden z-50"
               >
                 {/* Popover Header */}
-                <div className="p-3.5 border-b border-slate-100 bg-[#eefafc]/50 flex items-center justify-between">
+                <div className="p-4 border-b border-slate-100 bg-[#eefafc]/50 flex items-center justify-between">
                   <span className="text-xs font-bold text-[#0c2229]">
                     {mode === "domestic"
                       ? "Domestic Removals"
@@ -493,7 +493,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                           : "Piano & Fine Art"}{" "}
                     ({selectedServices.length} chosen)
                   </span>
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-3">
                     <button
                       type="button"
                       onClick={selectAllServices}
@@ -516,14 +516,14 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                 </div>
 
                 {/* Helpful Tip */}
-                <div className="px-3.5 py-1.5 border-b border-slate-100 bg-slate-50/80">
+                <div className="px-4 py-2 border-b border-slate-100 bg-slate-50/80">
                   <p className="text-[0.6875rem] font-medium text-slate-600">
                     💡 You can select as many options as you need
                   </p>
                 </div>
 
-                {/* Service Items List */}
-                <div className="p-2.5 space-y-1 max-h-64 overflow-y-auto">
+                {/* Service Items List with Ample Row Spacing */}
+                <div className="p-3 space-y-1.5 max-h-64 overflow-y-auto">
                   {availableServices.map((item) => {
                     const isChecked = selectedServices.includes(item);
                     return (
@@ -534,7 +534,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                         role="checkbox"
                         aria-checked={isChecked}
                         className={cn(
-                          "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-xs sm:text-sm transition-all duration-150 cursor-pointer select-none",
+                          "flex w-full items-center gap-3.5 rounded-xl px-3.5 py-2.5 text-left text-sm transition-all duration-150 cursor-pointer select-none",
                           isChecked
                             ? "bg-[#eefafc] text-[#0c2229] font-semibold"
                             : "text-slate-700 hover:bg-slate-50 hover:text-slate-900",
@@ -557,7 +557,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                 </div>
 
                 {/* Popover Footer */}
-                <div className="p-3 border-t border-slate-100 bg-slate-50/60 flex items-center justify-between">
+                <div className="p-3.5 border-t border-slate-100 bg-slate-50/60 flex items-center justify-between">
                   <span className="text-[0.6875rem] text-slate-600 px-1 font-medium">
                     {selectedServices.length === 0
                       ? "Select at least 1 service"
@@ -566,7 +566,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                   <button
                     type="button"
                     onClick={() => setServicesOpen(false)}
-                    className="rounded-xl bg-[#0c2229] px-4 py-1.5 text-xs font-bold text-[#9bdce6] transition-colors hover:bg-[#132f38] cursor-pointer shadow-xs"
+                    className="rounded-xl bg-[#0c2229] px-4.5 py-2 text-xs font-bold text-[#9bdce6] transition-colors hover:bg-[#132f38] cursor-pointer shadow-xs"
                   >
                     Done
                   </button>
@@ -574,25 +574,25 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
               </PopoverContent>
             </Popover>
           </div>
-          {errors.service && <p className="text-[0.6875rem] font-medium text-red-600 mt-1">{errors.service}</p>}
+          {errors.service && <p className="text-xs font-medium text-red-600 mt-1.5">{errors.service}</p>}
         </div>
 
         {/* Section 3: Size of Move */}
-        <div className="space-y-1.5">
-          <div className="flex items-center justify-between min-h-[1.5rem] mb-1.5">
+        <div className="space-y-2">
+          <div className="flex items-center justify-between min-h-[1.75rem] mb-1">
             <label className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
               Step 3 • Approximate Move Size
             </label>
-            <span className="text-[0.6875rem] text-slate-500">For accurate vehicle allocation</span>
+            <span className="text-[0.6875rem] text-slate-500 font-normal">For accurate vehicle allocation</span>
           </div>
 
           <Select value={moveSize} onValueChange={setMoveSize}>
-            <SelectTrigger className="h-11 w-full rounded-xl border-slate-200 bg-white px-4 text-xs sm:text-sm font-normal text-slate-900 shadow-2xs focus:border-[#368b9a] focus:ring-2 focus:ring-[#9bdce6]/40">
+            <SelectTrigger className="h-12 w-full rounded-xl border-slate-200 bg-white px-4 text-sm font-normal text-slate-900 shadow-2xs focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35">
               <SelectValue placeholder="Select move size" />
             </SelectTrigger>
             <SelectContent>
               {ALDHOUSE_MOVE_SIZES.map((sz) => (
-                <SelectItem key={sz} value={sz} className="text-xs sm:text-sm">
+                <SelectItem key={sz} value={sz} className="text-sm py-2">
                   {sz}
                 </SelectItem>
               ))}
@@ -600,13 +600,13 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
           </Select>
         </div>
 
-        {/* Section 4: Locations */}
-        <div className="space-y-2.5">
+        {/* Section 4: Locations with Generous Gap */}
+        <div className="space-y-3">
           <span className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
             Step 4 • Locations &amp; Access
           </span>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-start">
             {/* Pick-Up */}
             <AldhouseLocationField
               label="Collection / Pick-Up *"
@@ -647,7 +647,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                     }
                   }}
                   className={cn(
-                    "text-[0.6875rem] font-bold px-2 py-0.5 rounded-full transition-all cursor-pointer border",
+                    "text-[0.6875rem] font-bold px-2.5 py-1 rounded-full transition-all cursor-pointer border",
                     isIntoStorage
                       ? "bg-[#9bdce6] text-[#0c2229] border-[#9bdce6]"
                       : "bg-slate-100 text-slate-600 border-slate-200 hover:bg-[#eefafc] hover:text-[#368b9a]"
@@ -661,10 +661,10 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
         </div>
 
         {/* Section 5: Date & Flexibility */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-start">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 items-start">
           {/* Preferred Date */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between min-h-[1.5rem] mb-1.5">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between min-h-[1.75rem] mb-1">
               <label className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
                 Step 5 • Moving Date
               </label>
@@ -676,7 +676,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                 <button
                   type="button"
                   className={cn(
-                    "h-11 w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-3.5 text-left text-xs sm:text-sm font-normal text-slate-900 shadow-2xs hover:border-slate-300 transition-colors focus:border-[#368b9a] focus:ring-2 focus:ring-[#9bdce6]/40",
+                    "h-12 w-full flex items-center justify-between rounded-xl border border-slate-200 bg-white px-4 text-left text-sm font-normal text-slate-900 shadow-2xs hover:border-slate-300 transition-colors focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35",
                     !date && "text-slate-400"
                   )}
                 >
@@ -699,8 +699,8 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
           </div>
 
           {/* Date Flexibility */}
-          <div className="space-y-1.5">
-            <div className="flex items-center justify-between min-h-[1.5rem] mb-1.5">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between min-h-[1.75rem] mb-1">
               <label className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
                 Date Flexibility
               </label>
@@ -708,60 +708,60 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
             </div>
 
             <Select value={dateFlexibility} onValueChange={setDateFlexibility}>
-              <SelectTrigger className="h-11 w-full rounded-xl border-slate-200 bg-white px-4 text-xs sm:text-sm font-normal text-slate-900 shadow-2xs focus:border-[#368b9a] focus:ring-2 focus:ring-[#9bdce6]/40">
+              <SelectTrigger className="h-12 w-full rounded-xl border-slate-200 bg-white px-4 text-sm font-normal text-slate-900 shadow-2xs focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35">
                 <SelectValue placeholder="Flexibility" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="exact" className="text-xs sm:text-sm">Exact date required</SelectItem>
-                <SelectItem value="flexible_few_days" className="text-xs sm:text-sm">Flexible within ±2 days</SelectItem>
-                <SelectItem value="flexible_week" className="text-xs sm:text-sm">Flexible within 1-2 weeks</SelectItem>
-                <SelectItem value="planning" className="text-xs sm:text-sm">Just planning / Rough timeframe</SelectItem>
+                <SelectItem value="exact" className="text-sm py-2">Exact date required</SelectItem>
+                <SelectItem value="flexible_few_days" className="text-sm py-2">Flexible within ±2 days</SelectItem>
+                <SelectItem value="flexible_week" className="text-sm py-2">Flexible within 1-2 weeks</SelectItem>
+                <SelectItem value="planning" className="text-sm py-2">Just planning / Rough timeframe</SelectItem>
               </SelectContent>
             </Select>
           </div>
         </div>
 
         {/* Section 6: Additional Add-ons */}
-        <div className="space-y-2">
+        <div className="space-y-2.5">
           <span className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
             Step 6 • Optional Additions
           </span>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
             <label className={cn(
-              "flex items-center gap-3 rounded-xl border p-3 text-xs font-medium cursor-pointer transition-all h-12",
-              needPacking ? "border-[#0c2229] bg-[#eefafc] text-[#0c2229]" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              "flex items-center gap-3.5 rounded-xl border px-4 py-3 text-sm font-medium cursor-pointer transition-all min-h-[52px]",
+              needPacking ? "border-[#0c2229] bg-[#eefafc] text-[#0c2229] shadow-2xs" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
             )}>
               <input
                 type="checkbox"
                 checked={needPacking}
                 onChange={(e) => setNeedPacking(e.target.checked)}
-                className="size-4 rounded border-slate-300 text-[#0c2229] focus:ring-[#9bdce6]"
+                className="size-4.5 rounded border-slate-300 text-[#0c2229] focus:ring-[#9bdce6]"
               />
               <span className="truncate">Packing Service</span>
             </label>
 
             <label className={cn(
-              "flex items-center gap-3 rounded-xl border p-3 text-xs font-medium cursor-pointer transition-all h-12",
-              needBoxes ? "border-[#0c2229] bg-[#eefafc] text-[#0c2229]" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              "flex items-center gap-3.5 rounded-xl border px-4 py-3 text-sm font-medium cursor-pointer transition-all min-h-[52px]",
+              needBoxes ? "border-[#0c2229] bg-[#eefafc] text-[#0c2229] shadow-2xs" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
             )}>
               <input
                 type="checkbox"
                 checked={needBoxes}
                 onChange={(e) => setNeedBoxes(e.target.checked)}
-                className="size-4 rounded border-slate-300 text-[#0c2229] focus:ring-[#9bdce6]"
+                className="size-4.5 rounded border-slate-300 text-[#0c2229] focus:ring-[#9bdce6]"
               />
               <span className="truncate">Boxes &amp; Supplies</span>
             </label>
 
             <label className={cn(
-              "flex items-center gap-3 rounded-xl border p-3 text-xs font-medium cursor-pointer transition-all h-12",
-              hasPiano ? "border-[#0c2229] bg-[#eefafc] text-[#0c2229]" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              "flex items-center gap-3.5 rounded-xl border px-4 py-3 text-sm font-medium cursor-pointer transition-all min-h-[52px]",
+              hasPiano ? "border-[#0c2229] bg-[#eefafc] text-[#0c2229] shadow-2xs" : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
             )}>
               <input
                 type="checkbox"
                 checked={hasPiano}
                 onChange={(e) => setHasPiano(e.target.checked)}
-                className="size-4 rounded border-slate-300 text-[#0c2229] focus:ring-[#9bdce6]"
+                className="size-4.5 rounded border-slate-300 text-[#0c2229] focus:ring-[#9bdce6]"
               />
               <span className="truncate">Piano / Antique</span>
             </label>
@@ -769,22 +769,22 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
         </div>
 
         {/* Section 7: Contact Details */}
-        <div className="space-y-3 pt-2 border-t border-slate-100">
+        <div className="space-y-4 pt-3 border-t border-slate-100">
           <div className="flex items-center justify-between">
             <span className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
               Step 7 • Your Contact Information
             </span>
-            <span className="text-[0.6875rem] text-slate-500">Strictly for your quote</span>
+            <span className="text-[0.6875rem] text-slate-500 font-normal">Strictly for your quote</span>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-4">
             <div className="space-y-1">
               <input
                 type="text"
                 placeholder="Full Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-2 focus:ring-[#9bdce6]/40"
+                className="h-12 w-full rounded-xl border border-slate-200 bg-white px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35"
               />
             </div>
 
@@ -798,11 +798,11 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                   if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
                 }}
                 className={cn(
-                  "h-11 w-full rounded-xl border bg-white px-3.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-2 focus:ring-[#9bdce6]/40",
+                  "h-12 w-full rounded-xl border bg-white px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35",
                   errors.phone ? "border-red-500" : "border-slate-200"
                 )}
               />
-              {errors.phone && <p className="text-[0.6875rem] text-red-600">{errors.phone}</p>}
+              {errors.phone && <p className="text-xs font-medium text-red-600 mt-1">{errors.phone}</p>}
             </div>
 
             <div className="space-y-1">
@@ -815,17 +815,17 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                   if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
                 }}
                 className={cn(
-                  "h-11 w-full rounded-xl border bg-white px-3.5 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-2 focus:ring-[#9bdce6]/40",
+                  "h-12 w-full rounded-xl border bg-white px-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35",
                   errors.email ? "border-red-500" : "border-slate-200"
                 )}
               />
-              {errors.email && <p className="text-[0.6875rem] text-red-600">{errors.email}</p>}
+              {errors.email && <p className="text-xs font-medium text-red-600 mt-1">{errors.email}</p>}
             </div>
           </div>
 
           {/* Preferred Communication Segmented Toggle */}
-          <div className="flex flex-wrap items-center gap-2 pt-1 text-xs">
-            <span className="text-xs font-semibold text-slate-600 mr-1">Preferred reply channel:</span>
+          <div className="flex flex-wrap items-center gap-2.5 pt-2 text-xs">
+            <span className="text-xs font-semibold text-slate-700 mr-1.5">Preferred reply channel:</span>
             {(
               [
                 { id: "phone" as const, label: "Phone Call", icon: Phone },
@@ -841,13 +841,13 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
                   type="button"
                   onClick={() => setPreferredContact(ch.id)}
                   className={cn(
-                    "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-semibold transition-all cursor-pointer",
+                    "inline-flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-semibold transition-all cursor-pointer",
                     active
                       ? "border-[#0c2229] bg-[#0c2229] text-[#9bdce6] shadow-2xs"
-                      : "border-slate-200 bg-slate-50/70 text-slate-600 hover:bg-[#eefafc]"
+                      : "border-slate-200 bg-slate-50/70 text-slate-700 hover:bg-[#eefafc] hover:border-slate-300"
                   )}
                 >
-                  <Icon className="size-3" />
+                  <Icon className="size-3.5" />
                   <span>{ch.label}</span>
                 </button>
               );
@@ -856,7 +856,7 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
         </div>
 
         {/* Special Instructions */}
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           <label className="block text-xs font-bold uppercase tracking-wider text-[#0c2229]">
             Special Notes / Access Information (Optional)
           </label>
@@ -865,16 +865,16 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
             placeholder="Tell us about parking permits, flight of stairs, specific upright/grand piano make, or estimated storage duration..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            className="w-full rounded-xl border border-slate-200 bg-white p-3 text-xs sm:text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-2 focus:ring-[#9bdce6]/40 resize-y"
+            className="w-full rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-900 placeholder:text-slate-400 focus:border-[#368b9a] focus:ring-3 focus:ring-[#9bdce6]/35 resize-y leading-relaxed"
           />
         </div>
 
-        {/* Submit Button */}
-        <div className="pt-2">
+        {/* Submit Button with Spacious Margins */}
+        <div className="pt-3">
           <button
             type="submit"
             disabled={submitting}
-            className="w-full flex items-center justify-center gap-2.5 rounded-2xl bg-[#0c2229] py-4 px-6 text-sm sm:text-base font-extrabold text-[#9bdce6] shadow-lg shadow-[#0c2229]/20 hover:bg-[#132f38] hover:text-white active:scale-[0.99] transition-all cursor-pointer disabled:opacity-70 border border-[#9bdce6]/30"
+            className="w-full flex items-center justify-center gap-3 rounded-2xl bg-[#0c2229] py-4.5 px-7 text-base font-extrabold text-[#9bdce6] shadow-lg shadow-[#0c2229]/20 hover:bg-[#132f38] hover:text-white active:scale-[0.99] transition-all cursor-pointer disabled:opacity-70 border border-[#9bdce6]/35 tracking-wide"
           >
             {submitting ? (
               <>
@@ -889,17 +889,17 @@ export function AldhouseQuoteWizard({ className }: AldhouseQuoteWizardProps) {
             )}
           </button>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[0.6875rem] text-slate-500 font-medium text-center">
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="size-3.5 text-[#368b9a]" />
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-2.5 text-xs text-slate-500 font-medium text-center">
+            <span className="flex items-center gap-2">
+              <ShieldCheck className="size-4 text-[#368b9a]" />
               <span>100% Free &amp; Zero Obligation</span>
             </span>
-            <span className="flex items-center gap-1.5">
-              <Check className="size-3.5 text-[#368b9a]" />
+            <span className="flex items-center gap-2">
+              <Check className="size-4 text-[#368b9a]" />
               <span>Guaranteed Fixed Pricing</span>
             </span>
-            <span className="flex items-center gap-1.5">
-              <ShieldCheck className="size-3.5 text-[#368b9a]" />
+            <span className="flex items-center gap-2">
+              <ShieldCheck className="size-4 text-[#368b9a]" />
               <span>Fully Insured Removals &amp; Storage</span>
             </span>
           </div>
