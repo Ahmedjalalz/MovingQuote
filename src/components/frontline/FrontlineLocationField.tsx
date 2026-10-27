@@ -108,8 +108,8 @@ export function FrontlineLocationField({
   };
 
   return (
-    <div ref={wrapperRef} className={cn("relative space-y-1.5", className)}>
-      <div className="flex items-center justify-between">
+    <div ref={wrapperRef} className={cn("relative space-y-1.5 w-full", className)}>
+      <div className="flex items-center justify-between gap-2">
         <label htmlFor={inputId} className="block text-xs font-bold text-slate-900 tracking-tight">
           {label}
         </label>
@@ -117,8 +117,8 @@ export function FrontlineLocationField({
       </div>
 
       <div className="relative">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
-          <MapPin className="size-4 text-[#20c200]" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+          <MapPin className="size-4 text-[#20c200] shrink-0" />
         </div>
 
         <input
@@ -138,7 +138,7 @@ export function FrontlineLocationField({
           }}
           onKeyDown={handleKeyDown}
           className={cn(
-            "w-full rounded-xl border bg-white py-3 pl-10 pr-10 text-sm text-slate-900 shadow-xs transition-colors",
+            "w-full rounded-xl border bg-white py-2.5 sm:py-3 pl-9 sm:pl-10 pr-9 sm:pr-10 text-xs sm:text-sm text-slate-900 shadow-xs transition-colors",
             "placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#20c200]/25 focus:border-[#20c200]",
             error
               ? "border-red-400 focus:border-red-500 focus:ring-red-200"
@@ -147,7 +147,7 @@ export function FrontlineLocationField({
           )}
         />
 
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 gap-1">
+        <div className="absolute inset-y-0 right-0 flex items-center pr-2.5 sm:pr-3 gap-1">
           {isFetching ? (
             <Loader2 className="size-4 animate-spin text-[#20c200]" />
           ) : value && !readOnly && !disabled ? (
@@ -167,14 +167,14 @@ export function FrontlineLocationField({
       </div>
 
       {helperText && !error && (
-        <p className="text-[0.7rem] text-slate-500 font-normal">{helperText}</p>
+        <p className="text-[0.68rem] sm:text-[0.7rem] text-slate-500 font-normal">{helperText}</p>
       )}
 
       {error && <p className="text-xs text-red-600 font-medium">{error}</p>}
 
-      {/* Autocomplete Dropdown */}
+      {/* Autocomplete Dropdown with responsive positioning */}
       {open && (suggestions.length > 0 || isFetching) && (
-        <div className="absolute z-50 left-0 right-0 mt-1 max-h-60 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl">
+        <div className="absolute z-50 left-0 right-0 mt-1 max-h-52 sm:max-h-60 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl w-full">
           {isFetching && suggestions.length === 0 ? (
             <div className="flex items-center gap-2 p-3 text-xs text-slate-500">
               <Loader2 className="size-3.5 animate-spin text-[#20c200]" />
@@ -188,19 +188,19 @@ export function FrontlineLocationField({
                     type="button"
                     onClick={() => selectSuggestion(item)}
                     className={cn(
-                      "w-full text-left rounded-lg px-3 py-2 text-xs flex items-start gap-2.5 transition-colors",
+                      "w-full text-left rounded-lg px-2.5 sm:px-3 py-2 text-xs flex items-start gap-2 transition-colors",
                       selectedIndex === idx
                         ? "bg-[#ecf5eb] text-[#147a00] font-semibold"
                         : "text-slate-700 hover:bg-slate-100"
                     )}
                   >
                     <Search className="size-3.5 text-[#20c200] shrink-0 mt-0.5" />
-                    <div className="truncate">
-                      <span className="font-semibold text-slate-900 block truncate">
+                    <div className="min-w-0 flex-1">
+                      <span className="font-semibold text-slate-900 block truncate text-xs">
                         {item.primary}
                       </span>
                       {item.secondary && (
-                        <span className="text-[0.7rem] text-slate-500 block truncate">
+                        <span className="text-[0.68rem] text-slate-500 block truncate">
                           {item.secondary}
                         </span>
                       )}
