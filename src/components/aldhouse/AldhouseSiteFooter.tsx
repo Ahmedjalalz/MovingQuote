@@ -143,6 +143,20 @@ export function AldhouseSiteFooter() {
             </div>
           </div>
         </div>
+
+        {/* UK Partners Bar */}
+        <div className="border-t border-[#163945] mt-8 pt-4 text-[0.6875rem] text-slate-400 flex flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-slate-500 font-semibold uppercase">UK Partners:</span>
+            <a href="/frontlinetransport" className="text-slate-300 hover:text-[#9bdce6] transition-colors">
+              Frontline Transport (West Midlands &amp; Nationwide)
+            </a>
+            <span className="text-slate-700">•</span>
+            <a href="/unitywasteremovals" className="text-slate-300 hover:text-[#9bdce6] transition-colors">
+              Unity Waste Removals (Cheshire &amp; Wirral)
+            </a>
+          </div>
+        </div>
       </div>
 
       {/* Bottom Bar */}

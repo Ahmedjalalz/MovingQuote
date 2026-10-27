@@ -23,6 +23,11 @@ function copyFallbacks(): Plugin {
       if (fs.existsSync(aldhouseIndex)) {
         fs.copyFileSync(aldhouseIndex, aldhouseHtml);
       }
+      const frontlineIndex = path.join(distDir, "frontlinetransport", "index.html");
+      const frontlineHtml = path.join(distDir, "frontlinetransport.html");
+      if (fs.existsSync(frontlineIndex)) {
+        fs.copyFileSync(frontlineIndex, frontlineHtml);
+      }
     },
   };
 }
@@ -40,6 +45,7 @@ export default defineConfig({
         main: path.resolve(__dirname, "index.html"),
         unitywasteremovals: path.resolve(__dirname, "unitywasteremovals/index.html"),
         aldhouseandsmith: path.resolve(__dirname, "aldhouseandsmith/index.html"),
+        frontlinetransport: path.resolve(__dirname, "frontlinetransport/index.html"),
       },
     },
   },

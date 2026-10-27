@@ -92,7 +92,20 @@ export function UnitySiteFooter() {
           </div>
         </div>
 
-        <div className="mt-14 border-t border-gray-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
+        <div className="mt-14 border-t border-gray-800 pt-6 pb-2 flex flex-wrap items-center justify-between gap-3 text-xs text-gray-400">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-gray-500 font-semibold uppercase">UK Partners:</span>
+            <a href="/frontlinetransport" className="text-gray-300 hover:text-white transition-colors">
+              Frontline Transport (West Midlands &amp; Nationwide)
+            </a>
+            <span className="text-gray-700">•</span>
+            <a href="/aldhouseandsmith" className="text-gray-300 hover:text-white transition-colors">
+              Aldhouse &amp; Smith (Cambridge Removals)
+            </a>
+          </div>
+        </div>
+
+        <div className="border-t border-gray-800/60 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
           <p>© {new Date().getFullYear()} Unity Waste Removal. All rights reserved.</p>
           <p className="flex items-center gap-3">
             <span>Licensed UK Waste Carrier</span>

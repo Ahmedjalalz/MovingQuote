@@ -1,3 +1,7 @@
+/frontlinetransport    /frontlinetransport/index.html    200
+/frontlinetransport/*  /frontlinetransport/index.html    200
+/aldhouseandsmith      /aldhouseandsmith/index.html      200
+/aldhouseandsmith/*    /aldhouseandsmith/index.html      200
 /unitywasteremovals    /unitywasteremovals/index.html    200
 /unitywasteremovals/*  /unitywasteremovals/index.html    200
 /*                     /index.html                       200

@@ -6,6 +6,31 @@ export type UkPlaceSuggestion = {
 
 // Core local coverage: Cambridgeshire (Cambridge, Waterbeach, Ely, etc.), Cheshire, Wirral, and UK Nationwide
 export const UK_COMMON_PLACES: Array<{ name: string; area: string; county: string; postcode?: string }> = [
+  // West Midlands (Frontline Transport home region)
+  { name: "Brownhills", area: "Walsall", county: "West Midlands", postcode: "WS8" },
+  { name: "Walsall Town Centre", area: "Walsall", county: "West Midlands", postcode: "WS1" },
+  { name: "Aldridge", area: "Walsall", county: "West Midlands", postcode: "WS9" },
+  { name: "Bloxwich", area: "Walsall", county: "West Midlands", postcode: "WS3" },
+  { name: "Lichfield City Centre", area: "Lichfield", county: "Staffordshire", postcode: "WS13 / WS14" },
+  { name: "Cannock", area: "Cannock Chase", county: "Staffordshire", postcode: "WS11" },
+  { name: "Burntwood", area: "Burntwood", county: "Staffordshire", postcode: "WS7" },
+  { name: "Rugeley", area: "Rugeley", county: "Staffordshire", postcode: "WS15" },
+  { name: "Tamworth", area: "Tamworth", county: "Staffordshire", postcode: "B77 / B79" },
+  { name: "Sutton Coldfield", area: "Birmingham", county: "West Midlands", postcode: "B72 / B73" },
+  { name: "Birmingham City Centre", area: "Birmingham", county: "West Midlands", postcode: "B1 / B2 / B3" },
+  { name: "Wolverhampton City Centre", area: "Wolverhampton", county: "West Midlands", postcode: "WV1" },
+  { name: "Dudley", area: "Dudley", county: "West Midlands", postcode: "DY1" },
+  { name: "West Bromwich", area: "Sandwell", county: "West Midlands", postcode: "B70" },
+  { name: "Smethwick", area: "Sandwell", county: "West Midlands", postcode: "B66" },
+  { name: "Solihull", area: "Solihull", county: "West Midlands", postcode: "B91" },
+  { name: "Coventry City Centre", area: "Coventry", county: "West Midlands", postcode: "CV1" },
+  { name: "Telford", area: "Telford", county: "Shropshire", postcode: "TF1" },
+  { name: "Stafford", area: "Stafford", county: "Staffordshire", postcode: "ST16" },
+  { name: "Stourbridge", area: "Dudley", county: "West Midlands", postcode: "DY8" },
+  { name: "Kidderminster", area: "Wyre Forest", county: "Worcestershire", postcode: "DY10" },
+  { name: "Redditch", area: "Redditch", county: "Worcestershire", postcode: "B97" },
+  { name: "Burton-upon-Trent", area: "Burton", county: "Staffordshire", postcode: "DE14" },
+
   // Cambridge & Cambridgeshire (Aldhouse & Smith home region)
   { name: "Waterbeach", area: "Waterbeach", county: "Cambridgeshire", postcode: "CB25" },
   { name: "Cambridge City Centre", area: "Cambridge", county: "Cambridgeshire", postcode: "CB1 / CB2" },

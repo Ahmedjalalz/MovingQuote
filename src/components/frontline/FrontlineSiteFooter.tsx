@@ -1,0 +1,197 @@
+import { Phone, Mail, MapPin, ShieldCheck, Truck, ExternalLink, Heart } from "lucide-react";
+
+export function FrontlineSiteFooter() {
+  return (
+    <footer className="bg-[#0f172a] text-slate-300 pt-14 pb-10 border-t border-slate-800">
+      <div className="container mx-auto px-4 sm:px-6 max-w-6xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          {/* Col 1: About & Logo */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <img
+                src="/frontline-logo-full.png"
+                alt="Frontline Transport"
+                className="h-9 w-auto brightness-0 invert object-contain"
+                onError={(e) => {
+                  const target = e.currentTarget;
+                  if (!target.src.endsWith("frontline-logo.png")) {
+                    target.src = "/frontline-logo.png";
+                  }
+                }}
+              />
+            </div>
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed font-normal">
+              We move, remove, and deliver your stuff. Professional house removals, licensed waste clearances, and rapid courier delivery across the West Midlands and UK Nationwide.
+            </p>
+            <div className="pt-2 flex items-center gap-2 text-xs font-semibold text-amber-400">
+              <ShieldCheck className="size-4 shrink-0" />
+              <span>Environment Agency Registered Waste Carrier</span>
+            </div>
+          </div>
+
+          {/* Col 2: Services */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Our Services</h4>
+            <ul className="text-xs space-y-2 text-slate-400 font-medium">
+              <li>
+                <a href="#removals" className="hover:text-amber-400 transition-colors">
+                  Full House &amp; Flat Removals
+                </a>
+              </li>
+              <li>
+                <a href="#removals" className="hover:text-amber-400 transition-colors">
+                  Office &amp; Commercial Moves
+                </a>
+              </li>
+              <li>
+                <a href="#waste-clearance" className="hover:text-amber-400 transition-colors">
+                  Licensed Waste &amp; Rubbish Clearance
+                </a>
+              </li>
+              <li>
+                <a href="#waste-clearance" className="hover:text-amber-400 transition-colors">
+                  End of Tenancy &amp; Garage Clearances
+                </a>
+              </li>
+              <li>
+                <a href="#delivery" className="hover:text-amber-400 transition-colors">
+                  Same-Day &amp; Next-Day Courier Delivery
+                </a>
+              </li>
+              <li>
+                <a href="#delivery" className="hover:text-amber-400 transition-colors">
+                  Single Item &amp; Palletized Freight
+                </a>
+              </li>
+              <li>
+                <a href="#fleet" className="hover:text-amber-400 transition-colors">
+                  Luton Van &amp; SWB / LWB Fleet
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 3: Service Areas */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Service Coverage</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Operating daily throughout the West Midlands and available for long-distance relocations across the UK:
+            </p>
+            <div className="flex flex-wrap gap-1.5 pt-1">
+              {[
+                "Brownhills",
+                "Walsall",
+                "Birmingham",
+                "Wolverhampton",
+                "Lichfield",
+                "Cannock",
+                "Dudley",
+                "Sutton Coldfield",
+                "Solihull",
+                "Tamworth",
+                "Coventry",
+                "Stafford",
+                "Telford",
+                "UK Nationwide",
+              ].map((town) => (
+                <span
+                  key={town}
+                  className="rounded-md bg-slate-800/80 px-2 py-1 text-[0.68rem] text-slate-300 border border-slate-700/60"
+                >
+                  {town}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Col 4: Contact & Depot */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-bold text-white uppercase tracking-wider">Contact Details</h4>
+            <div className="space-y-2.5 text-xs text-slate-300">
+              <a
+                href="tel:01543630122"
+                className="flex items-start gap-2.5 hover:text-amber-400 transition-colors"
+              >
+                <Phone className="size-4 text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <span className="block font-bold text-sm text-white">01543 630 122</span>
+                  <span className="text-[0.7rem] text-slate-400 font-normal">Customer Enquiries</span>
+                </div>
+              </a>
+
+              <a
+                href="tel:07761098483"
+                className="flex items-start gap-2.5 hover:text-amber-400 transition-colors"
+              >
+                <Phone className="size-4 text-amber-400 shrink-0 mt-0.5" />
+                <div>
+                  <span className="block font-semibold text-white">07761 098 483</span>
+                  <span className="text-[0.7rem] text-slate-400 font-normal">Direct Line / WhatsApp</span>
+                </div>
+              </a>
+
+              <a
+                href="mailto:enquiries@frontlinetransport.co.uk"
+                className="flex items-start gap-2.5 hover:text-amber-400 transition-colors"
+              >
+                <Mail className="size-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="break-all font-medium">enquiries@frontlinetransport.co.uk</span>
+              </a>
+
+              <div className="flex items-start gap-2.5 pt-1 text-slate-400">
+                <MapPin className="size-4 text-amber-400 shrink-0 mt-0.5" />
+                <span className="leading-relaxed">
+                  Office 5, Toll Point Industrial Estate, Lichfield Road, Brownhills, Walsall, WS8 6JP
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Other Brand Links */}
+        <div className="pt-6 pb-6 border-t border-slate-800 text-xs text-slate-400 flex flex-wrap items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center gap-3">
+            <span className="text-slate-500 font-semibold uppercase tracking-wider text-[0.68rem]">
+              Partner Network:
+            </span>
+            <a
+              href="/aldhouseandsmith"
+              className="text-slate-300 hover:text-amber-400 transition-colors"
+            >
+              Aldhouse &amp; Smith (Cambridge Removals)
+            </a>
+            <span className="text-slate-700">•</span>
+            <a
+              href="/unitywasteremovals"
+              className="text-slate-300 hover:text-amber-400 transition-colors"
+            >
+              Unity Waste Removals (Cheshire &amp; Wirral)
+            </a>
+            <span className="text-slate-700">•</span>
+            <a href="/" className="text-slate-300 hover:text-amber-400 transition-colors">
+              Paul Movers Auckland (NZ)
+            </a>
+          </div>
+
+          <a
+            href="https://www.frontlinetransport.co.uk/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-amber-400 hover:underline font-semibold"
+          >
+            <span>Visit official website: frontlinetransport.co.uk</span>
+            <ExternalLink className="size-3" />
+          </a>
+        </div>
+
+        {/* Copyright */}
+        <div className="pt-4 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between text-[0.7rem] text-slate-500 gap-2">
+          <p>© {new Date().getFullYear()} Frontline Transport. All rights reserved. Registered in the United Kingdom.</p>
+          <p className="flex items-center gap-1">
+            <span>Fast, Reliable &amp; Licensed Transport Services</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+  );
+}

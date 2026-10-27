@@ -1,6 +1,8 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+  RewriteRule ^frontlinetransport/?$ /frontlinetransport/index.html [L]
+  RewriteRule ^aldhouseandsmith/?$ /aldhouseandsmith/index.html [L]
   RewriteRule ^unitywasteremovals/?$ /unitywasteremovals/index.html [L]
   RewriteRule ^index\.html$ - [L]
   RewriteCond %{REQUEST_FILENAME} !-f

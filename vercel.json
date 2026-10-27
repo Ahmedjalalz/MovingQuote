@@ -12,6 +12,14 @@
       "destination": "/aldhouseandsmith/index.html"
     },
     {
+      "source": "/frontlinetransport",
+      "destination": "/frontlinetransport/index.html"
+    },
+    {
+      "source": "/frontlinetransport/(.*)",
+      "destination": "/frontlinetransport/index.html"
+    },
+    {
       "source": "/unitywasteremovals",
       "destination": "/unitywasteremovals/index.html"
     },

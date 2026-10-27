@@ -8,6 +8,7 @@ import { SiteFooter } from "@/components/site/SiteFooter";
 import { Toaster } from "@/components/ui/sonner";
 import { UnityWasteQuotePage } from "@/pages/UnityWasteQuotePage";
 import { AldhouseAndSmithQuotePage } from "@/pages/AldhouseAndSmithQuotePage";
+import { FrontlineTransportQuotePage } from "@/pages/FrontlineTransportQuotePage";
 
 const ASSURANCES = [
   {
@@ -69,15 +70,35 @@ function checkIsAldhouseRoute(): boolean {
   );
 }
 
+function checkIsFrontlineRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/frontlinetransport") ||
+    path.startsWith("/frontline") ||
+    hash.includes("frontlinetransport") ||
+    hash.includes("frontline") ||
+    params.get("page") === "frontlinetransport" ||
+    params.get("page") === "frontline" ||
+    params.get("route") === "frontlinetransport" ||
+    params.get("route") === "frontline"
+  );
+}
+
 export function App() {
   const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
   const [isAldhouse, setIsAldhouse] = useState(checkIsAldhouseRoute);
+  const [isFrontline, setIsFrontline] = useState(checkIsFrontlineRoute);
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
 
   useEffect(() => {
     const handleLocationChange = () => {
       setIsUnity(checkIsUnityRoute());
       setIsAldhouse(checkIsAldhouseRoute());
+      setIsFrontline(checkIsFrontlineRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
@@ -121,6 +142,11 @@ export function App() {
       // fallback
     }
   };
+
+  // Route: /frontlinetransport
+  if (isFrontline) {
+    return <FrontlineTransportQuotePage />;
+  }
 
   // Route: /aldhouseandsmith
   if (isAldhouse) {
@@ -195,6 +221,25 @@ export function App() {
                       className="mt-5 inline-flex border-b border-accent pb-1 text-sm font-semibold hover:text-accent transition-colors"
                     >
                       021 100 9045
+                    </a>
+                  </div>
+
+                  {/* Route Link to Frontline Transport */}
+                  <div className="mt-4 p-4 rounded-2xl border border-amber-300/60 bg-amber-50/50 text-xs text-foreground/85 flex items-center justify-between">
+                    <span>Looking for West Midlands Removals &amp; Courier?</span>
+                    <a
+                      href="/frontlinetransport"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState({}, "", "/frontlinetransport");
+                        setIsFrontline(true);
+                        setIsAldhouse(false);
+                        setIsUnity(false);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="font-bold text-amber-700 hover:underline flex items-center gap-1"
+                    >
+                      <span>Frontline Transport →</span>
                     </a>
                   </div>
 
