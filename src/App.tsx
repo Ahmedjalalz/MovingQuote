@@ -225,7 +225,7 @@ export function App() {
                   </div>
 
                   {/* Route Link to Frontline Transport */}
-                  <div className="mt-4 p-4 rounded-2xl border border-amber-300/60 bg-amber-50/50 text-xs text-foreground/85 flex items-center justify-between">
+                  <div className="mt-4 p-4 rounded-2xl border border-[#20c200]/40 bg-[#ecf5eb]/60 text-xs text-foreground/85 flex items-center justify-between">
                     <span>Looking for West Midlands Removals &amp; Courier?</span>
                     <a
                       href="/frontlinetransport"
@@ -237,7 +237,7 @@ export function App() {
                         setIsUnity(false);
                         window.scrollTo({ top: 0, behavior: "smooth" });
                       }}
-                      className="font-bold text-amber-700 hover:underline flex items-center gap-1"
+                      className="font-bold text-[#147a00] hover:underline flex items-center gap-1"
                     >
                       <span>Frontline Transport →</span>
                     </a>

@@ -274,22 +274,22 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
 
   if (submitted) {
     return (
-      <div className={cn("rounded-3xl border border-amber-200 bg-white p-6 sm:p-8 md:p-10 shadow-xl", className)}>
+      <div className={cn("rounded-3xl border border-[#20c200]/30 bg-white p-6 sm:p-8 md:p-10 shadow-xl", className)}>
         <div className="text-center space-y-4 max-w-lg mx-auto py-6">
-          <div className="size-16 rounded-full bg-amber-500/15 border border-amber-500/30 flex items-center justify-center mx-auto text-amber-600">
+          <div className="size-16 rounded-full bg-[#ecf5eb] border border-[#20c200]/30 flex items-center justify-center mx-auto text-[#147a00]">
             <FileCheck2 className="size-8" />
           </div>
 
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#261744] tracking-tight">
             Quote Request Received!
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 leading-relaxed font-normal">
             Thank you, <span className="font-semibold text-slate-900">{name || "Customer"}</span>. Your enquiry for{" "}
-            <span className="font-semibold text-amber-600">{selectedServices[0]}</span> has been dispatched to our West Midlands operations team.
+            <span className="font-semibold text-[#147a00]">{selectedServices[0]}</span> has been dispatched to our West Midlands operations team.
           </p>
 
-          <div className="rounded-2xl bg-slate-50 border border-slate-200 p-4 text-xs sm:text-sm text-slate-700 text-left space-y-2">
+          <div className="rounded-2xl bg-[#ecf5eb]/40 border border-[#20c200]/20 p-4 text-xs sm:text-sm text-slate-700 text-left space-y-2">
             <div className="flex justify-between border-b border-slate-200/80 pb-2">
               <span className="text-slate-500">Pick-up Area:</span>
               <span className="font-semibold text-slate-900 truncate max-w-[200px]">{pickup}</span>
@@ -306,17 +306,17 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
             </div>
             <div className="flex justify-between">
               <span className="text-slate-500">Fixed-Price Quotation:</span>
-              <span className="font-bold text-amber-600">100% Free &amp; Guaranteed</span>
+              <span className="font-bold text-[#147a00]">100% Free &amp; Guaranteed</span>
             </div>
           </div>
 
           <div className="pt-2 text-xs text-slate-500 leading-relaxed">
             Need urgent same-day transport or immediate clearance? Call our Brownhills depot directly on{" "}
-            <a href="tel:01543630122" className="font-bold text-amber-600 hover:underline">
+            <a href="tel:01543630122" className="font-bold text-[#147a00] hover:underline">
               01543 630 122
             </a>{" "}
             or WhatsApp{" "}
-            <a href="tel:07761098483" className="font-bold text-amber-600 hover:underline">
+            <a href="tel:07761098483" className="font-bold text-[#147a00] hover:underline">
               07761 098 483
             </a>.
           </div>
@@ -330,7 +330,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                 setDropoff("");
                 setNotes("");
               }}
-              className="rounded-xl border border-slate-300 bg-white hover:bg-slate-50 px-5 py-2.5 text-xs font-semibold text-slate-700 transition-colors shadow-2xs"
+              className="rounded-full border border-slate-300 bg-white hover:bg-slate-50 px-6 py-2.5 text-xs font-bold text-slate-700 transition-colors shadow-2xs"
             >
               Submit Another Quote Request
             </button>
@@ -344,7 +344,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
     <div className={cn("rounded-3xl border border-slate-200/80 bg-white p-5 sm:p-7 md:p-8 shadow-xl", className)}>
       {/* Service Mode Selector Tabs */}
       <div className="space-y-3 mb-6">
-        <label className="block text-xs font-bold text-slate-900 tracking-tight uppercase">
+        <label className="block text-xs font-bold text-[#261744] tracking-tight uppercase">
           Select Service Category
         </label>
         <div className="grid grid-cols-3 gap-2 p-1.5 bg-slate-100 rounded-2xl border border-slate-200/80">
@@ -354,7 +354,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
             className={cn(
               "flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 py-3 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all",
               mode === "removals"
-                ? "bg-slate-900 text-amber-400 shadow-md scale-[1.02]"
+                ? "bg-[#261744] text-[#20c200] shadow-md scale-[1.02]"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/60"
             )}
           >
@@ -368,7 +368,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
             className={cn(
               "flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 py-3 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all",
               mode === "waste"
-                ? "bg-slate-900 text-amber-400 shadow-md scale-[1.02]"
+                ? "bg-[#261744] text-[#20c200] shadow-md scale-[1.02]"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/60"
             )}
           >
@@ -382,7 +382,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
             className={cn(
               "flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 py-3 px-2 rounded-xl text-xs sm:text-sm font-bold transition-all",
               mode === "delivery"
-                ? "bg-slate-900 text-amber-400 shadow-md scale-[1.02]"
+                ? "bg-[#261744] text-[#20c200] shadow-md scale-[1.02]"
                 : "text-slate-600 hover:text-slate-900 hover:bg-slate-200/60"
             )}
           >
@@ -413,7 +413,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                   className={cn(
                     "flex items-center justify-between gap-2 rounded-xl border p-3 text-left text-xs transition-all",
                     isSelected
-                      ? "border-amber-500 bg-amber-500/10 font-bold text-slate-900 shadow-2xs"
+                      ? "border-[#20c200] bg-[#ecf5eb] font-bold text-[#147a00] shadow-2xs"
                       : "border-slate-200 bg-white text-slate-700 hover:border-slate-300 hover:bg-slate-50"
                   )}
                 >
@@ -422,7 +422,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                     className={cn(
                       "size-4 shrink-0 rounded flex items-center justify-center border transition-colors",
                       isSelected
-                        ? "bg-amber-500 border-amber-500 text-slate-950"
+                        ? "bg-[#20c200] border-[#20c200] text-[#261744]"
                         : "border-slate-300 bg-white"
                     )}
                   >
@@ -441,7 +441,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
             {getSizeLabel(mode)}
           </label>
           <Select value={moveSize} onValueChange={(val) => setMoveSize(val)}>
-            <SelectTrigger className="w-full rounded-xl border-slate-300 bg-white py-3 px-3.5 text-sm text-slate-900 shadow-xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500">
+            <SelectTrigger className="w-full rounded-xl border-slate-300 bg-white py-3 px-3.5 text-sm text-slate-900 shadow-xs focus:ring-2 focus:ring-[#20c200]/25 focus:border-[#20c200]">
               <SelectValue placeholder="Select size / vehicle" />
             </SelectTrigger>
             <SelectContent className="bg-white border-slate-200">
@@ -473,9 +473,9 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
               <label className="block text-xs font-bold text-slate-900 tracking-tight">
                 Disposal / Drop-Off Facility
               </label>
-              <div className="w-full rounded-xl border border-slate-200 bg-slate-50 py-3 px-3.5 text-sm text-slate-600 flex items-center justify-between">
-                <span className="text-xs font-medium">Licensed Waste Transfer &amp; Recycling Facility</span>
-                <ShieldCheck className="size-4 text-emerald-600 shrink-0" />
+              <div className="w-full rounded-xl border border-slate-200 bg-[#ecf5eb]/50 py-3 px-3.5 text-sm text-slate-700 flex items-center justify-between">
+                <span className="text-xs font-semibold text-[#147a00]">Licensed Waste Transfer &amp; Recycling Facility</span>
+                <ShieldCheck className="size-4 text-[#20c200] shrink-0" />
               </div>
               <p className="text-[0.7rem] text-slate-500">
                 100% compliant transfer with official Environment Agency documentation.
@@ -514,7 +514,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                   )}
                 >
                   <span className="flex items-center gap-2 truncate text-xs sm:text-sm">
-                    <CalendarDays className="size-4 text-amber-500 shrink-0" />
+                    <CalendarDays className="size-4 text-[#20c200] shrink-0" />
                     <span>
                       {preferredDate ? format(preferredDate, "EEE, d MMM yyyy") : "Select preferred date"}
                     </span>
@@ -540,19 +540,19 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                 type="checkbox"
                 checked={dateFlexible}
                 onChange={(e) => setDateFlexible(e.target.checked)}
-                className="size-4 rounded border-slate-300 text-amber-500 focus:ring-amber-500/20"
+                className="size-4 rounded border-slate-300 text-[#20c200] focus:ring-[#20c200]/20"
               />
-              <span>Date is flexible (± 3 days for best price / availability)</span>
+              <span>Date is flexible (± 3 days for best price / vehicle availability)</span>
             </label>
             <p className="text-[0.7rem] text-slate-500 leading-normal">
-              Same-day service available across the West Midlands subject to vehicle schedule.
+              Same-day service available across the West Midlands subject to schedule.
             </p>
           </div>
         </div>
 
         {/* Step 5: Contact Details */}
         <div className="border-t border-slate-100 pt-5 space-y-4">
-          <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+          <h4 className="text-xs font-bold text-[#261744] uppercase tracking-wider">
             Where should we send your quote?
           </h4>
 
@@ -564,7 +564,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="e.g. John Davies"
-                className="w-full rounded-xl border border-slate-300 bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500"
+                className="w-full rounded-xl border border-slate-300 bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-[#20c200]/25 focus:border-[#20c200]"
               />
             </div>
 
@@ -581,7 +581,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                 }}
                 placeholder="e.g. 01543 630 122 or 07..."
                 className={cn(
-                  "w-full rounded-xl border bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500",
+                  "w-full rounded-xl border bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-[#20c200]/25 focus:border-[#20c200]",
                   errors.phone ? "border-red-400 focus:border-red-500" : "border-slate-300"
                 )}
               />
@@ -601,7 +601,7 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                 }}
                 placeholder="e.g. john@example.co.uk"
                 className={cn(
-                  "w-full rounded-xl border bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500",
+                  "w-full rounded-xl border bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-[#20c200]/25 focus:border-[#20c200]",
                   errors.email ? "border-red-400 focus:border-red-500" : "border-slate-300"
                 )}
               />
@@ -623,13 +623,13 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
                   type="button"
                   onClick={() => setPreferredContact(id as "phone" | "email" | "whatsapp")}
                   className={cn(
-                    "flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors",
+                    "flex items-center gap-1.5 px-4 py-2 rounded-full border text-xs font-medium transition-colors",
                     preferredContact === id
-                      ? "border-amber-500 bg-amber-50 text-amber-950 font-bold"
+                      ? "border-[#20c200] bg-[#ecf5eb] text-[#147a00] font-bold shadow-2xs"
                       : "border-slate-200 text-slate-600 hover:bg-slate-50"
                   )}
                 >
-                  <Icon className="size-3.5 text-amber-500" />
+                  <Icon className="size-3.5 text-[#20c200]" />
                   <span>{label}</span>
                 </button>
               ))}
@@ -646,17 +646,17 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
             rows={3}
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
-            placeholder="Tell us about stairs, parking restrictions, heavy or fragile items (e.g. piano, American fridge, large safe), or describe waste to be cleared..."
-            className="w-full rounded-xl border border-slate-300 bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 placeholder:text-slate-400"
+            placeholder="Tell us about stairs, parking restrictions, heavy items, or describe waste to be cleared..."
+            className="w-full rounded-xl border border-slate-300 bg-white py-2.5 px-3 text-xs sm:text-sm text-slate-900 shadow-2xs focus:ring-2 focus:ring-[#20c200]/25 focus:border-[#20c200] placeholder:text-slate-400"
           />
         </div>
 
-        {/* Submit CTA */}
+        {/* Submit CTA - Pill shape, Electric Lime Green, Bold Deep Purple text */}
         <div className="pt-2">
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-2xl bg-amber-500 hover:bg-amber-600 active:scale-[0.99] py-4 px-6 text-sm sm:text-base font-extrabold text-slate-950 transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer"
+            className="w-full rounded-full bg-[#20c200] hover:bg-[#1cb000] active:scale-[0.99] py-4 px-6 text-sm sm:text-base font-extrabold text-[#261744] transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-60 cursor-pointer uppercase tracking-wider"
           >
             {isSubmitting ? (
               <>
@@ -666,11 +666,11 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
             ) : (
               <>
                 <span>Get My Free Fixed-Price Quote</span>
-                <ArrowRight className="size-5" />
+                <ArrowRight className="size-5 stroke-[2.5]" />
               </>
             )}
           </button>
-          <p className="mt-2 text-center text-[0.7rem] text-slate-500">
+          <p className="mt-2.5 text-center text-[0.7rem] text-slate-500">
             100% Free &amp; No Obligation • Reviewed by our Brownhills logistics team • Zero spam guaranteed
           </p>
         </div>

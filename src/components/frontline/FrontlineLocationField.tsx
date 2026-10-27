@@ -118,7 +118,7 @@ export function FrontlineLocationField({
 
       <div className="relative">
         <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-400">
-          <MapPin className="size-4 text-amber-500" />
+          <MapPin className="size-4 text-[#20c200]" />
         </div>
 
         <input
@@ -139,7 +139,7 @@ export function FrontlineLocationField({
           onKeyDown={handleKeyDown}
           className={cn(
             "w-full rounded-xl border bg-white py-3 pl-10 pr-10 text-sm text-slate-900 shadow-xs transition-colors",
-            "placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500",
+            "placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-[#20c200]/25 focus:border-[#20c200]",
             error
               ? "border-red-400 focus:border-red-500 focus:ring-red-200"
               : "border-slate-300 hover:border-slate-400",
@@ -149,7 +149,7 @@ export function FrontlineLocationField({
 
         <div className="absolute inset-y-0 right-0 flex items-center pr-3 gap-1">
           {isFetching ? (
-            <Loader2 className="size-4 animate-spin text-amber-500" />
+            <Loader2 className="size-4 animate-spin text-[#20c200]" />
           ) : value && !readOnly && !disabled ? (
             <button
               type="button"
@@ -177,7 +177,7 @@ export function FrontlineLocationField({
         <div className="absolute z-50 left-0 right-0 mt-1 max-h-60 overflow-y-auto rounded-xl border border-slate-200 bg-white p-1.5 shadow-xl">
           {isFetching && suggestions.length === 0 ? (
             <div className="flex items-center gap-2 p-3 text-xs text-slate-500">
-              <Loader2 className="size-3.5 animate-spin text-amber-500" />
+              <Loader2 className="size-3.5 animate-spin text-[#20c200]" />
               <span>Searching UK addresses &amp; postcodes...</span>
             </div>
           ) : (
@@ -190,11 +190,11 @@ export function FrontlineLocationField({
                     className={cn(
                       "w-full text-left rounded-lg px-3 py-2 text-xs flex items-start gap-2.5 transition-colors",
                       selectedIndex === idx
-                        ? "bg-amber-50 text-amber-950 font-medium"
+                        ? "bg-[#ecf5eb] text-[#147a00] font-semibold"
                         : "text-slate-700 hover:bg-slate-100"
                     )}
                   >
-                    <Search className="size-3.5 text-amber-500 shrink-0 mt-0.5" />
+                    <Search className="size-3.5 text-[#20c200] shrink-0 mt-0.5" />
                     <div className="truncate">
                       <span className="font-semibold text-slate-900 block truncate">
                         {item.primary}
