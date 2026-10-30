@@ -34,6 +34,6 @@ export async function submitQuoteEnquiry({ data }: { data: QuoteEnquiryPayload }
     if (err instanceof z.ZodError) {
       return { success: false, error: err.errors[0]?.message || "Invalid submission details." };
     }
-    return { success: false, error: "Failed to submit quote enquiry. Please try again or call 021 100 9045." };
+    return { success: false, error: "Failed to submit quote enquiry. Please try again or call our customer team." };
   }
 }

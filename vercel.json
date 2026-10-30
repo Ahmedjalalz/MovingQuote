@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/budgetskipscoventry",
+      "destination": "/budgetskipscoventry/index.html"
+    },
+    {
+      "source": "/budgetskipscoventry/(.*)",
+      "destination": "/budgetskipscoventry/index.html"
+    },
+    {
       "source": "/aldhouseandsmith",
       "destination": "/aldhouseandsmith/index.html"
     },

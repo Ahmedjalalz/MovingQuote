@@ -28,6 +28,11 @@ function copyFallbacks(): Plugin {
       if (fs.existsSync(frontlineIndex)) {
         fs.copyFileSync(frontlineIndex, frontlineHtml);
       }
+      const budgetIndex = path.join(distDir, "budgetskipscoventry", "index.html");
+      const budgetHtml = path.join(distDir, "budgetskipscoventry.html");
+      if (fs.existsSync(budgetIndex)) {
+        fs.copyFileSync(budgetIndex, budgetHtml);
+      }
     },
   };
 }
@@ -46,6 +51,7 @@ export default defineConfig({
         unitywasteremovals: path.resolve(__dirname, "unitywasteremovals/index.html"),
         aldhouseandsmith: path.resolve(__dirname, "aldhouseandsmith/index.html"),
         frontlinetransport: path.resolve(__dirname, "frontlinetransport/index.html"),
+        budgetskipscoventry: path.resolve(__dirname, "budgetskipscoventry/index.html"),
       },
     },
   },

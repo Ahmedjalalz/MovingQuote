@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { UnityWasteQuotePage } from "@/pages/UnityWasteQuotePage";
 import { AldhouseAndSmithQuotePage } from "@/pages/AldhouseAndSmithQuotePage";
 import { FrontlineTransportQuotePage } from "@/pages/FrontlineTransportQuotePage";
+import { BudgetSkipsCoventryQuotePage } from "@/pages/BudgetSkipsCoventryQuotePage";
 
 const ASSURANCES = [
   {
@@ -70,6 +71,28 @@ function checkIsAldhouseRoute(): boolean {
   );
 }
 
+function checkIsBudgetSkipsRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/budgetskipscoventry") ||
+    path.startsWith("/budgetskips") ||
+    path.startsWith("/skiphireincoventry") ||
+    hash.includes("budgetskipscoventry") ||
+    hash.includes("budgetskips") ||
+    hash.includes("skiphireincoventry") ||
+    params.get("page") === "budgetskipscoventry" ||
+    params.get("page") === "budgetskips" ||
+    params.get("page") === "skiphireincoventry" ||
+    params.get("route") === "budgetskipscoventry" ||
+    params.get("route") === "budgetskips" ||
+    params.get("route") === "skiphireincoventry"
+  );
+}
+
 function checkIsFrontlineRoute(): boolean {
   if (typeof window === "undefined") return false;
   const path = window.location.pathname.toLowerCase();
@@ -92,6 +115,7 @@ export function App() {
   const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
   const [isAldhouse, setIsAldhouse] = useState(checkIsAldhouseRoute);
   const [isFrontline, setIsFrontline] = useState(checkIsFrontlineRoute);
+  const [isBudgetSkips, setIsBudgetSkips] = useState(checkIsBudgetSkipsRoute);
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
 
   useEffect(() => {
@@ -99,6 +123,7 @@ export function App() {
       setIsUnity(checkIsUnityRoute());
       setIsAldhouse(checkIsAldhouseRoute());
       setIsFrontline(checkIsFrontlineRoute());
+      setIsBudgetSkips(checkIsBudgetSkipsRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
@@ -142,6 +167,11 @@ export function App() {
       // fallback
     }
   };
+
+  // Route: /budgetskipscoventry
+  if (isBudgetSkips) {
+    return <BudgetSkipsCoventryQuotePage />;
+  }
 
   // Route: /frontlinetransport
   if (isFrontline) {
@@ -221,6 +251,26 @@ export function App() {
                       className="mt-5 inline-flex border-b border-accent pb-1 text-sm font-semibold hover:text-accent transition-colors"
                     >
                       021 100 9045
+                    </a>
+                  </div>
+
+                  {/* Route Link to Budget Skips Coventry */}
+                  <div className="mt-4 p-4 rounded-2xl border border-[#ec6c05]/40 bg-orange-50/70 text-xs text-foreground/85 flex items-center justify-between">
+                    <span>Looking for Coventry &amp; Warwickshire Skip Hire?</span>
+                    <a
+                      href="/budgetskipscoventry"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState({}, "", "/budgetskipscoventry");
+                        setIsBudgetSkips(true);
+                        setIsFrontline(false);
+                        setIsAldhouse(false);
+                        setIsUnity(false);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="font-bold text-[#ec6c05] hover:underline flex items-center gap-1"
+                    >
+                      <span>Budget Skips Coventry →</span>
                     </a>
                   </div>
 
