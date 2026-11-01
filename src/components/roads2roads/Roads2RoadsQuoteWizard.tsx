@@ -359,13 +359,14 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-8 space-y-8">
-        {/* Step 1: Mode Switcher - Spacious 2-column layout with generous breathing room */}
-        <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
+      <form onSubmit={handleSubmit} className="mt-8 space-y-7">
+        {/* Step 1: Mode Switcher - Cleanly sized rectangular cards with balanced spacing */}
+        <div className="space-y-2.5">
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-700">
             1. Select Courier Service Type
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
+
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
             {COURIER_MODES.map((item) => {
               const Icon = item.icon;
               const active = mode === item.id;
@@ -375,49 +376,35 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                   type="button"
                   onClick={() => handleModeChange(item.id)}
                   className={cn(
-                    "flex items-start gap-4 p-4 sm:p-5 rounded-2xl border text-left transition-all duration-200 relative group cursor-pointer",
+                    "flex flex-col items-center justify-center py-3 px-2.5 sm:py-3.5 sm:px-3 rounded-xl sm:rounded-2xl text-center transition-all duration-200 cursor-pointer min-h-[82px] sm:min-h-[88px] group",
                     active
-                      ? "border-[#25AAE1] bg-sky-50/70 text-slate-900 ring-2 ring-[#25AAE1]/30 shadow-xs"
-                      : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/60 text-slate-700"
+                      ? "border-2 border-[#25AAE1] bg-sky-50/70 text-slate-950 ring-2 ring-[#25AAE1]/15 shadow-2xs scale-[1.01]"
+                      : "border border-slate-200/90 bg-white hover:border-[#25AAE1]/50 hover:bg-slate-50/60 text-slate-700 shadow-2xs"
                   )}
                 >
                   <span
                     className={cn(
-                      "size-11 sm:size-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors mt-0.5",
-                      active ? "bg-[#25AAE1] text-white shadow-xs" : "bg-slate-100 text-slate-500 group-hover:text-[#25AAE1] group-hover:bg-sky-50"
+                      "size-8 sm:size-8.5 rounded-lg flex items-center justify-center mb-1.5 transition-colors",
+                      active
+                        ? "bg-[#25AAE1] text-white shadow-xs"
+                        : "bg-slate-100 text-slate-600 group-hover:bg-sky-50 group-hover:text-[#25AAE1]"
                     )}
                   >
-                    <Icon className="size-5 sm:size-6" />
+                    <Icon className="size-4" />
                   </span>
 
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between gap-2 mb-1">
-                      <span className="text-sm sm:text-base font-bold text-slate-900 tracking-tight leading-snug">
-                        {item.label}
-                      </span>
-                      {item.badge && (
-                        <span
-                          className={cn(
-                            "text-[0.6875rem] font-semibold px-2.5 py-0.5 rounded-full border shrink-0",
-                            active
-                              ? "bg-white border-[#25AAE1]/40 text-[#007cb0]"
-                              : "bg-white border-slate-200 text-slate-500"
-                          )}
-                        >
-                          {item.badge}
-                        </span>
-                      )}
-                    </div>
-                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
-                      {item.description}
-                    </p>
-                  </div>
+                  <span className="text-xs sm:text-[0.8125rem] font-bold text-slate-900 leading-tight block">
+                    {item.label}
+                  </span>
 
-                  {active && (
-                    <span className="shrink-0 text-[#25AAE1] mt-0.5">
-                      <CheckCircle2 className="size-5" />
-                    </span>
-                  )}
+                  <span
+                    className={cn(
+                      "text-[0.625rem] sm:text-[0.6875rem] font-medium mt-0.5 block",
+                      active ? "text-[#007cb0] font-semibold" : "text-slate-500"
+                    )}
+                  >
+                    {item.badge}
+                  </span>
                 </button>
               );
             })}
