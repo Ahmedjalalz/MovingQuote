@@ -170,7 +170,10 @@ export function App() {
 
   // Route: /budgetskipscoventry
   if (isBudgetSkips) {
-    return <BudgetSkipsCoventryQuotePage />;
+    if (typeof window !== "undefined") {
+      window.location.replace("/budgetskipscoventry");
+    }
+    return null;
   }
 
   // Route: /frontlinetransport
@@ -259,15 +262,6 @@ export function App() {
                     <span>Looking for Coventry &amp; Warwickshire Skip Hire?</span>
                     <a
                       href="/budgetskipscoventry"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        window.history.pushState({}, "", "/budgetskipscoventry");
-                        setIsBudgetSkips(true);
-                        setIsFrontline(false);
-                        setIsAldhouse(false);
-                        setIsUnity(false);
-                        window.scrollTo({ top: 0, behavior: "smooth" });
-                      }}
                       className="font-bold text-[#ec6c05] hover:underline flex items-center gap-1"
                     >
                       <span>Budget Skips Coventry →</span>
