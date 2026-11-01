@@ -16,7 +16,6 @@ import {
   CheckCircle2,
   Building2,
   Layers,
-  ChevronDown,
 } from "lucide-react";
 
 import { Calendar } from "@/components/ui/calendar";
@@ -47,28 +46,28 @@ export const COURIER_MODES: Array<{
     label: "Same-Day Urgent",
     badge: "Within 60 Mins",
     icon: Zap,
-    description: "Time-critical packets, legal files, keys & urgent parts.",
+    description: "Time-critical packets, legal files, keys, medical samples & urgent parts.",
   },
   {
     id: "pallets",
     label: "Pallets & Freight",
     badge: "Up to 1,200kg",
     icon: Package,
-    description: "Standard/Euro pallets transported safely with tail lift.",
+    description: "Standard or Euro pallets transported safely with dedicated tail-lift vehicles.",
   },
   {
     id: "dedicated",
-    label: "Dedicated Van",
+    label: "Dedicated Vehicle",
     badge: "Direct Route",
     icon: Truck,
-    description: "Exclusive vehicle & driver. Zero co-loading or hub delays.",
+    description: "Exclusive vehicle & driver solely for your cargo. Zero co-loading or hub delays.",
   },
   {
     id: "scheduled",
     label: "Route & Multi-Drop",
     badge: "B2B Logistics",
     icon: Layers,
-    description: "Regular business contracts, timed deliveries & multi-stops.",
+    description: "Regular business contracts, timed deliveries, and multi-stop inter-city drops.",
   },
 ];
 
@@ -128,7 +127,7 @@ type Errors = Partial<
   >
 >;
 
-const phonePattern = /^(?:\+44\s?|0)(?:[1-9]\d{2,4}\s?\d{3,4}\s?\d{3,4}|[1-9]\d{8,10})$/;
+const phonePattern = /^[0-9+()\s-]{6,25}$/;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export interface Roads2RoadsQuoteWizardProps {
@@ -183,10 +182,8 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
       err.dropoff = "Delivery destination address or UK postcode is required.";
     }
 
-    if (!phone.trim()) {
-      err.phone = "Contact phone number is required for urgent coordination.";
-    } else if (!phonePattern.test(phone.trim().replace(/\s+/g, ""))) {
-      err.phone = "Please enter a valid UK phone number (e.g. 020 3476 9656 or 0758 423 9227).";
+    if (!phone.trim() || phone.trim().replace(/\D/g, "").length < 6) {
+      err.phone = "Please enter a contact phone number.";
     }
 
     if (!email.trim()) {
@@ -249,19 +246,19 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
     return (
       <div
         className={cn(
-          "rounded-3xl border border-sky-100 bg-white p-6 sm:p-9 md:p-12 shadow-xl animate-in fade-in zoom-in-95 duration-500",
+          "rounded-3xl border border-sky-100 bg-white p-7 sm:p-10 md:p-12 shadow-xl animate-in fade-in zoom-in-95 duration-500",
           className
         )}
       >
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3.5">
           <span className="grid size-12 place-items-center rounded-2xl bg-emerald-100 text-[#449D44]">
             <Check className="size-6 text-[#449D44] stroke-[2.5]" />
           </span>
           <div>
-            <span className="text-[0.6875rem] font-bold uppercase tracking-wider text-[#25AAE1]">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#25AAE1]">
               Roads2Roads 24/7 Dispatch
             </span>
-            <p className="text-xs text-slate-500">Enquiry Received Successfully</p>
+            <p className="text-xs text-slate-500 font-medium">Enquiry Received Successfully</p>
           </div>
         </div>
 
@@ -273,7 +270,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
         </p>
 
         {/* Immediate Callout */}
-        <div className="mt-6 p-4 sm:p-5 rounded-2xl bg-sky-50/80 border border-sky-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-7 p-4 sm:p-5 rounded-2xl bg-sky-50/80 border border-sky-200/80 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-xs text-slate-700">
             <span className="font-bold text-slate-900 block text-sm">Need immediate vehicle collection?</span>
             Call our urgent desk directly for vehicle dispatch within 60 minutes.
@@ -287,7 +284,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
           </a>
         </div>
 
-        <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2">
+        <dl className="mt-7 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2">
           {[
             { term: "Service & Mode", value: `${mode.toUpperCase()} — ${selectedConsignment}` },
             { term: "Vehicle Required", value: selectedVehicle },
@@ -309,7 +306,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
             ...(company ? [{ term: "Company", value: company }] : []),
             ...(notes ? [{ term: "Special Instructions", value: notes }] : []),
           ].map((row) => (
-            <div key={row.term} className="bg-white p-3.5">
+            <div key={row.term} className="bg-white p-4">
               <dt className="text-[0.6875rem] font-bold tracking-wider text-slate-500 uppercase">
                 {row.term}
               </dt>
@@ -344,14 +341,14 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
   return (
     <div
       className={cn(
-        "rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-9 md:p-10 shadow-lg ring-1 ring-slate-900/5",
+        "rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-10 md:p-12 shadow-lg ring-1 ring-slate-900/5",
         className
       )}
     >
       {/* Header of Wizard */}
-      <div className="space-y-1.5 pb-2">
-        <div className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 border border-sky-200/70 px-3 py-1 text-[0.6875rem] font-bold text-[#007cb0] uppercase tracking-wide">
-          <Zap className="size-3 text-[#25AAE1] fill-current" />
+      <div className="space-y-2 pb-3">
+        <div className="inline-flex items-center gap-1.5 rounded-full bg-sky-50 border border-sky-200/70 px-3.5 py-1 text-xs font-bold text-[#007cb0] uppercase tracking-wide">
+          <Zap className="size-3.5 text-[#25AAE1] fill-current" />
           <span>Same-Day Courier &bull; Packets to Pallets</span>
         </div>
         <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -362,13 +359,13 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="mt-7 space-y-7">
-        {/* Step 1: Mode Switcher */}
+      <form onSubmit={handleSubmit} className="mt-8 space-y-8">
+        {/* Step 1: Mode Switcher - Spacious 2-column layout with generous breathing room */}
         <div>
-          <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-2.5">
+          <label className="block text-xs font-bold uppercase tracking-wider text-slate-600 mb-3">
             1. Select Courier Service Type
           </label>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 sm:gap-4">
             {COURIER_MODES.map((item) => {
               const Icon = item.icon;
               const active = mode === item.id;
@@ -378,40 +375,49 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                   type="button"
                   onClick={() => handleModeChange(item.id)}
                   className={cn(
-                    "flex flex-col items-start p-3.5 sm:p-4 rounded-2xl border text-left transition-all duration-200 relative overflow-hidden group",
+                    "flex items-start gap-4 p-4 sm:p-5 rounded-2xl border text-left transition-all duration-200 relative group cursor-pointer",
                     active
                       ? "border-[#25AAE1] bg-sky-50/70 text-slate-900 ring-2 ring-[#25AAE1]/30 shadow-xs"
                       : "border-slate-200 hover:border-slate-300 hover:bg-slate-50/60 text-slate-700"
                   )}
                 >
-                  <div className="flex items-center justify-between w-full mb-2">
-                    <span
-                      className={cn(
-                        "size-8 rounded-xl flex items-center justify-center transition-colors",
-                        active ? "bg-[#25AAE1] text-white" : "bg-slate-100 text-slate-500 group-hover:text-[#25AAE1]"
-                      )}
-                    >
-                      <Icon className="size-4" />
-                    </span>
-                    {item.badge && (
-                      <span
-                        className={cn(
-                          "text-[0.625rem] font-bold px-2 py-0.5 rounded-md border",
-                          active
-                            ? "bg-white border-[#25AAE1]/30 text-[#007cb0]"
-                            : "bg-white border-slate-200 text-slate-500"
-                        )}
-                      >
-                        {item.badge}
-                      </span>
+                  <span
+                    className={cn(
+                      "size-11 sm:size-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors mt-0.5",
+                      active ? "bg-[#25AAE1] text-white shadow-xs" : "bg-slate-100 text-slate-500 group-hover:text-[#25AAE1] group-hover:bg-sky-50"
                     )}
+                  >
+                    <Icon className="size-5 sm:size-6" />
+                  </span>
+
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center justify-between gap-2 mb-1">
+                      <span className="text-sm sm:text-base font-bold text-slate-900 tracking-tight leading-snug">
+                        {item.label}
+                      </span>
+                      {item.badge && (
+                        <span
+                          className={cn(
+                            "text-[0.6875rem] font-semibold px-2.5 py-0.5 rounded-full border shrink-0",
+                            active
+                              ? "bg-white border-[#25AAE1]/40 text-[#007cb0]"
+                              : "bg-white border-slate-200 text-slate-500"
+                          )}
+                        >
+                          {item.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-xs text-slate-500 leading-relaxed font-normal">
+                      {item.description}
+                    </p>
                   </div>
-                  <span className="text-xs font-bold leading-tight block text-slate-900">
-                    {item.label}
-                  </span>
-                  <span className="text-[0.6875rem] text-slate-500 mt-1 leading-snug line-clamp-2">
-                    {item.description}
-                  </span>
+
+                  {active && (
+                    <span className="shrink-0 text-[#25AAE1] mt-0.5">
+                      <CheckCircle2 className="size-5" />
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -419,8 +425,8 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
         </div>
 
         {/* Step 2: What are you sending? */}
-        <div className="grid gap-5 sm:grid-cols-2">
-          <div className="space-y-1.5">
+        <div className="grid gap-6 sm:grid-cols-2">
+          <div className="space-y-2">
             <label className="block text-xs sm:text-sm font-bold text-slate-800">
               Consignment Description <span className="text-red-500">*</span>
             </label>
@@ -449,7 +455,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
             )}
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="block text-xs sm:text-sm font-bold text-slate-800">
               Preferred Vehicle Type
             </label>
@@ -472,7 +478,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
         </div>
 
         {/* Step 3: Collection & Delivery Addresses */}
-        <div className="grid gap-5 sm:grid-cols-2 pt-1">
+        <div className="grid gap-6 sm:grid-cols-2 pt-1">
           <Roads2RoadsLocationField
             label="Collection Address / UK Postcode"
             placeholder="e.g. 45 Fitzroy St, London W1T 6EB or EC2"
@@ -484,7 +490,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
               }
             }}
             error={errors.pickup}
-            helperText="Collection address where driver picks up goods."
+            helperText="Where should our courier pick up the consignment?"
           />
 
           <Roads2RoadsLocationField
@@ -498,13 +504,13 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
               }
             }}
             error={errors.dropoff}
-            helperText="Direct point-to-point destination address."
+            helperText="Direct point-to-point destination address across the UK."
           />
         </div>
 
         {/* Step 4: Urgency & Timing */}
-        <div className="grid gap-5 sm:grid-cols-2 pt-1">
-          <div className="space-y-1.5">
+        <div className="grid gap-6 sm:grid-cols-2 pt-1">
+          <div className="space-y-2">
             <label className="block text-xs sm:text-sm font-bold text-slate-800">
               Collection Timeline / Urgency
             </label>
@@ -525,7 +531,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
             </Roads2RoadsSelect>
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="block text-xs sm:text-sm font-bold text-slate-800">
               Specific Date (If Scheduled)
             </label>
@@ -534,7 +540,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                 <button
                   type="button"
                   className={cn(
-                    "flex w-full h-12 items-center justify-between rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-left text-xs sm:text-sm font-medium text-slate-800 shadow-xs outline-hidden transition-all duration-200 hover:border-[#25AAE1]/70 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15",
+                    "flex w-full h-12 items-center justify-between rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-left text-xs sm:text-sm font-medium text-slate-800 shadow-xs outline-hidden transition-all duration-200 hover:border-[#25AAE1]/70 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 cursor-pointer",
                     !date && "text-slate-400 font-normal"
                   )}
                 >
@@ -565,16 +571,16 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
         </div>
 
         {/* Step 5: Contact Details */}
-        <div className="border-t border-slate-100 pt-6 space-y-5">
+        <div className="border-t border-slate-100 pt-7 space-y-6">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-600">
               5. Contact &amp; Dispatch Confirmation
             </span>
-            <span className="text-[0.6875rem] text-slate-400 font-medium">100% Free &bull; No obligation</span>
+            <span className="text-xs text-slate-400 font-medium">100% Free &bull; No obligation</span>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div className="space-y-1.5">
+          <div className="grid gap-5 sm:grid-cols-2">
+            <div className="space-y-2">
               <label className="block text-xs font-bold text-slate-800">
                 Your Full Name
               </label>
@@ -583,11 +589,11 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                 placeholder="e.g. John Smith"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full h-12 rounded-xl border border-slate-200 px-3.5 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden"
+                className="w-full h-12 rounded-xl border border-slate-200 px-4 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden"
               />
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label className="block text-xs font-bold text-slate-800">
                 Company Name (Optional)
               </label>
@@ -598,12 +604,12 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                   placeholder="e.g. Acme Logistics Ltd"
                   value={company}
                   onChange={(e) => setCompany(e.target.value)}
-                  className="w-full h-12 rounded-xl border border-slate-200 pl-10 pr-3.5 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden"
+                  className="w-full h-12 rounded-xl border border-slate-200 pl-10 pr-4 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden"
                 />
               </div>
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label className="block text-xs font-bold text-slate-800">
                 Contact Phone <span className="text-red-500">*</span>
               </label>
@@ -616,14 +622,14 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                   if (errors.phone) setErrors((prev) => ({ ...prev, phone: undefined }));
                 }}
                 className={cn(
-                  "w-full h-12 rounded-xl border border-slate-200 px-3.5 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden",
+                  "w-full h-12 rounded-xl border border-slate-200 px-4 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden",
                   errors.phone && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                 )}
               />
               {errors.phone && <p className="text-xs text-red-500">{errors.phone}</p>}
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               <label className="block text-xs font-bold text-slate-800">
                 Email Address <span className="text-red-500">*</span>
               </label>
@@ -636,7 +642,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                   if (errors.email) setErrors((prev) => ({ ...prev, email: undefined }));
                 }}
                 className={cn(
-                  "w-full h-12 rounded-xl border border-slate-200 px-3.5 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden",
+                  "w-full h-12 rounded-xl border border-slate-200 px-4 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden",
                   errors.email && "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                 )}
               />
@@ -644,7 +650,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
             </div>
           </div>
 
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="block text-xs font-bold text-slate-800">
               Consignment Notes &amp; Special Handling (Optional)
             </label>
@@ -653,7 +659,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
               placeholder="e.g. Dimensions, estimated weight, reference code, loading dock or tail lift needed..."
               value={notes}
               onChange={(e) => setNotes(e.target.value)}
-              className="w-full rounded-xl border border-slate-200 px-3.5 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden resize-none"
+              className="w-full rounded-xl border border-slate-200 px-4 py-3 text-xs sm:text-sm shadow-xs transition-all hover:border-[#25AAE1]/60 focus:border-[#25AAE1] focus:ring-4 focus:ring-[#25AAE1]/15 outline-hidden resize-none"
             />
           </div>
 
@@ -665,7 +671,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                 type="button"
                 onClick={() => setPreferredContact("phone")}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg transition-colors cursor-pointer",
+                  "px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer",
                   preferredContact === "phone" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
                 )}
               >
@@ -675,7 +681,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                 type="button"
                 onClick={() => setPreferredContact("email")}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg transition-colors cursor-pointer",
+                  "px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer",
                   preferredContact === "email" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
                 )}
               >
@@ -685,7 +691,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
                 type="button"
                 onClick={() => setPreferredContact("whatsapp")}
                 className={cn(
-                  "px-3 py-1.5 rounded-lg transition-colors cursor-pointer",
+                  "px-3.5 py-1.5 rounded-lg transition-colors cursor-pointer",
                   preferredContact === "whatsapp" ? "bg-white text-slate-900 shadow-xs" : "text-slate-600 hover:text-slate-900"
                 )}
               >
@@ -696,11 +702,11 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
         </div>
 
         {/* Submit Button */}
-        <div className="pt-2">
+        <div className="pt-3">
           <button
             type="submit"
             disabled={submitting}
-            className="w-full rounded-2xl bg-[#449D44] hover:bg-[#398439] active:scale-[0.99] text-white font-extrabold text-sm sm:text-base py-4 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full rounded-2xl bg-[#449D44] hover:bg-[#398439] active:scale-[0.99] text-white font-extrabold text-sm sm:text-base py-4 shadow-md hover:shadow-lg transition-all flex items-center justify-center gap-2.5 cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {submitting ? (
               <>
@@ -714,7 +720,7 @@ export function Roads2RoadsQuoteWizard({ className }: Roads2RoadsQuoteWizardProp
               </>
             )}
           </button>
-          <p className="mt-2 text-center text-[0.6875rem] text-slate-500">
+          <p className="mt-2.5 text-center text-xs text-slate-500">
             100% Free &bull; No obligation &bull; Directly reviewed by Roads2Roads dispatch coordinators
           </p>
         </div>

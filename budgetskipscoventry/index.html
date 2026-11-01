@@ -2463,12 +2463,12 @@
           state.name = nameVal;
         }
 
-        // Validate Phone (Accepts UK phone formats)
+        // Validate Phone (Relaxed check: allows any standard phone/mobile with at least 6 digits)
         const phoneError = document.getElementById("phoneError");
         const phoneVal = document.getElementById("custPhone").value.trim();
-        const ukPhoneRegex = /^(?:\+44\s?|0)(?:[1-9]\d{2,4}\s?\d{3,4}\s?\d{3,4}|[1-9]\d{8,10})$/;
-        if (!phoneVal || !ukPhoneRegex.test(phoneVal.replace(/[\s-]/g, ""))) {
-          phoneError.textContent = "Please enter a valid UK contact telephone number (e.g. 024 7636 3002).";
+        const digitsOnly = phoneVal.replace(/\D/g, "");
+        if (!phoneVal || digitsOnly.length < 6) {
+          phoneError.textContent = "Please enter a contact phone number.";
           phoneError.style.display = "block";
           document.getElementById("custPhone").focus();
           hasError = true;

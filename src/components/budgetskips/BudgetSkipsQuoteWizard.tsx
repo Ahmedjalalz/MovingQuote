@@ -90,7 +90,7 @@ type Errors = Partial<
   >
 >;
 
-const phonePattern = /^(?:\+44\s?|0)(?:[1-9]\d{2,4}\s?\d{3,4}\s?\d{3,4}|[1-9]\d{8,10})$/;
+const phonePattern = /^[0-9+()\s-]{6,25}$/;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export interface BudgetSkipsQuoteWizardProps {
@@ -182,8 +182,8 @@ export function BudgetSkipsQuoteWizard({ className }: BudgetSkipsQuoteWizardProp
     if (!pickup.trim()) {
       next.pickup = "Enter your Coventry / Warwickshire delivery address or postcode.";
     }
-    if (!phonePattern.test(phone.trim().replace(/\s+/g, ""))) {
-      next.phone = "Enter a valid UK phone number (e.g. 024 7636 3002 or 07...).";
+    if (!phone.trim() || phone.trim().replace(/\D/g, "").length < 6) {
+      next.phone = "Please enter a contact phone number.";
     }
     if (!emailPattern.test(email.trim())) {
       next.email = "Enter a valid email address.";

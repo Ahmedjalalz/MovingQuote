@@ -2,9 +2,9 @@ import { Phone, Mail, MapPin, Clock, ShieldCheck, Truck, ExternalLink } from "lu
 
 export function Roads2RoadsSiteFooter() {
   return (
-    <footer id="contact" className="bg-[#0b0f19] text-white pt-12 pb-8 border-t border-slate-800">
-      <div className="container mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 pb-10 border-b border-slate-800/80">
+    <footer id="contact" className="bg-[#0b0f19] text-white pt-14 pb-10 border-t border-slate-800">
+      <div className="mx-auto max-w-[1440px] px-6 sm:px-10 lg:px-14 xl:px-16">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4 pb-12 border-b border-slate-800/80">
           {/* Column 1: Brand & Tagline */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">

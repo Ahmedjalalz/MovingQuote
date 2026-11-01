@@ -97,7 +97,7 @@ type Errors = Partial<
   >
 >;
 
-const phonePattern = /^(?:\+44\s?|0)(?:[1-9]\d{2,4}\s?\d{3,4}\s?\d{3,4}|[1-9]\d{8,10})$/;
+const phonePattern = /^[0-9+()\s-]{6,25}$/;
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export interface FrontlineQuoteWizardProps {
@@ -208,10 +208,8 @@ export function FrontlineQuoteWizard({ className }: FrontlineQuoteWizardProps) {
       newErrors.dropoff = "Please enter your destination / delivery address or postcode.";
     }
 
-    if (!phone.trim()) {
-      newErrors.phone = "Phone number is required so we can confirm quote details.";
-    } else if (!phonePattern.test(phone.trim().replace(/[\s()-]/g, ""))) {
-      newErrors.phone = "Please enter a valid UK phone number (e.g. 01543 630 122 or 07761 098 483).";
+    if (!phone.trim() || phone.trim().replace(/\D/g, "").length < 6) {
+      newErrors.phone = "Please enter a contact phone number.";
     }
 
     if (!email.trim()) {
