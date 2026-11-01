@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/ravensoakecaravanstorage",
+      "destination": "/ravensoakecaravanstorage/index.html"
+    },
+    {
+      "source": "/ravensoakecaravanstorage/(.*)",
+      "destination": "/ravensoakecaravanstorage/index.html"
+    },
+    {
       "source": "/roads2roads",
       "destination": "/roads2roads/index.html"
     },

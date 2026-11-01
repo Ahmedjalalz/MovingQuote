@@ -38,6 +38,11 @@ function copyFallbacks(): Plugin {
       if (fs.existsSync(roads2roadsIndex)) {
         fs.copyFileSync(roads2roadsIndex, roads2roadsHtml);
       }
+      const ravensIndex = path.join(distDir, "ravensoakecaravanstorage", "index.html");
+      const ravensHtml = path.join(distDir, "ravensoakecaravanstorage.html");
+      if (fs.existsSync(ravensIndex)) {
+        fs.copyFileSync(ravensIndex, ravensHtml);
+      }
     },
   };
 }
@@ -58,6 +63,7 @@ export default defineConfig({
         frontlinetransport: path.resolve(__dirname, "frontlinetransport/index.html"),
         budgetskipscoventry: path.resolve(__dirname, "budgetskipscoventry/index.html"),
         roads2roads: path.resolve(__dirname, "roads2roads/index.html"),
+        ravensoakecaravanstorage: path.resolve(__dirname, "ravensoakecaravanstorage/index.html"),
       },
     },
   },

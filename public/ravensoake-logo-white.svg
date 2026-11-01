@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" fill="none">
+  <!-- Oak Leaf & Security Shield Emblem -->
+  <g transform="translate(10, 10)">
+    <defs>
+      <linearGradient id="shieldGradW" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#166534" />
+        <stop offset="100%" stop-color="#052e16" />
+      </linearGradient>
+      <linearGradient id="leafGradW" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#86efac" />
+        <stop offset="100%" stop-color="#4ade80" />
+      </linearGradient>
+    </defs>
+
+    <path d="M50 4 C76 4, 96 14, 96 36 C96 68, 68 88, 50 96 C32 88, 4 68, 4 36 C4 14, 24 4, 50 4 Z" 
+          fill="url(#shieldGradW)" 
+          stroke="#4ade80" 
+          stroke-width="2.5" />
+
+    <path d="M50 16 C53 22, 60 22, 62 27 C64 32, 59 36, 64 41 C69 46, 73 45, 73 52 C73 59, 67 62, 65 67 C63 72, 65 77, 57 82 C53 84, 50 86, 50 86 C50 86, 47 84, 43 82 C35 77, 37 72, 35 67 C33 62, 27 59, 27 52 C27 45, 31 46, 36 41 C41 36, 36 32, 38 27 C40 22, 47 22, 50 16 Z" 
+          fill="url(#leafGradW)" />
+    <path d="M50 24 L50 82 M50 36 L60 30 M50 48 L65 42 M50 60 L62 55 M50 36 L40 30 M50 48 L35 42 M50 60 L38 55" 
+          stroke="#052e16" 
+          stroke-width="2" 
+          stroke-linecap="round" />
+    <circle cx="50" cy="85" r="4.5" fill="#fcd34d" stroke="#b45309" stroke-width="1"/>
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(125, 26)">
+    <text x="0" y="38" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="34" font-weight="900" fill="#FFFFFF" letter-spacing="-0.5">
+      RAVENS OAK
+    </text>
+    <text x="2" y="60" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="13" font-weight="700" fill="#86efac" letter-spacing="2.8">
+      CARAVAN &amp; MOTORHOME STORAGE
+    </text>
+    <text x="2" y="77" font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" font-size="10" font-weight="600" fill="#94A3B8" letter-spacing="1.2">
+      RUSHDEN, NORTHAMPTONSHIRE • EST. 2012
+    </text>
+  </g>
+</svg>

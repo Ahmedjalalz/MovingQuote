@@ -11,6 +11,7 @@ import { AldhouseAndSmithQuotePage } from "@/pages/AldhouseAndSmithQuotePage";
 import { FrontlineTransportQuotePage } from "@/pages/FrontlineTransportQuotePage";
 import { BudgetSkipsCoventryQuotePage } from "@/pages/BudgetSkipsCoventryQuotePage";
 import { Roads2RoadsQuotePage } from "@/pages/Roads2RoadsQuotePage";
+import { RavensOakCaravanStoragePage } from "@/pages/RavensOakCaravanStoragePage";
 
 const ASSURANCES = [
   {
@@ -130,12 +131,33 @@ function checkIsRoads2RoadsRoute(): boolean {
   );
 }
 
+function checkIsRavensOakRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/ravensoakecaravanstorage") ||
+    path.startsWith("/ravensoak") ||
+    path.startsWith("/ravens") ||
+    hash.includes("ravensoakecaravanstorage") ||
+    hash.includes("ravensoak") ||
+    hash.includes("ravens") ||
+    params.get("page") === "ravensoakecaravanstorage" ||
+    params.get("page") === "ravensoak" ||
+    params.get("route") === "ravensoakecaravanstorage" ||
+    params.get("route") === "ravensoak"
+  );
+}
+
 export function App() {
   const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
   const [isAldhouse, setIsAldhouse] = useState(checkIsAldhouseRoute);
   const [isFrontline, setIsFrontline] = useState(checkIsFrontlineRoute);
   const [isBudgetSkips, setIsBudgetSkips] = useState(checkIsBudgetSkipsRoute);
   const [isRoads2Roads, setIsRoads2Roads] = useState(checkIsRoads2RoadsRoute);
+  const [isRavensOak, setIsRavensOak] = useState(checkIsRavensOakRoute);
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
 
   useEffect(() => {
@@ -145,6 +167,7 @@ export function App() {
       setIsFrontline(checkIsFrontlineRoute());
       setIsBudgetSkips(checkIsBudgetSkipsRoute());
       setIsRoads2Roads(checkIsRoads2RoadsRoute());
+      setIsRavensOak(checkIsRavensOakRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
@@ -188,6 +211,11 @@ export function App() {
       // fallback
     }
   };
+
+  // Route: /ravensoakecaravanstorage
+  if (isRavensOak) {
+    return <RavensOakCaravanStoragePage />;
+  }
 
   // Route: /roads2roads
   if (isRoads2Roads) {
@@ -280,6 +308,27 @@ export function App() {
                       className="mt-5 inline-flex border-b border-accent pb-1 text-sm font-semibold hover:text-accent transition-colors"
                     >
                       021 100 9045
+                    </a>
+                  </div>
+
+                  {/* Route Link to Ravens Oak Caravan Storage */}
+                  <div className="mt-4 p-4 rounded-2xl border border-[#006837]/40 bg-[#f0fdf4] text-xs text-foreground/85 flex items-center justify-between">
+                    <span>Looking for Northamptonshire Caravan &amp; Motorhome Storage?</span>
+                    <a
+                      href="/ravensoakecaravanstorage"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState({}, "", "/ravensoakecaravanstorage");
+                        setIsRavensOak(true);
+                        setIsRoads2Roads(false);
+                        setIsFrontline(false);
+                        setIsAldhouse(false);
+                        setIsUnity(false);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="font-bold text-[#006837] hover:underline flex items-center gap-1"
+                    >
+                      <span>Ravens Oak Caravan Storage →</span>
                     </a>
                   </div>
 

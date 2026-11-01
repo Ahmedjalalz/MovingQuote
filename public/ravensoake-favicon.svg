@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+  <defs>
+    <linearGradient id="favShield" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#006837" />
+      <stop offset="100%" stop-color="#14532D" />
+    </linearGradient>
+    <linearGradient id="favLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8CC63F" />
+      <stop offset="100%" stop-color="#509D25" />
+    </linearGradient>
+  </defs>
+  <path d="M50 4 C76 4, 96 14, 96 36 C96 68, 68 88, 50 96 C32 88, 4 68, 4 36 C4 14, 24 4, 50 4 Z" 
+        fill="url(#favShield)" 
+        stroke="#8CC63F" 
+        stroke-width="3" />
+  <path d="M50 16 C53 22, 60 22, 62 27 C64 32, 59 36, 64 41 C69 46, 73 45, 73 52 C73 59, 67 62, 65 67 C63 72, 65 77, 57 82 C53 84, 50 86, 50 86 C50 86, 47 84, 43 82 C35 77, 37 72, 35 67 C33 62, 27 59, 27 52 C27 45, 31 46, 36 41 C41 36, 36 32, 38 27 C40 22, 47 22, 50 16 Z" 
+        fill="url(#favLeaf)" />
+  <path d="M50 24 L50 82 M50 36 L60 30 M50 48 L65 42 M50 60 L62 55 M50 36 L40 30 M50 48 L35 42 M50 60 L38 55" 
+        stroke="#006837" 
+        stroke-width="2.5" 
+        stroke-linecap="round" />
+</svg>
