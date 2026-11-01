@@ -33,6 +33,11 @@ function copyFallbacks(): Plugin {
       if (fs.existsSync(budgetIndex)) {
         fs.copyFileSync(budgetIndex, budgetHtml);
       }
+      const roads2roadsIndex = path.join(distDir, "roads2roads", "index.html");
+      const roads2roadsHtml = path.join(distDir, "roads2roads.html");
+      if (fs.existsSync(roads2roadsIndex)) {
+        fs.copyFileSync(roads2roadsIndex, roads2roadsHtml);
+      }
     },
   };
 }
@@ -52,6 +57,7 @@ export default defineConfig({
         aldhouseandsmith: path.resolve(__dirname, "aldhouseandsmith/index.html"),
         frontlinetransport: path.resolve(__dirname, "frontlinetransport/index.html"),
         budgetskipscoventry: path.resolve(__dirname, "budgetskipscoventry/index.html"),
+        roads2roads: path.resolve(__dirname, "roads2roads/index.html"),
       },
     },
   },

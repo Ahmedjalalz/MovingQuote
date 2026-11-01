@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/roads2roads",
+      "destination": "/roads2roads/index.html"
+    },
+    {
+      "source": "/roads2roads/(.*)",
+      "destination": "/roads2roads/index.html"
+    },
+    {
       "source": "/budgetskipscoventry",
       "destination": "/budgetskipscoventry/index.html"
     },

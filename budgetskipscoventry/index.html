@@ -6,7 +6,7 @@
     <title>Instant Skip Hire Quote | Budget Skips Coventry</title>
     <meta
       name="description"
-      content="Instant online skip hire price calculator for Budget Skips Coventry. Real-time pricing for 4yd, 6yd, 8yd, 12yd and 16yd skips across Coventry and Warwickshire."
+      content="Instant online skip hire price calculator for Budget Skips Coventry. Live pricing for 4yd, 6yd, 8yd, 12yd & 16yd skips across Coventry, Bedworth, Nuneaton & Warwickshire."
     />
     <meta name="theme-color" content="#ec6c05" />
 
@@ -15,7 +15,9 @@
     <link rel="apple-touch-icon" href="/budgetskips-favicon.png" />
 
     <style>
-      /* --- RESET & DESIGN TOKENS --- */
+      /* ==========================================================================
+         RESET & MODERN DESIGN TOKENS
+         ========================================================================== */
       *, *::before, *::after {
         box-sizing: border-box;
         margin: 0;
@@ -24,10 +26,12 @@
 
       :root {
         --brand: #ec6c05;
-        --brand-hover: #d45f00;
-        --brand-light: #fff7ed;
-        --brand-border: #fed7aa;
-        --dark-text-on-brand: #111827; /* Dark text for high contrast on orange */
+        --brand-hover: #d35f00;
+        --brand-active: #b95200;
+        --brand-light: #fffaf5;
+        --brand-tint: #ffedd5;
+        --brand-border: #fdba74;
+        --brand-text: #0f172a; /* High-contrast accessible text on orange */
 
         --slate-950: #020617;
         --slate-900: #0f172a;
@@ -47,6 +51,11 @@
         --emerald-50: #ecfdf5;
         --emerald-border: #a7f3d0;
 
+        --amber-800: #92400e;
+        --amber-600: #d97706;
+        --amber-50: #fffbeb;
+        --amber-border: #fde68a;
+
         --red-700: #b91c1c;
         --red-600: #dc2626;
         --red-50: #fef2f2;
@@ -55,29 +64,35 @@
         --radius-sm: 8px;
         --radius-md: 12px;
         --radius-lg: 16px;
-        --radius-xl: 24px;
-        --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
-        --shadow-md: 0 4px 14px rgba(0,0,0,0.06);
-        --shadow-lg: 0 10px 25px rgba(0,0,0,0.08);
+        --radius-xl: 22px;
 
-        --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.04);
+        --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.05);
+        --shadow-md: 0 6px 18px rgba(15, 23, 42, 0.06);
+        --shadow-lg: 0 14px 34px rgba(15, 23, 42, 0.08);
+
+        --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       }
 
       body {
-        font-family: var(--font-family);
+        font-family: var(--font-sans);
         background-color: var(--slate-50);
         color: var(--slate-900);
         line-height: 1.5;
         -webkit-font-smoothing: antialiased;
         min-height: 100vh;
+        display: flex;
+        flex-direction: column;
       }
 
-      /* --- TOP DEMO BANNER --- */
+      /* ==========================================================================
+         TOP DEMO BANNER
+         ========================================================================== */
       .demo-banner {
         background: #fffbeb;
         color: #92400e;
-        border-bottom: 1px solid #fde68a;
-        padding: 10px 16px;
+        border-bottom: 1px solid #fef3c7;
+        padding: 9px 16px;
         font-size: 13px;
         font-weight: 600;
         text-align: center;
@@ -88,9 +103,12 @@
       }
       .demo-banner svg {
         flex-shrink: 0;
+        color: #d97706;
       }
 
-      /* --- SITE HEADER --- */
+      /* ==========================================================================
+         SITE HEADER & UTILITY BAR
+         ========================================================================== */
       .site-header {
         background: var(--white);
         border-bottom: 1px solid var(--slate-200);
@@ -98,42 +116,39 @@
         top: 0;
         z-index: 40;
       }
+
       .header-utility {
         background: var(--slate-900);
         color: var(--slate-300);
-        font-size: 11px;
+        font-size: 12px;
         font-weight: 500;
-        padding: 6px 16px;
+        padding: 7px 16px;
       }
       .header-utility-inner {
-        max-width: 1160px;
+        max-width: 1200px;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 6px;
+        gap: 8px;
       }
-      .utility-link {
-        color: var(--white);
-        text-decoration: none;
-        font-weight: 700;
-        display: inline-flex;
+      .utility-left {
+        display: flex;
         align-items: center;
-        gap: 5px;
-      }
-      .utility-link:hover {
-        color: var(--brand);
+        gap: 14px;
+        flex-wrap: wrap;
       }
       .utility-badge {
         color: #34d399;
         display: inline-flex;
         align-items: center;
         gap: 6px;
+        font-weight: 600;
       }
       .pulse-dot {
-        width: 6px;
-        height: 6px;
+        width: 7px;
+        height: 7px;
         border-radius: 50%;
         background: #34d399;
         display: inline-block;
@@ -141,13 +156,17 @@
       }
       @keyframes pulse {
         0%, 100% { opacity: 1; transform: scale(1); }
-        50% { opacity: 0.4; transform: scale(1.2); }
+        50% { opacity: 0.35; transform: scale(1.25); }
+      }
+      .utility-depot {
+        color: var(--slate-400);
+        font-size: 11px;
       }
 
       .header-main {
-        max-width: 1160px;
+        max-width: 1200px;
         margin: 0 auto;
-        padding: 12px 16px;
+        padding: 14px 16px;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -156,79 +175,114 @@
       .header-brand {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 14px;
         text-decoration: none;
       }
       .header-logo {
-        height: 42px;
+        height: 44px;
         width: auto;
         display: block;
       }
       .header-heritage {
-        height: 28px;
+        height: 30px;
         width: auto;
         display: block;
         border-left: 1px solid var(--slate-200);
-        padding-left: 12px;
+        padding-left: 14px;
       }
-      .header-contact {
-        text-align: right;
+      .header-cta-group {
+        display: flex;
+        align-items: center;
+        gap: 16px;
       }
-      .header-contact-label {
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: 0.05em;
-        font-weight: 700;
-        color: var(--slate-500);
-      }
-      .header-phone {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--slate-900);
-        text-decoration: none;
+      .header-call-pill {
         display: inline-flex;
         align-items: center;
-        gap: 4px;
+        gap: 8px;
+        background: var(--brand-light);
+        border: 1px solid var(--brand-border);
+        color: var(--brand-hover);
+        padding: 8px 14px;
+        border-radius: 30px;
+        text-decoration: none;
+        font-weight: 700;
+        font-size: 14px;
+        transition: all 0.15s ease;
       }
-      .header-phone:hover {
-        color: var(--brand);
+      .header-call-pill:hover {
+        background: var(--brand-tint);
+        color: var(--brand-active);
       }
 
-      /* --- PAGE CONTAINER & LAYOUT --- */
-      .page-wrap {
-        max-width: 1160px;
+      /* ==========================================================================
+         PAGE CONTAINER & HERO SECTION
+         ========================================================================== */
+      .page-container {
+        max-width: 1200px;
+        width: 100%;
         margin: 0 auto;
-        padding: 24px 16px 80px 16px;
+        padding: 28px 16px 90px 16px;
+        flex: 1;
       }
 
-      .hero-title-wrap {
+      .hero-wrap {
         margin-bottom: 24px;
       }
       .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
         font-size: 11px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: var(--brand);
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        margin-bottom: 4px;
+        background: var(--brand-light);
+        border: 1px solid var(--brand-border);
+        padding: 4px 10px;
+        border-radius: 20px;
+        margin-bottom: 8px;
       }
       .hero-title {
-        font-size: 28px;
+        font-size: 30px;
         font-weight: 800;
         color: var(--slate-900);
-        line-height: 1.2;
         letter-spacing: -0.02em;
+        line-height: 1.2;
       }
-      .hero-sub {
-        font-size: 14px;
+      .hero-subtitle {
+        font-size: 15px;
         color: var(--slate-600);
-        margin-top: 4px;
+        margin-top: 6px;
+        max-width: 680px;
       }
 
-      /* Two Column Layout on Desktop */
+      /* Quick highlights pills */
+      .hero-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 14px;
+      }
+      .hero-pill-item {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--slate-700);
+        background: var(--white);
+        border: 1px solid var(--slate-200);
+        padding: 4px 10px;
+        border-radius: 20px;
+      }
+      .hero-pill-item svg {
+        color: var(--brand);
+      }
+
+      /* ==========================================================================
+         TWO-COLUMN DESKTOP LAYOUT
+         ========================================================================== */
       .layout-grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -242,8 +296,10 @@
         }
       }
 
-      /* --- FORM STYLING --- */
-      .calculator-form {
+      /* ==========================================================================
+         FORM CARD & STEP STYLING
+         ========================================================================== */
+      .form-container {
         background: var(--white);
         border: 1px solid var(--slate-200);
         border-radius: var(--radius-xl);
@@ -254,12 +310,12 @@
         gap: 28px;
       }
       @media (min-width: 640px) {
-        .calculator-form {
+        .form-container {
           padding: 32px;
         }
       }
 
-      .form-step {
+      .step-block {
         display: flex;
         flex-direction: column;
         gap: 12px;
@@ -267,29 +323,47 @@
       .step-header {
         display: flex;
         justify-content: space-between;
-        align-items: baseline;
-        gap: 8px;
+        align-items: center;
+        gap: 10px;
       }
-      .step-number-title {
-        font-size: 13px;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
-        color: var(--slate-900);
+      .step-title-wrap {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
+      }
+      .step-num-pill {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        background: var(--slate-900);
+        color: var(--white);
+        font-size: 12px;
+        font-weight: 800;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+      .step-title {
+        font-size: 15px;
+        font-weight: 800;
+        color: var(--slate-900);
+        letter-spacing: -0.01em;
       }
       .step-hint {
         font-size: 12px;
         color: var(--slate-500);
+        font-weight: 500;
       }
 
       /* Form inputs */
+      .form-input-wrap {
+        position: relative;
+      }
       .input-text, .input-date {
         width: 100%;
-        min-height: 48px;
-        padding: 10px 14px;
+        min-height: 50px;
+        padding: 12px 14px;
         font-size: 15px;
         font-family: inherit;
         border: 1px solid var(--slate-300);
@@ -303,10 +377,6 @@
         border-color: var(--brand);
         box-shadow: 0 0 0 3px rgba(236, 108, 5, 0.18);
       }
-      .input-error {
-        border-color: var(--red-600) !important;
-        background-color: var(--red-50);
-      }
       .field-error-msg {
         font-size: 12px;
         font-weight: 600;
@@ -314,15 +384,46 @@
         margin-top: 4px;
       }
 
-      /* Area status badges under postcode */
+      /* Postcode quick chips */
+      .quick-chips-wrap {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-top: 4px;
+      }
+      .quick-chip-label {
+        font-size: 11px;
+        color: var(--slate-500);
+        font-weight: 600;
+        margin-right: 2px;
+      }
+      .quick-chip {
+        background: var(--slate-100);
+        border: 1px solid var(--slate-200);
+        color: var(--slate-700);
+        font-size: 11px;
+        font-weight: 600;
+        padding: 3px 8px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+      .quick-chip:hover {
+        background: var(--brand-light);
+        border-color: var(--brand-border);
+        color: var(--brand-hover);
+      }
+
+      /* Postcode zone feedback status */
       .postcode-status {
-        padding: 8px 12px;
+        padding: 10px 14px;
         border-radius: var(--radius-sm);
-        font-size: 12px;
+        font-size: 13px;
         font-weight: 600;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         margin-top: 6px;
       }
       .status-zoneA {
@@ -341,47 +442,58 @@
         border: 1px solid #fecdd3;
         flex-direction: column;
         align-items: flex-start;
-        gap: 6px;
+        gap: 8px;
       }
       .status-out-of-area a {
-        color: #be123c;
+        background: #be123c;
+        color: #ffffff;
         font-weight: 700;
-        text-decoration: underline;
+        text-decoration: none;
+        padding: 5px 12px;
+        border-radius: 6px;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
       }
 
-      /* --- SELECTABLE CARDS (WASTE & SIZES) --- */
-      .card-selector-grid {
+      /* ==========================================================================
+         SELECTABLE CARDS (WASTE, SIZES, PERMITS)
+         ========================================================================== */
+      .card-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 10px;
       }
-      @media (min-width: 540px) {
-        .card-selector-grid.three-col {
+      @media (min-width: 580px) {
+        .card-grid.three-col {
           grid-template-columns: repeat(3, 1fr);
         }
-        .card-selector-grid.two-col {
+        .card-grid.two-col {
           grid-template-columns: repeat(2, 1fr);
         }
       }
 
       .selectable-card {
-        border: 1px solid var(--slate-200);
-        border-radius: var(--radius-md);
         background: var(--white);
-        padding: 14px 16px;
-        min-height: 48px;
+        border: 1.5px solid var(--slate-200);
+        border-radius: var(--radius-md);
+        padding: 16px;
         cursor: pointer;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: 10px;
+        transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
         position: relative;
-        transition: all 0.15s ease;
-        text-align: left;
         user-select: none;
+        outline: none;
       }
       .selectable-card:hover:not(.disabled) {
-        border-color: var(--slate-300);
+        border-color: var(--slate-400);
         background: var(--slate-50);
+        transform: translateY(-1px);
+        box-shadow: var(--shadow-sm);
       }
       .selectable-card.selected {
         border-color: var(--brand);
@@ -395,94 +507,169 @@
 
       /* Disabled state for heavy waste */
       .selectable-card.disabled {
-        opacity: 0.45;
+        opacity: 0.55;
         cursor: not-allowed;
         background: var(--slate-100);
-        border-color: var(--slate-200);
+        border: 1px dashed var(--slate-300);
       }
-      .disabled-badge {
-        font-size: 10px;
-        font-weight: 800;
+      .card-disabled-notice {
+        font-size: 11px;
+        font-weight: 700;
         color: var(--red-700);
         background: #fee2e2;
+        padding: 3px 8px;
         border-radius: 4px;
-        padding: 2px 6px;
-        margin-top: 6px;
         display: inline-block;
+        margin-top: 4px;
       }
 
-      .card-top {
+      /* Card internal anatomy */
+      .card-head {
         display: flex;
         justify-content: space-between;
         align-items: flex-start;
         gap: 8px;
       }
-      .card-name {
+      .card-title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+      }
+      .card-title {
         font-size: 15px;
         font-weight: 800;
         color: var(--slate-900);
         display: flex;
         align-items: center;
         gap: 6px;
+        flex-wrap: wrap;
       }
+      .card-check-pill {
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        border: 1.5px solid var(--slate-300);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.15s ease;
+      }
+      .selectable-card.selected .card-check-pill {
+        border-color: var(--brand);
+        background: var(--brand);
+        color: var(--white);
+      }
+      .selectable-card.selected .card-check-pill svg {
+        display: block;
+      }
+      .card-check-pill svg {
+        display: none;
+      }
+
       .card-badge {
         font-size: 10px;
         font-weight: 800;
         text-transform: uppercase;
+        letter-spacing: 0.05em;
         background: var(--brand);
-        color: var(--dark-text-on-brand);
-        padding: 2px 6px;
+        color: var(--brand-text);
+        padding: 2px 7px;
         border-radius: 10px;
-        letter-spacing: 0.04em;
       }
-      .card-price-hint {
-        font-size: 14px;
+      .card-badge.green {
+        background: var(--emerald-600);
+        color: var(--white);
+      }
+
+      .card-price-row {
+        display: flex;
+        align-items: baseline;
+        gap: 4px;
+      }
+      .card-price-val {
+        font-size: 16px;
         font-weight: 800;
         color: var(--brand);
       }
-      .card-meta {
-        font-size: 12px;
-        color: var(--slate-600);
-        margin-top: 4px;
+      .card-price-sub {
+        font-size: 11px;
+        font-weight: 500;
+        color: var(--slate-500);
       }
-      .card-capacity {
+
+      .card-specs {
         font-size: 12px;
         font-weight: 600;
         color: var(--slate-700);
-        margin-top: 4px;
+        background: rgba(15, 23, 42, 0.04);
+        padding: 4px 8px;
+        border-radius: 6px;
+        display: inline-block;
+        width: fit-content;
+      }
+      .card-desc {
+        font-size: 12px;
+        color: var(--slate-600);
+        line-height: 1.4;
       }
 
-      /* Road permit switch */
-      .permit-selector {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-      @media (min-width: 500px) {
-        .permit-selector {
-          grid-template-columns: 1fr 1fr;
-        }
+      /* Heavy Waste Notice */
+      .heavy-rule-box {
+        font-size: 12px;
+        color: #92400e;
+        background: #fffbeb;
+        border: 1px solid #fef3c7;
+        padding: 10px 14px;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
       }
 
-      /* Contact inputs row */
-      .contact-row {
+      /* Waste Advice Box */
+      .waste-hint-banner {
+        background: var(--slate-50);
+        border: 1px solid var(--slate-200);
+        border-radius: var(--radius-sm);
+        padding: 9px 12px;
+        font-size: 12px;
+        color: var(--slate-600);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .waste-hint-banner svg {
+        flex-shrink: 0;
+        color: var(--slate-500);
+      }
+
+      /* Contact Inputs Row */
+      .contact-grid {
         display: grid;
         grid-template-columns: 1fr;
         gap: 12px;
       }
-      @media (min-width: 540px) {
-        .contact-row {
+      @media (min-width: 580px) {
+        .contact-grid {
           grid-template-columns: 1fr 1fr;
         }
       }
+      .input-label {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--slate-800);
+        display: block;
+        margin-bottom: 5px;
+      }
 
-      /* --- SUBMIT BUTTON --- */
+      /* Submit Button */
       .btn-submit {
         background: var(--brand);
-        color: var(--dark-text-on-brand); /* Dark text on orange */
+        color: var(--brand-text); /* Accessible dark text on orange */
         border: none;
         border-radius: var(--radius-md);
-        min-height: 52px;
+        min-height: 54px;
         padding: 14px 24px;
         font-size: 16px;
         font-weight: 800;
@@ -493,26 +680,29 @@
         gap: 10px;
         width: 100%;
         box-shadow: 0 4px 14px rgba(236, 108, 5, 0.25);
-        transition: background 0.15s, transform 0.1s;
+        transition: background-color 0.15s, transform 0.1s, box-shadow 0.15s;
       }
       .btn-submit:hover {
         background: var(--brand-hover);
+        box-shadow: 0 6px 20px rgba(236, 108, 5, 0.35);
       }
       .btn-submit:active {
         transform: scale(0.99);
       }
       .btn-submit:focus-visible {
         outline: none;
-        box-shadow: 0 0 0 4px rgba(17, 24, 39, 0.3);
+        box-shadow: 0 0 0 4px rgba(15, 23, 42, 0.3);
       }
 
-      /* --- STICKY PRICE PANEL (DESKTOP) --- */
-      .sticky-panel-container {
+      /* ==========================================================================
+         STICKY "YOUR PRICE" PANEL (DESKTOP)
+         ========================================================================== */
+      .sticky-panel-wrap {
         position: sticky;
         top: 24px;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+        gap: 18px;
       }
 
       .price-card {
@@ -521,45 +711,45 @@
         border-radius: var(--radius-xl);
         padding: 24px;
         box-shadow: var(--shadow-md);
-        transition: border-color 0.25s, box-shadow 0.25s;
+        transition: border-color 0.25s ease, box-shadow 0.25s ease;
       }
-      .price-card.highlight {
+      .price-card.pulse-highlight {
         border-color: var(--brand);
-        box-shadow: 0 0 0 4px rgba(236, 108, 5, 0.25);
+        box-shadow: 0 0 0 5px rgba(236, 108, 5, 0.22);
       }
 
       .price-card-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
       }
-      .price-card-title {
+      .price-card-label {
         font-size: 12px;
         font-weight: 800;
         text-transform: uppercase;
         letter-spacing: 0.08em;
         color: var(--slate-500);
       }
-      .price-badge-live {
+      .live-quote-pill {
         background: var(--emerald-50);
         color: var(--emerald-700);
         border: 1px solid var(--emerald-border);
         font-size: 11px;
         font-weight: 700;
-        padding: 2px 8px;
+        padding: 3px 9px;
         border-radius: 12px;
         display: inline-flex;
         align-items: center;
-        gap: 4px;
+        gap: 5px;
       }
 
-      /* 64px BOLD TABULAR PRICE */
-      .price-display-wrap {
+      /* 64PX BOLD TABULAR PRICE DISPLAY */
+      .price-number-row {
         display: flex;
         align-items: baseline;
         gap: 10px;
-        margin-bottom: 8px;
+        margin-bottom: 6px;
         flex-wrap: wrap;
       }
       .price-amount {
@@ -571,24 +761,37 @@
         font-variant-numeric: tabular-nums;
       }
       .price-vat-tag {
-        font-size: 14px;
-        font-weight: 700;
+        font-size: 15px;
+        font-weight: 800;
         color: var(--slate-500);
         text-transform: uppercase;
         letter-spacing: 0.04em;
       }
 
-      .price-note {
+      .price-confirmation-note {
         font-size: 12px;
         color: var(--slate-500);
         font-weight: 500;
         margin-bottom: 18px;
         border-bottom: 1px solid var(--slate-100);
-        padding-bottom: 12px;
+        padding-bottom: 14px;
+      }
+
+      /* Incomplete postcode message placeholder */
+      .postcode-placeholder-card {
+        background: var(--slate-50);
+        border: 1.5px dashed var(--slate-300);
+        border-radius: var(--radius-md);
+        padding: 24px 16px;
+        text-align: center;
+        color: var(--slate-600);
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 16px;
       }
 
       /* Out of area message */
-      .out-of-area-box {
+      .out-of-area-card {
         background: #fff1f2;
         border: 1px solid #fecdd3;
         border-radius: var(--radius-md);
@@ -597,12 +800,12 @@
         font-size: 13px;
         margin-bottom: 16px;
       }
-      .out-of-area-box h4 {
+      .out-of-area-card h4 {
         font-size: 15px;
         font-weight: 800;
         margin-bottom: 4px;
       }
-      .out-of-area-box a {
+      .out-of-area-card a {
         display: inline-flex;
         align-items: center;
         gap: 6px;
@@ -615,91 +818,91 @@
         text-decoration: none;
       }
 
-      /* Incomplete postcode placeholder */
-      .incomplete-postcode-box {
-        background: var(--slate-50);
-        border: 1px dashed var(--slate-300);
-        border-radius: var(--radius-md);
-        padding: 20px 16px;
-        text-align: center;
-        color: var(--slate-600);
-        font-size: 14px;
-        font-weight: 600;
-        margin-bottom: 16px;
-      }
-
-      /* LIVE BREAKDOWN LIST */
-      .breakdown-list {
+      /* Live Breakdown Table */
+      .breakdown-table {
         list-style: none;
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 9px;
       }
-      .breakdown-item {
+      .bd-row {
         display: flex;
         justify-content: space-between;
         align-items: center;
         font-size: 13px;
         color: var(--slate-700);
       }
-      .breakdown-item.subtotal {
+      .bd-row.subtotal {
         margin-top: 6px;
         padding-top: 10px;
         border-top: 1px solid var(--slate-200);
         font-weight: 700;
         color: var(--slate-800);
       }
-      .breakdown-item.total {
-        margin-top: 4px;
-        padding-top: 8px;
-        border-top: 1px solid var(--slate-300);
-        font-size: 15px;
+      .bd-row.total {
+        margin-top: 6px;
+        padding-top: 10px;
+        border-top: 2px solid var(--slate-900);
+        font-size: 16px;
         font-weight: 800;
         color: var(--slate-900);
       }
-      .breakdown-val {
+      .bd-val {
         font-variant-numeric: tabular-nums;
-        font-weight: 600;
+        font-weight: 700;
+        color: var(--slate-900);
       }
 
-      /* SIDEBAR TRUST ASSURANCES */
+      /* Trust & Accreditation Box */
       .trust-card {
         background: var(--white);
         border: 1px solid var(--slate-200);
         border-radius: var(--radius-lg);
         padding: 18px;
-        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        box-shadow: var(--shadow-xs);
       }
-      .trust-item {
+      .trust-row {
         display: flex;
         align-items: flex-start;
         gap: 10px;
-        margin-bottom: 10px;
+        font-size: 12px;
+        color: var(--slate-700);
+        line-height: 1.4;
       }
-      .trust-item:last-child {
-        margin-bottom: 0;
-      }
-      .trust-item svg {
+      .trust-row svg {
         color: var(--brand);
         flex-shrink: 0;
         margin-top: 2px;
       }
+      .trust-row strong {
+        color: var(--slate-900);
+      }
 
-      /* --- MOBILE STICKY BOTTOM BAR --- */
+      /* ==========================================================================
+         MOBILE STICKY BOTTOM BAR & SLIDE-UP DRAWER
+         ========================================================================== */
       .mobile-sticky-bar {
-        display: none;
         position: fixed;
         bottom: 0;
         left: 0;
         right: 0;
-        z-index: 50;
         background: var(--white);
-        border-top: 2px solid var(--brand);
-        box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
-        padding: 10px 16px;
+        border-top: 1px solid var(--slate-200);
+        box-shadow: 0 -4px 16px rgba(15, 23, 42, 0.08);
+        padding: 12px 16px;
+        z-index: 50;
+        display: block;
       }
-      .mobile-sticky-inner {
-        max-width: 1160px;
+      @media (min-width: 1024px) {
+        .mobile-sticky-bar {
+          display: none;
+        }
+      }
+      .mobile-bar-inner {
+        max-width: 600px;
         margin: 0 auto;
         display: flex;
         align-items: center;
@@ -710,72 +913,59 @@
         display: flex;
         flex-direction: column;
       }
-      .mobile-price-label {
-        font-size: 10px;
+      .mobile-price-sub {
+        font-size: 11px;
         text-transform: uppercase;
         font-weight: 700;
         color: var(--slate-500);
       }
-      .mobile-price-val {
-        font-size: 24px;
+      .mobile-price-display {
+        font-size: 22px;
         font-weight: 800;
         color: var(--slate-900);
         font-variant-numeric: tabular-nums;
         line-height: 1.1;
       }
-      .mobile-price-val small {
-        font-size: 11px;
+      .mobile-price-display small {
+        font-size: 12px;
         font-weight: 600;
         color: var(--slate-500);
       }
-      .btn-mobile-breakdown {
-        background: var(--slate-100);
-        color: var(--slate-800);
-        border: 1px solid var(--slate-300);
+      .btn-mobile-sheet {
+        background: var(--brand);
+        color: var(--brand-text);
+        border: none;
         border-radius: var(--radius-md);
-        min-height: 48px;
-        padding: 8px 16px;
+        padding: 10px 18px;
         font-size: 13px;
-        font-weight: 700;
+        font-weight: 800;
         cursor: pointer;
         display: inline-flex;
         align-items: center;
         gap: 6px;
       }
-      .btn-mobile-breakdown:hover {
-        background: var(--slate-200);
-      }
 
-      @media (max-width: 1023px) {
-        .mobile-sticky-bar {
-          display: block;
-        }
-        .page-wrap {
-          padding-bottom: 96px; /* space for sticky bar */
-        }
-      }
-
-      /* --- MOBILE BREAKDOWN DRAWER / MODAL --- */
+      /* Drawer Modal Overlay */
       .drawer-overlay {
-        display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.5);
+        background: rgba(15, 23, 42, 0.6);
+        backdrop-filter: blur(4px);
         z-index: 60;
-        backdrop-filter: blur(2px);
+        display: none;
+        align-items: flex-end;
       }
       .drawer-overlay.active {
         display: flex;
-        align-items: flex-end;
       }
       .drawer-content {
         background: var(--white);
-        width: 100%;
         border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-        padding: 24px 20px 32px 20px;
+        width: 100%;
         max-height: 85vh;
         overflow-y: auto;
-        box-shadow: 0 -10px 30px rgba(0,0,0,0.2);
+        padding: 24px 20px 32px 20px;
+        box-shadow: var(--shadow-lg);
         animation: slideUp 0.25s ease-out;
       }
       @keyframes slideUp {
@@ -787,121 +977,97 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 16px;
-        border-bottom: 1px solid var(--slate-200);
         padding-bottom: 12px;
+        border-bottom: 1px solid var(--slate-200);
       }
-      .drawer-title {
-        font-size: 16px;
-        font-weight: 800;
-        color: var(--slate-900);
-      }
-      .btn-drawer-close {
+      .btn-close-drawer {
         background: var(--slate-100);
         border: none;
         border-radius: 50%;
-        width: 36px;
-        height: 36px;
-        cursor: pointer;
-        display: grid;
-        place-content: center;
-        font-size: 16px;
-        font-weight: 700;
-      }
-
-      /* --- EMAIL PREVIEW CONFIRMATION MODAL --- */
-      .modal-backdrop {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(15, 23, 42, 0.7);
-        z-index: 100;
-        backdrop-filter: blur(4px);
-        padding: 16px;
-        overflow-y: auto;
-      }
-      .modal-backdrop.active {
+        width: 32px;
+        height: 32px;
         display: flex;
         align-items: center;
         justify-content: center;
+        cursor: pointer;
+        color: var(--slate-700);
       }
-      .modal-dialog {
+
+      /* ==========================================================================
+         OFFICE EMAIL PREVIEW MODAL
+         ========================================================================== */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.7);
+        backdrop-filter: blur(4px);
+        z-index: 70;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+      .modal-backdrop.active {
+        display: flex;
+      }
+      .modal-box {
         background: var(--white);
-        width: 100%;
-        max-width: 620px;
         border-radius: var(--radius-xl);
+        max-width: 580px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
         box-shadow: var(--shadow-lg);
-        overflow: hidden;
-        animation: modalFade 0.2s ease-out;
+        animation: modalScale 0.2s ease-out;
       }
-      @keyframes modalFade {
+      @keyframes modalScale {
         from { opacity: 0; transform: scale(0.96); }
         to { opacity: 1; transform: scale(1); }
       }
-      .modal-banner {
-        background: var(--emerald-600);
+      .modal-head {
+        background: var(--slate-900);
         color: var(--white);
-        padding: 20px 24px;
+        padding: 18px 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+      }
+      .modal-title {
+        font-size: 16px;
+        font-weight: 800;
         display: flex;
         align-items: center;
-        gap: 14px;
-      }
-      .modal-banner-icon {
-        width: 44px;
-        height: 44px;
-        background: rgba(255,255,255,0.2);
-        border-radius: 50%;
-        display: grid;
-        place-content: center;
-        flex-shrink: 0;
+        gap: 8px;
       }
       .modal-body {
-        padding: 24px;
+        padding: 22px;
       }
-      .preview-email-box {
+      .email-preview-card {
         background: var(--slate-50);
         border: 1px solid var(--slate-300);
         border-radius: var(--radius-md);
         padding: 16px;
+        font-family: monospace;
         font-size: 13px;
-        font-family: inherit;
-        margin: 16px 0;
+        color: var(--slate-800);
+        margin-top: 12px;
       }
-      .preview-header-field {
-        display: flex;
-        gap: 8px;
-        font-size: 12px;
-        color: var(--slate-600);
-        border-bottom: 1px solid var(--slate-200);
-        padding-bottom: 6px;
-        margin-bottom: 6px;
-      }
-      .preview-header-field strong {
-        color: var(--slate-900);
-      }
-      .preview-table {
+      .email-preview-table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 10px;
-        font-size: 12px;
       }
-      .preview-table td {
-        padding: 4px 0;
+      .email-preview-table td {
+        padding: 5px 0;
+        vertical-align: top;
       }
-      .preview-table td:last-child {
-        text-align: right;
+      .email-preview-table td:first-child {
+        color: var(--slate-500);
+        width: 125px;
         font-weight: 700;
       }
-      .modal-demo-tag {
-        font-size: 12px;
-        color: #92400e;
-        background: #fef3c7;
-        border: 1px solid #fde68a;
-        border-radius: var(--radius-sm);
-        padding: 8px 12px;
-      }
-      .modal-footer {
-        padding: 16px 24px;
-        background: var(--slate-50);
+      .modal-actions {
+        padding: 16px 22px;
         border-top: 1px solid var(--slate-200);
         display: flex;
         justify-content: flex-end;
@@ -911,98 +1077,163 @@
         color: var(--white);
         border: none;
         border-radius: var(--radius-md);
-        min-height: 48px;
-        padding: 10px 24px;
+        padding: 10px 20px;
         font-size: 14px;
         font-weight: 700;
         cursor: pointer;
       }
+
+      /* ==========================================================================
+         FOOTER
+         ========================================================================== */
+      .site-footer {
+        background: var(--slate-900);
+        color: var(--slate-400);
+        border-top: 1px solid var(--slate-800);
+        padding: 32px 16px 80px 16px;
+        font-size: 13px;
+        margin-top: auto;
+      }
+      @media (min-width: 1024px) {
+        .site-footer {
+          padding-bottom: 32px;
+        }
+      }
+      .footer-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+      }
     </style>
   </head>
   <body>
-    <!-- DEMO BANNER -->
+    <!-- TOP DEMO BANNER -->
     <div class="demo-banner">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <circle cx="12" cy="12" r="10"></circle>
         <line x1="12" y1="8" x2="12" y2="12"></line>
         <line x1="12" y1="16" x2="12.01" y2="16"></line>
       </svg>
-      <span>Demo using example prices. Final version uses your own price list.</span>
+      <span>Interactive Demo for Sammy &amp; Budget Skips Coventry — Live baseline pricing calculator</span>
     </div>
 
     <!-- SITE HEADER -->
     <header class="site-header">
       <div class="header-utility">
         <div class="header-utility-inner">
-          <div style="display: flex; align-items: center; gap: 16px;">
-            <a href="tel:02476363002" class="utility-link">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-              </svg>
-              <span>024 7636 3002</span>
-            </a>
-            <span style="color: var(--slate-400);">•</span>
-            <span>Bayton Road Industrial Estate, Coventry, CV7 9NH</span>
+          <div class="utility-left">
+            <span class="utility-badge">
+              <span class="pulse-dot"></span>
+              <span>Bayton Road Depot Open • Mon–Fri 7am–5pm, Sat 7am–12pm</span>
+            </span>
+            <span class="utility-depot">Crondal Rd, Bayton Rd Ind Estate, Coventry CV7 9NH</span>
           </div>
-          <div class="utility-badge">
-            <span class="pulse-dot"></span>
-            <span>Licensed Waste Carrier &amp; Transfer Station</span>
+          <div>
+            <strong style="color:var(--white);">Need Booking Advice?</strong>
+            <a href="tel:02476363002" style="color:var(--white); text-decoration:none; margin-left:6px; font-weight:700;">
+              024 7636 3002
+            </a>
           </div>
         </div>
       </div>
 
       <div class="header-main">
-        <a href="/budgetskipscoventry" class="header-brand">
-          <img src="/budget-skips-logo.svg" alt="Budget Skips Coventry" class="header-logo" />
-          <img src="/budget-25.svg" alt="25 Years" class="header-heritage" />
+        <a href="/budgetskipscoventry" class="header-brand" aria-label="Budget Skips Coventry Home">
+          <img src="/budget-skips-logo.svg" alt="Budget Skips Coventry Logo" class="header-logo" />
+          <img src="/budget-25.svg" alt="Celebrating 25+ Years in Coventry" class="header-heritage" />
         </a>
 
-        <div class="header-contact">
-          <div class="header-contact-label">Need Advice? Call Us</div>
-          <a href="tel:02476363002" class="header-phone">024 7636 3002</a>
+        <div class="header-cta-group">
+          <a href="tel:02476363002" class="header-call-pill">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+            </svg>
+            <span>024 7636 3002</span>
+          </a>
         </div>
       </div>
     </header>
 
-    <!-- MAIN PAGE WRAPPER -->
-    <main class="page-wrap">
-      <div class="hero-title-wrap">
+    <!-- MAIN CALCULATOR VIEW -->
+    <main class="page-container">
+      <div class="hero-wrap">
         <div class="hero-eyebrow">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
           </svg>
-          <span>Instant Price Calculator</span>
+          <span>Instant Quote Calculator • Coventry &amp; Warwickshire</span>
         </div>
-        <h1 class="hero-title">Get an Instant Skip Quote</h1>
-        <p class="hero-sub">Select your skip options below. The price updates live as you make your choices.</p>
+        <h1 class="hero-title">Instant Skip Hire Pricing</h1>
+        <p class="hero-subtitle">
+          Select your skip size and waste type to calculate your exact price with delivery and optional council permit.
+        </p>
+
+        <div class="hero-pills">
+          <span class="hero-pill-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Free Delivery within 10 Miles
+          </span>
+          <span class="hero-pill-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            Same-Day &amp; Next-Day Slots
+          </span>
+          <span class="hero-pill-item">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            95%+ Waste Diverted From Landfill
+          </span>
+        </div>
       </div>
 
-      <!-- TWO-COLUMN LAYOUT -->
       <div class="layout-grid">
-        <!-- LEFT COLUMN: FORM -->
-        <form id="quoteForm" class="calculator-form" onsubmit="event.preventDefault(); handleRequestSubmit();" novalidate>
+        <!-- LEFT COLUMN: INTERACTIVE FORM -->
+        <form id="calculatorForm" class="form-container" onsubmit="event.preventDefault(); handleRequestSubmit();">
           
           <!-- STEP 1: DELIVERY POSTCODE -->
-          <div class="form-step">
+          <div class="step-block">
             <div class="step-header">
-              <label for="postcode" class="step-number-title">
-                1. Delivery Postcode
-              </label>
-              <span class="step-hint">Coventry &amp; Warwickshire</span>
+              <div class="step-title-wrap">
+                <span class="step-num-pill">1</span>
+                <label for="postcode" class="step-title">Delivery Postcode</label>
+              </div>
+              <span class="step-hint">Live area check</span>
             </div>
-            <input
-              type="text"
-              id="postcode"
-              name="postcode"
-              class="input-text"
-              placeholder="e.g. CV6 4AB"
-              value="CV6 4AB"
-              autocomplete="postal-code"
-              maxlength="10"
-              required
-            />
+
+            <div class="form-input-wrap">
+              <input
+                type="text"
+                id="postcode"
+                name="postcode"
+                class="input-text"
+                placeholder="e.g. CV6 4AB or CV11"
+                value="CV6 4AB"
+                autocomplete="postal-code"
+                maxlength="10"
+                required
+              />
+            </div>
+
+            <!-- Quick postcode test chips -->
+            <div class="quick-chips-wrap">
+              <span class="quick-chip-label">Quick sample:</span>
+              <button type="button" class="quick-chip" onclick="setPostcodeSample('CV6 4AB')">CV6 (Radford/Depot)</button>
+              <button type="button" class="quick-chip" onclick="setPostcodeSample('CV1 2FL')">CV1 (Coventry Central)</button>
+              <button type="button" class="quick-chip" onclick="setPostcodeSample('CV12 8AB')">CV12 (Bedworth)</button>
+              <button type="button" class="quick-chip" onclick="setPostcodeSample('CV11 5TH')">CV11 (Nuneaton)</button>
+              <button type="button" class="quick-chip" onclick="setPostcodeSample('CV32 5TY')">CV32 (Leamington)</button>
+            </div>
+
             <div id="postcodeStatus" class="postcode-status status-zoneA">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
               <span>Zone A (CV6) • Free delivery from our Bayton Road depot</span>
@@ -1010,16 +1241,17 @@
             <div id="postcodeError" class="field-error-msg" style="display: none;"></div>
           </div>
 
-          <!-- STEP 2: WHAT IS GOING IN THE SKIP -->
-          <div class="form-step">
+          <!-- STEP 2: WASTE TYPE -->
+          <div class="step-block">
             <div class="step-header">
-              <span class="step-number-title">
-                2. What is going in the skip?
-              </span>
+              <div class="step-title-wrap">
+                <span class="step-num-pill">2</span>
+                <span class="step-title">What is going in the skip?</span>
+              </div>
               <span class="step-hint">Select waste type</span>
             </div>
 
-            <div class="card-selector-grid three-col" id="wasteTypeGrid" role="radiogroup" aria-label="Waste type">
+            <div class="card-grid three-col" id="wasteTypeGrid" role="radiogroup" aria-label="Waste type">
               <!-- General Waste -->
               <div
                 class="selectable-card selected"
@@ -1028,11 +1260,21 @@
                 aria-checked="true"
                 data-waste="general"
               >
-                <div class="card-top">
-                  <span class="card-name">General Waste</span>
-                  <span class="card-price-hint">£0</span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">General Waste</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£0</span>
+                      <span class="card-price-sub">standard</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <p class="card-meta">Household clutter, furniture, wood, plastics, packaging</p>
+                <p class="card-desc">Household clutter, furniture, plastics, wood, and light renovation items.</p>
               </div>
 
               <!-- Garden Waste -->
@@ -1043,11 +1285,24 @@
                 aria-checked="false"
                 data-waste="garden"
               >
-                <div class="card-top">
-                  <span class="card-name">Garden Waste</span>
-                  <span class="card-badge" style="background:#059669; color:#fff;">-£10 off</span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">
+                      Garden Waste
+                      <span class="card-badge green">-£10 Off</span>
+                    </span>
+                    <div class="card-price-row">
+                      <span class="card-price-val" style="color:var(--emerald-600);">-£10</span>
+                      <span class="card-price-sub">discount</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <p class="card-meta">Branches, turf, leaves, hedge clippings &amp; green waste</p>
+                <p class="card-desc">Tree branches, hedge clippings, lawn turf, shrubs, leaves, and green waste.</p>
               </div>
 
               <!-- Heavy Waste -->
@@ -1058,29 +1313,59 @@
                 aria-checked="false"
                 data-waste="heavy"
               >
-                <div class="card-top">
-                  <span class="card-name">Heavy Waste</span>
-                  <span class="card-price-hint">£0</span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">Heavy Waste</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£0</span>
+                      <span class="card-price-sub">max 6yd</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <p class="card-meta">Soil, rubble, concrete, bricks &amp; hardcore (4yd &amp; 6yd only)</p>
+                <p class="card-desc">Soil, bricks, concrete, rubble, tiles &amp; hardcore (4yd &amp; 6yd skips only).</p>
               </div>
             </div>
 
-            <div id="heavyNotice" style="display: none; font-size: 12px; color: #b45309; background: #fffbeb; border: 1px solid #fef3c7; padding: 8px 12px; border-radius: var(--radius-sm); margin-top: 4px;">
-              ⚠️ <strong>Heavy Waste rule:</strong> Skips larger than 6 yards are disabled to comply with road weight safety limits for heavy soil and rubble.
+            <!-- Heavy Waste Rule Notice -->
+            <div id="heavyNotice" class="heavy-rule-box" style="display: none;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="flex-shrink:0; margin-top:1px;">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="8" x2="12" y2="12"></line>
+                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+              </svg>
+              <div>
+                <strong>Lorry Weight Limit Notice:</strong> For driver safety and road transit laws, skips larger than 6 yards cannot carry heavy soil, hardcore, or concrete. Skips 8yd and above are disabled.
+              </div>
+            </div>
+
+            <!-- Waste Acceptance Reminder -->
+            <div class="waste-hint-banner">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="12" y1="16" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12.01" y2="8"></line>
+              </svg>
+              <span>No asbestos, fridges, tyres, or hazardous items without prior notice. Bagged plasterboard accepted.</span>
             </div>
           </div>
 
           <!-- STEP 3: SKIP SIZE -->
-          <div class="form-step">
+          <div class="step-block">
             <div class="step-header">
-              <span class="step-number-title">
-                3. Choose Skip Size
-              </span>
+              <div class="step-title-wrap">
+                <span class="step-num-pill">3</span>
+                <span class="step-title">Choose Skip Size</span>
+              </div>
               <span class="step-hint">Select size</span>
             </div>
 
-            <div class="card-selector-grid" id="skipSizeGrid" role="radiogroup" aria-label="Skip size">
+            <div class="card-grid two-col" id="skipSizeGrid" role="radiogroup" aria-label="Skip size">
+              
               <!-- 4 Yard -->
               <div
                 class="selectable-card"
@@ -1089,14 +1374,23 @@
                 aria-checked="false"
                 data-skip="4yd"
               >
-                <div class="card-top">
-                  <span class="card-name">
-                    4 Yard Mini Skip
-                  </span>
-                  <span class="card-price-hint">£150 <small style="font-size:11px;font-weight:normal;color:var(--slate-500);">ex VAT</small></span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">4 Yard Mini Skip</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£150</span>
+                      <span class="card-price-sub">ex VAT</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <div class="card-capacity">Holds ~30 black bin bags (6ft x 4.2ft x 3.2ft)</div>
-                <p class="card-meta">Best for small garden tasks, bathroom refits &amp; small decluttering.</p>
+                <div class="card-specs">~30-40 bags • 6.9ft × 5.5ft × 3.0ft</div>
+                <p class="card-desc">Ideal for small garden clearances, bathroom refits, soil &amp; rubble tasks.</p>
+                <div class="card-disabled-notice" style="display:none;">Not permitted for heavy waste</div>
               </div>
 
               <!-- 6 Yard (Default) -->
@@ -1107,17 +1401,26 @@
                 aria-checked="true"
                 data-skip="6yd"
               >
-                <div class="card-top">
-                  <span class="card-name">
-                    6 Yard Small Builders Skip
-                  </span>
-                  <span class="card-price-hint">£190 <small style="font-size:11px;font-weight:normal;color:var(--slate-500);">ex VAT</small></span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">6 Yard Small Builders</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£190</span>
+                      <span class="card-price-sub">ex VAT</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <div class="card-capacity">Holds ~55 black bin bags (8.5ft x 5ft x 3.5ft)</div>
-                <p class="card-meta">Standard DIY size. Ideal for kitchen renovations, mixed soil &amp; rubble.</p>
+                <div class="card-specs">~55-60 bags • 8.5ft × 5.0ft × 3.5ft</div>
+                <p class="card-desc">Most popular DIY size. Perfect for kitchen refits, mixed soil, brick &amp; rubble.</p>
+                <div class="card-disabled-notice" style="display:none;">Not permitted for heavy waste</div>
               </div>
 
-              <!-- 8 Yard (Most Popular) -->
+              <!-- 8 Yard -->
               <div
                 class="selectable-card"
                 tabindex="0"
@@ -1125,16 +1428,26 @@
                 aria-checked="false"
                 data-skip="8yd"
               >
-                <div class="card-top">
-                  <span class="card-name">
-                    8 Yard Large Builders Skip
-                    <span class="card-badge">Most Popular</span>
-                  </span>
-                  <span class="card-price-hint">£230 <small style="font-size:11px;font-weight:normal;color:var(--slate-500);">ex VAT</small></span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">
+                      8 Yard Large Builders
+                      <span class="card-badge">Most Popular</span>
+                    </span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£230</span>
+                      <span class="card-price-sub">ex VAT</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <div class="card-capacity">Holds ~75 black bin bags (10ft x 5.5ft x 4ft)</div>
-                <p class="card-meta">The contractor favorite for home extensions &amp; full property clearouts.</p>
-                <div class="disabled-badge" style="display:none;">Not allowed for heavy waste</div>
+                <div class="card-specs">~75-80 bags • 10.0ft × 5.5ft × 4.0ft</div>
+                <p class="card-desc">Coventry's favorite for home renovations, major clearouts &amp; property extensions.</p>
+                <div class="card-disabled-notice" style="display:none;">Max 6yd allowed for heavy soil/rubble</div>
               </div>
 
               <!-- 12 Yard -->
@@ -1145,15 +1458,23 @@
                 aria-checked="false"
                 data-skip="12yd"
               >
-                <div class="card-top">
-                  <span class="card-name">
-                    12 Yard Maxi Skip
-                  </span>
-                  <span class="card-price-hint">£320 <small style="font-size:11px;font-weight:normal;color:var(--slate-500);">ex VAT</small></span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">12 Yard Maxi Skip</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£320</span>
+                      <span class="card-price-sub">ex VAT</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <div class="card-capacity">Holds ~115 black bin bags (12.5ft x 6ft x 5ft)</div>
-                <p class="card-meta">High volume skip for shop fittings, estate clearouts &amp; light bulky waste.</p>
-                <div class="disabled-badge" style="display:none;">Not allowed for heavy waste</div>
+                <div class="card-specs">~115-120 bags • 12.5ft × 6.0ft × 5.0ft</div>
+                <p class="card-desc">High volume skip for bulky domestic clearouts, office refits &amp; timber (light waste only).</p>
+                <div class="card-disabled-notice" style="display:none;">Max 6yd allowed for heavy soil/rubble</div>
               </div>
 
               <!-- 16 Yard -->
@@ -1163,30 +1484,41 @@
                 role="radio"
                 aria-checked="false"
                 data-skip="16yd"
+                style="grid-column: 1 / -1;"
               >
-                <div class="card-top">
-                  <span class="card-name">
-                    16 Yard Maxi Skip
-                  </span>
-                  <span class="card-price-hint">£420 <small style="font-size:11px;font-weight:normal;color:var(--slate-500);">ex VAT</small></span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">16 Yard Maxi Skip</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£420</span>
+                      <span class="card-price-sub">ex VAT</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <div class="card-capacity">Holds ~150 black bin bags (13.5ft x 6ft x 6.5ft)</div>
-                <p class="card-meta">Maximum chain-lift skip. Large house clearances &amp; bulky trade packaging.</p>
-                <div class="disabled-badge" style="display:none;">Not allowed for heavy waste</div>
+                <div class="card-specs">~150 bags • 13.5ft × 6.0ft × 6.5ft</div>
+                <p class="card-desc">Largest chain-lift skip. Great for shop clearances &amp; commercial packaging (Max 2t weight limit).</p>
+                <div class="card-disabled-notice" style="display:none;">Max 6yd allowed for heavy soil/rubble</div>
               </div>
+
             </div>
           </div>
 
-          <!-- STEP 4: ROAD PERMIT -->
-          <div class="form-step">
+          <!-- STEP 4: PLACEMENT & ROAD PERMIT -->
+          <div class="step-block">
             <div class="step-header">
-              <span class="step-number-title">
-                4. Skip on the road?
-              </span>
-              <span class="step-hint">Placement on site</span>
+              <div class="step-title-wrap">
+                <span class="step-num-pill">4</span>
+                <span class="step-title">Skip on the road?</span>
+              </div>
+              <span class="step-hint">Council permit check</span>
             </div>
 
-            <div class="permit-selector" id="permitSelector" role="radiogroup" aria-label="Skip placement">
+            <div class="card-grid two-col" id="permitSelector" role="radiogroup" aria-label="Skip placement">
               <!-- Private Driveway -->
               <div
                 class="selectable-card selected"
@@ -1195,11 +1527,21 @@
                 aria-checked="true"
                 data-permit="false"
               >
-                <div class="card-top">
-                  <span class="card-name">Private Driveway / Off-Road</span>
-                  <span class="card-price-hint">£0</span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">Private Driveway / Off-Road</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">£0</span>
+                      <span class="card-price-sub">no permit required</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <p class="card-meta">No council permit required. Drop on your driveway or private land.</p>
+                <p class="card-desc">Dropped securely on your private driveway, private forecourt, or garden land.</p>
               </div>
 
               <!-- Public Road -->
@@ -1210,75 +1552,97 @@
                 aria-checked="false"
                 data-permit="true"
               >
-                <div class="card-top">
-                  <span class="card-name">On Public Road / Street</span>
-                  <span class="card-price-hint">+£45 <small style="font-size:11px;font-weight:normal;color:var(--slate-500);">ex VAT</small></span>
+                <div class="card-head">
+                  <div class="card-title-group">
+                    <span class="card-title">On Public Highway / Street</span>
+                    <div class="card-price-row">
+                      <span class="card-price-val">+£45</span>
+                      <span class="card-price-sub">council fee ex VAT</span>
+                    </div>
+                  </div>
+                  <div class="card-check-pill">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                  </div>
                 </div>
-                <p class="card-meta">Council permit, reflective markers &amp; safety lamps arranged by us.</p>
+                <p class="card-desc">Budget Skips arranges Coventry/Warwickshire council license, safety cones &amp; lights.</p>
               </div>
             </div>
           </div>
 
-          <!-- STEP 5: DELIVERY DATE -->
-          <div class="form-step">
+          <!-- STEP 5: PREFERRED DELIVERY DATE -->
+          <div class="step-block">
             <div class="step-header">
-              <label for="deliveryDate" class="step-number-title">
-                5. Preferred Delivery Date
-              </label>
-              <span class="step-hint">Mon – Sat delivery</span>
+              <div class="step-title-wrap">
+                <span class="step-num-pill">5</span>
+                <label for="deliveryDate" class="step-title">Preferred Delivery Date</label>
+              </div>
+              <span class="step-hint">Mon–Sat deliveries</span>
             </div>
-            <input
-              type="date"
-              id="deliveryDate"
-              name="deliveryDate"
-              class="input-date"
-              required
-            />
+
+            <div class="form-input-wrap">
+              <input
+                type="date"
+                id="deliveryDate"
+                name="deliveryDate"
+                class="input-date"
+                required
+              />
+            </div>
+
+            <div class="quick-chips-wrap">
+              <span class="quick-chip-label">Quick select:</span>
+              <button type="button" class="quick-chip" onclick="setQuickDate(1)">Tomorrow</button>
+              <button type="button" class="quick-chip" onclick="setQuickDate(3)">In 3 Days</button>
+              <button type="button" class="quick-chip" onclick="setQuickDate(7)">Next Week</button>
+            </div>
             <div id="dateError" class="field-error-msg" style="display: none;"></div>
           </div>
 
-          <!-- STEP 6: CONTACT DETAILS & REQUEST -->
-          <div class="form-step">
+          <!-- STEP 6: CONTACT & SUBMISSION -->
+          <div class="step-block">
             <div class="step-header">
-              <span class="step-number-title">
-                6. Your Details
-              </span>
-              <span class="step-hint">For confirmation</span>
+              <div class="step-title-wrap">
+                <span class="step-num-pill">6</span>
+                <span class="step-title">Your Details</span>
+              </div>
+              <span class="step-hint">To review booking</span>
             </div>
 
-            <div class="contact-row">
+            <div class="contact-grid">
               <div>
-                <label for="custName" style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">
-                  Full Name <span style="color:var(--red-600)">*</span>
+                <label for="custName" class="input-label">
+                  Your Full Name <span style="color:var(--red-600);">*</span>
                 </label>
                 <input
                   type="text"
                   id="custName"
                   name="custName"
                   class="input-text"
-                  placeholder="e.g. John Smith"
+                  placeholder="e.g. Sammy Edwards"
                   required
                 />
                 <div id="nameError" class="field-error-msg" style="display: none;"></div>
               </div>
 
               <div>
-                <label for="custPhone" style="font-size: 12px; font-weight: 700; display: block; margin-bottom: 4px;">
-                  Phone Number <span style="color:var(--red-600)">*</span>
+                <label for="custPhone" class="input-label">
+                  Phone Number <span style="color:var(--red-600);">*</span>
                 </label>
                 <input
                   type="tel"
                   id="custPhone"
                   name="custPhone"
                   class="input-text"
-                  placeholder="e.g. 024 7636 3002 or 07..."
+                  placeholder="e.g. 024 7636 3002"
                   required
                 />
                 <div id="phoneError" class="field-error-msg" style="display: none;"></div>
               </div>
             </div>
 
-            <div style="margin-top: 10px;">
+            <div style="margin-top: 8px;">
               <button type="submit" class="btn-submit">
                 <span>Request this skip</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -1287,7 +1651,7 @@
                 </svg>
               </button>
               <p style="font-size: 12px; text-align: center; color: var(--slate-500); margin-top: 8px;">
-                No payment taken now • Free &amp; zero obligation • Reviewed by our Coventry dispatch team
+                No upfront payment taken • Zero obligation • Reviewed by our Bayton Road dispatch team
               </p>
             </div>
           </div>
@@ -1295,34 +1659,36 @@
         </form>
 
         <!-- RIGHT COLUMN: STICKY "YOUR PRICE" PANEL (DESKTOP) -->
-        <aside class="sticky-panel-container">
+        <aside class="sticky-panel-wrap">
           <div id="priceCard" class="price-card" aria-live="polite">
             <div class="price-card-header">
-              <span class="price-card-title">Your Guaranteed Price</span>
-              <span class="price-badge-live">
+              <span class="price-card-label">Your Live Price</span>
+              <span class="live-quote-pill">
                 <span class="pulse-dot"></span>
-                <span>Live Quote</span>
+                <span>Guaranteed Rate</span>
               </span>
             </div>
 
-            <!-- PRICE AMOUNT (64px BOLD) -->
+            <!-- PRICE AMOUNT (64PX BOLD TABULAR) -->
             <div id="priceDisplayArea">
-              <div class="price-display-wrap">
+              <div class="price-number-row">
                 <span id="priceNumber" class="price-amount">£228</span>
                 <span class="price-vat-tag">inc. VAT</span>
               </div>
-              <div class="price-note">Price confirmed when your booking is accepted</div>
+              <div class="price-confirmation-note">
+                Price confirmed when your booking is accepted
+              </div>
             </div>
 
             <!-- INCOMPLETE POSTCODE PLACEHOLDER -->
-            <div id="incompletePostcodeBox" class="incomplete-postcode-box" style="display: none;">
+            <div id="incompletePostcodeBox" class="postcode-placeholder-card" style="display: none;">
               Enter your postcode to see your price
             </div>
 
-            <!-- OUT OF AREA MESSAGE BOX -->
-            <div id="outOfAreaBox" class="out-of-area-box" style="display: none;">
-              <h4>Outside Our Usual Area</h4>
-              <p>We deliver across Coventry &amp; Warwickshire. For custom arrangements or long-distance delivery, please give our office a quick call:</p>
+            <!-- OUT OF AREA MESSAGE -->
+            <div id="outOfAreaBox" class="out-of-area-card" style="display: none;">
+              <h4>Outside Our Regular Area</h4>
+              <p>We deliver across Coventry and Warwickshire. For surrounding counties or special logistics, call our office directly:</p>
               <a href="tel:02476363002">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
@@ -1331,64 +1697,65 @@
               </a>
             </div>
 
-            <!-- LIVE BREAKDOWN LIST -->
-            <ul id="breakdownList" class="breakdown-list">
-              <li class="breakdown-item">
+            <!-- LIVE BREAKDOWN TABLE -->
+            <ul id="breakdownList" class="breakdown-table">
+              <li class="bd-row">
                 <span id="bdSkipName">6 Yard Skip</span>
-                <span id="bdSkipPrice" class="breakdown-val">£190.00</span>
+                <span id="bdSkipPrice" class="bd-val">£190.00</span>
               </li>
-              <li class="breakdown-item">
+              <li class="bd-row">
                 <span id="bdWasteName">General Waste</span>
-                <span id="bdWastePrice" class="breakdown-val">£0.00</span>
+                <span id="bdWastePrice" class="bd-val">£0.00</span>
               </li>
-              <li class="breakdown-item">
+              <li class="bd-row">
                 <span id="bdDeliveryName">Delivery (Zone A - CV6)</span>
-                <span id="bdDeliveryPrice" class="breakdown-val" style="color: var(--emerald-700);">Free</span>
+                <span id="bdDeliveryPrice" class="bd-val" style="color:var(--emerald-700);">Free</span>
               </li>
-              <li class="breakdown-item">
-                <span id="bdPermitName">Council Road Permit</span>
-                <span id="bdPermitPrice" class="breakdown-val">None (£0.00)</span>
+              <li class="bd-row">
+                <span id="bdPermitName">Council Permit</span>
+                <span id="bdPermitPrice" class="bd-val">None (£0.00)</span>
               </li>
-              <li class="breakdown-item subtotal">
+              <li class="bd-row subtotal">
                 <span>Subtotal (ex. VAT)</span>
-                <span id="bdSubtotal" class="breakdown-val">£190.00</span>
+                <span id="bdSubtotal" class="bd-val">£190.00</span>
               </li>
-              <li class="breakdown-item">
+              <li class="bd-row">
                 <span>VAT (20%)</span>
-                <span id="bdVat" class="breakdown-val">£38.00</span>
+                <span id="bdVat" class="bd-val">£38.00</span>
               </li>
-              <li class="breakdown-item total">
+              <li class="bd-row total">
                 <span>Total (inc. VAT)</span>
-                <span id="bdTotal" class="breakdown-val">£228.00</span>
+                <span id="bdTotal" class="bd-val">£228.00</span>
               </li>
             </ul>
           </div>
 
           <!-- TRUST CARD -->
           <div class="trust-card">
-            <div class="trust-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <div class="trust-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
               </svg>
               <div>
-                <strong>Licensed Waste Carrier:</strong> Upper-Tier Environment Agency licensed carrier and recycling transfer station.
+                <strong>Licensed Waste Carrier:</strong> Upper-Tier Environment Agency licensed transfer and recycling station (CBDU105436).
               </div>
             </div>
-            <div class="trust-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <div class="trust-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <circle cx="12" cy="12" r="10"></circle>
                 <polyline points="12 6 12 12 16 14"></polyline>
               </svg>
               <div>
-                <strong>Over 25 Years in Coventry:</strong> Family-run, dependable service operating from Bayton Road Industrial Estate.
+                <strong>Over 25 Years Serving Coventry:</strong> Family-run, reputable depot on Bayton Road Industrial Estate, Exhall.
               </div>
             </div>
-            <div class="trust-item">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="20 6 9 17 4 12"></polyline>
+            <div class="trust-row">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
               </svg>
               <div>
-                <strong>Up to 95% Recycled:</strong> Diverting soil, wood, hardcore, and plastics away from UK landfill.
+                <strong>95%+ Recycled:</strong> Diverting soil, wood, hardcore, metal &amp; plastics away from UK landfill.
               </div>
             </div>
           </div>
@@ -1398,15 +1765,15 @@
 
     <!-- MOBILE STICKY BOTTOM BAR -->
     <div class="mobile-sticky-bar" id="mobileStickyBar">
-      <div class="mobile-sticky-inner">
+      <div class="mobile-bar-inner">
         <div class="mobile-price-group">
-          <span class="mobile-price-label">Live Quote</span>
-          <div class="mobile-price-val" id="mobilePriceVal">
+          <span class="mobile-price-sub">Live Total</span>
+          <div class="mobile-price-display" id="mobilePriceVal">
             £228 <small>inc. VAT</small>
           </div>
         </div>
 
-        <button type="button" class="btn-mobile-breakdown" onclick="openDrawer()">
+        <button type="button" class="btn-mobile-sheet" onclick="openDrawer()">
           <span>View breakdown</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
             <polyline points="18 15 12 9 6 15"></polyline>
@@ -1419,83 +1786,81 @@
     <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer(event)">
       <div class="drawer-content" onclick="event.stopPropagation()">
         <div class="drawer-header">
-          <div class="drawer-title">Quote Breakdown</div>
-          <button type="button" class="btn-drawer-close" onclick="closeDrawer()">✕</button>
-        </div>
-
-        <div style="margin-bottom: 16px;">
-          <div style="font-size: 28px; font-weight: 800; color: var(--slate-900); font-variant-numeric: tabular-nums;" id="drawerTotalDisplay">
-            £228.00 <span style="font-size: 13px; font-weight: 700; color: var(--slate-500); text-transform: uppercase;">inc. VAT</span>
+          <div>
+            <h3 style="font-size: 16px; font-weight: 800;">Your Quote Breakdown</h3>
+            <span style="font-size: 12px; color: var(--slate-500);">Budget Skips Coventry Live Pricing</span>
           </div>
-          <p style="font-size: 12px; color: var(--slate-500); margin-top: 2px;">Price confirmed when your booking is accepted</p>
+          <button type="button" class="btn-close-drawer" onclick="closeDrawer()">✕</button>
         </div>
 
-        <ul class="breakdown-list" id="drawerBreakdownList">
-          <!-- Populated by JS -->
-        </ul>
+        <div style="margin-bottom: 16px; padding: 14px; background: var(--brand-light); border-radius: var(--radius-md); border: 1px solid var(--brand-border); display: flex; justify-content: space-between; align-items: baseline;">
+          <span style="font-size: 13px; font-weight: 700; color: var(--slate-700);">Total Payable:</span>
+          <div id="drawerTotalDisplay" style="font-size: 26px; font-weight: 800; color: var(--slate-900);">
+            £228.00 <span style="font-size: 12px; font-weight: 700; color: var(--slate-500);">inc. VAT</span>
+          </div>
+        </div>
+
+        <div id="drawerBreakdownList">
+          <!-- Populated from main breakdown list -->
+        </div>
 
         <button type="button" class="btn-submit" style="margin-top: 20px;" onclick="closeDrawer(); document.getElementById('custName').focus();">
-          Continue to Request
+          <span>Continue to Booking Form</span>
         </button>
       </div>
     </div>
 
-    <!-- CONFIRMATION & EMAIL PREVIEW MODAL -->
+    <!-- BOOKING SUBMISSION & EMAIL PREVIEW MODAL -->
     <div class="modal-backdrop" id="emailPreviewModal" onclick="closeModal(event)">
-      <div class="modal-dialog" onclick="event.stopPropagation()">
-        <div class="modal-banner">
-          <div class="modal-banner-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
-              <polyline points="20 6 9 17 4 12"></polyline>
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-head">
+          <div class="modal-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
+            <span>Booking Request Received (Demo Preview)</span>
           </div>
-          <div>
-            <h3 style="font-size: 18px; font-weight: 800;">Quote Request Prepared!</h3>
-            <p style="font-size: 13px; opacity: 0.9;">Here is a preview of the booking email Sammy's office would receive:</p>
-          </div>
+          <button type="button" style="background:none; border:none; color:var(--white); font-size:18px; cursor:pointer;" onclick="closeModal()">✕</button>
         </div>
 
         <div class="modal-body">
-          <div class="modal-demo-tag">
-            ℹ️ <strong>Demo Simulation:</strong> This simulates the live booking notification that would arrive at Budget Skips dispatch. No email has actually been sent.
-          </div>
+          <p style="font-size: 13px; color: var(--slate-600); margin-bottom: 14px;">
+            Thank you! This is a demo simulation. In production, this instantly notifies Sammy and the dispatch office at <strong>info@budgetskips.net</strong>:
+          </p>
 
-          <div class="preview-email-box">
-            <div class="preview-header-field">
-              <span>To:</span> <strong>dispatch@budgetskips.net (Sammy's Office)</strong>
+          <div class="email-preview-card">
+            <div style="border-bottom: 1px solid var(--slate-300); padding-bottom: 8px; margin-bottom: 8px;">
+              <strong>Subject:</strong> <span id="previewSubject">New Skip Booking: 6 Yard - CV6 4AB - Sammy</span>
             </div>
-            <div class="preview-header-field">
-              <span>Subject:</span> <strong id="previewSubject">New Skip Booking: 6 Yard - CV6 4AB - John Smith</strong>
-            </div>
-            
-            <table class="preview-table">
+            <table class="email-preview-table">
               <tr>
-                <td style="color: var(--slate-600); width: 40%;">Customer Name:</td>
-                <td id="previewName">John Smith</td>
+                <td>Customer Name:</td>
+                <td id="previewName">Sammy Edwards</td>
               </tr>
               <tr>
-                <td style="color: var(--slate-600);">Contact Phone:</td>
+                <td>Telephone:</td>
                 <td id="previewPhone">024 7636 3002</td>
               </tr>
               <tr>
-                <td style="color: var(--slate-600);">Delivery Postcode:</td>
-                <td id="previewPostcode">CV6 4AB (Zone A)</td>
+                <td>Delivery Postcode:</td>
+                <td id="previewPostcode">CV6 4AB (Zone A - Free Delivery)</td>
               </tr>
               <tr>
-                <td style="color: var(--slate-600);">Requested Date:</td>
-                <td id="previewDate">2026-11-03</td>
+                <td>Delivery Date:</td>
+                <td id="previewDate">Tomorrow</td>
               </tr>
               <tr>
-                <td style="color: var(--slate-600);">Skip Size:</td>
-                <td id="previewSkip">6 Yard Skip</td>
+                <td>Skip Size:</td>
+                <td id="previewSkip">6 Yard Small Builders Skip (£190.00 ex VAT)</td>
               </tr>
               <tr>
-                <td style="color: var(--slate-600);">Waste Type:</td>
-                <td id="previewWaste">General Waste</td>
+                <td>Waste Type:</td>
+                <td id="previewWaste">General Household Waste</td>
               </tr>
               <tr>
-                <td style="color: var(--slate-600);">Placement:</td>
-                <td id="previewPermit">Private Driveway (No Permit)</td>
+                <td>Placement:</td>
+                <td id="previewPermit">Private Driveway (No Council Permit)</td>
               </tr>
               <tr style="border-top: 1px solid var(--slate-300);">
                 <td style="color: var(--slate-900); font-weight: 800; padding-top: 8px;">Quoted Price:</td>
@@ -1505,7 +1870,7 @@
           </div>
         </div>
 
-        <div class="modal-footer">
+        <div class="modal-actions">
           <button type="button" class="btn-modal-close" onclick="closeModal()">
             Close Demo Preview
           </button>
@@ -1513,46 +1878,60 @@
       </div>
     </div>
 
-    <!-- VANILLA JAVASCRIPT LOGIC -->
+    <!-- SITE FOOTER -->
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div>
+          <strong style="color:var(--white);">Budget Skips Services Ltd</strong> — Unit 6 Crondal Road, Bayton Road Industrial Estate, Exhall, Coventry, CV7 9NH
+        </div>
+        <div>
+          Telephone: <a href="tel:02476363002" style="color:var(--white); text-decoration:none; font-weight:700;">024 7636 3002</a> • Environment Agency License CBDU105436
+        </div>
+      </div>
+    </footer>
+
+    <!-- ==========================================================================
+         VANILLA JAVASCRIPT LOGIC & PRICING CONFIG
+         ========================================================================== -->
     <script>
       // ========================================================================
-      // PRICING RULES CONFIGURATION (ALL IN ONE OBJECT FOR SAMMY)
+      // 1. ALL PRICING CONFIG IN ONE OBJECT (FOR SAMMY TO UPDATE EASILY)
       // ========================================================================
       const PRICING_CONFIG = {
         // Base prices by skip size (ex VAT)
         skips: {
           "4yd": {
             id: "4yd",
-            name: "4 Yard Skip",
-            capacity: "~30 black bags",
+            name: "4 Yard Mini Skip",
+            capacity: "~30-40 black bags (6.9ft × 5.5ft × 3.0ft)",
             price: 150,
             allowsHeavy: true
           },
           "6yd": {
             id: "6yd",
-            name: "6 Yard Skip",
-            capacity: "~55 black bags",
+            name: "6 Yard Small Builders Skip",
+            capacity: "~55-60 black bags (8.5ft × 5.0ft × 3.5ft)",
             price: 190,
             allowsHeavy: true
           },
           "8yd": {
             id: "8yd",
-            name: "8 Yard Skip",
-            capacity: "~75 black bags",
+            name: "8 Yard Large Builders Skip",
+            capacity: "~75-80 black bags (10.0ft × 5.5ft × 4.0ft)",
             price: 230,
-            allowsHeavy: false
+            allowsHeavy: false // Disallow >6yd for heavy waste
           },
           "12yd": {
             id: "12yd",
-            name: "12 Yard Skip",
-            capacity: "~115 black bags",
+            name: "12 Yard Maxi Skip",
+            capacity: "~115-120 black bags (12.5ft × 6.0ft × 5.0ft)",
             price: 320,
             allowsHeavy: false
           },
           "16yd": {
             id: "16yd",
-            name: "16 Yard Skip",
-            capacity: "~150 black bags",
+            name: "16 Yard Maxi Skip",
+            capacity: "~150 black bags (13.5ft × 6.0ft × 6.5ft)",
             price: 420,
             allowsHeavy: false
           }
@@ -1576,34 +1955,37 @@
             id: "heavy",
             name: "Heavy Waste (Soil & Rubble)",
             modifier: 0,
-            allowsHeavy: false // Disables >6yd
+            allowsHeavy: false // Disables 8yd, 12yd, 16yd
           }
         },
 
-        // Delivery Postcode Zones
+        // Delivery Postcode Zones (Centered around Bayton Road Depot, CV7 9NH)
         zones: {
+          // Zone A: Free delivery within ~10 mile radius (Coventry, Bedworth, Nuneaton)
           zoneA: {
             id: "zoneA",
             name: "Zone A (Local)",
             deliveryFee: 0,
             label: "Free delivery from our Bayton Road depot",
-            // Zone A: CV1-CV8, CV10, CV12
-            outcodes: ["CV1", "CV2", "CV3", "CV4", "CV5", "CV6", "CV7", "CV8", "CV10", "CV12"]
+            outcodes: ["CV1", "CV2", "CV3", "CV4", "CV5", "CV6", "CV7", "CV8", "CV10", "CV11", "CV12"]
           },
+          // Zone B: Outer Warwickshire & border areas (+£25 delivery fee)
           zoneB: {
             id: "zoneB",
             name: "Zone B (Outer Warwickshire)",
             deliveryFee: 25,
             label: "+£25 delivery fee",
-            // Zone B: CV9, CV11, CV13, CV21-CV23, CV31-CV35
-            outcodes: ["CV9", "CV11", "CV13", "CV21", "CV22", "CV23", "CV31", "CV32", "CV33", "CV34", "CV35"]
+            outcodes: [
+              "CV9", "CV13", "CV21", "CV22", "CV23", "CV31", "CV32", "CV33", "CV34", "CV35", "CV36", "CV37", "CV47",
+              "B46", "B91", "B92"
+            ]
           }
         },
 
-        // Road permit fee (ex VAT)
+        // Council road permit fee (ex VAT)
         roadPermitFee: 45,
 
-        // VAT rate (20%)
+        // UK Standard VAT rate (20%)
         vatRate: 0.20,
 
         // Initial default selections on page load
@@ -1619,7 +2001,7 @@
       };
 
       // ========================================================================
-      // STATE MANAGEMENT
+      // 2. STATE MANAGEMENT
       // ========================================================================
       let state = {
         postcode: PRICING_CONFIG.defaults.postcode,
@@ -1629,7 +2011,7 @@
         deliveryDate: "",
         name: "",
         phone: "",
-        currentPriceTotal: 228 // start with default total for count-up animation
+        currentPriceTotal: 228 // start with default £228 for smooth animation
       };
 
       // Set default delivery date to tomorrow
@@ -1644,22 +2026,39 @@
       }
 
       // ========================================================================
-      // POSTCODE VALIDATION & ZONE LOOKUP
+      // 3. BULLETPROOF UK POSTCODE & OUTCODE EXTRACTOR
       // ========================================================================
+      function extractOutcode(raw) {
+        if (!raw) return "";
+        const trimmed = raw.trim().toUpperCase();
+        
+        // If there's a space (e.g. "CV6 4AB"), outward code is the first part: "CV6"
+        if (trimmed.includes(" ")) {
+          return trimmed.split(/\s+/)[0];
+        }
+
+        // If without spaces (e.g. "CV64AB" or "CV115TH"):
+        // UK inward code is always 3 characters (1 digit + 2 letters). If length >= 5:
+        if (trimmed.length >= 5 && /[0-9][A-Z]{2}$/.test(trimmed)) {
+          return trimmed.slice(0, -3);
+        }
+
+        // If user typed only outward code (e.g. "CV6", "CV11", "B46")
+        const match = trimmed.match(/^([A-Z]{1,2}[0-9]{1,2})/);
+        return match ? match[1] : trimmed;
+      }
+
       function evaluatePostcode(rawPostcode) {
         if (!rawPostcode || rawPostcode.trim() === "") {
           return { status: "empty" };
         }
-        const clean = rawPostcode.trim().toUpperCase().replace(/\s+/g, "");
-        
-        // Extract outcode (e.g. CV6 from CV64AB or CV11 from CV115TH)
-        const match = clean.match(/^([A-Z]{1,2}[0-9]{1,2}[A-Z]?)/i);
-        if (!match) {
+
+        const outcode = extractOutcode(rawPostcode);
+        if (!outcode) {
           return { status: "invalid" };
         }
 
-        const outcode = match[1].toUpperCase();
-
+        // Check Zone A (Free delivery)
         if (PRICING_CONFIG.zones.zoneA.outcodes.includes(outcode)) {
           return {
             status: "valid",
@@ -1670,6 +2069,7 @@
           };
         }
 
+        // Check Zone B (£25 delivery)
         if (PRICING_CONFIG.zones.zoneB.outcodes.includes(outcode)) {
           return {
             status: "valid",
@@ -1680,16 +2080,16 @@
           };
         }
 
-        // Any other postcode
+        // Any other postcode outside usual service area
         return {
           status: "out_of_area",
           outcode: outcode,
-          message: "Outside our usual area, please call 024 7636 3002"
+          message: "Outside our usual Coventry & Warwickshire delivery area, please call 024 7636 3002"
         };
       }
 
       // ========================================================================
-      // CALCULATION & RENDER LOGIC
+      // 4. CALCULATION & RENDER ENGINE
       // ========================================================================
       let postcodeDebounceTimer = null;
       let lastAnnouncedPrice = null;
@@ -1703,12 +2103,12 @@
         const priceCard = document.getElementById("priceCard");
         const mobilePriceVal = document.getElementById("mobilePriceVal");
 
-        // 1. Update Postcode UI Message
+        // 1. Update Postcode UI feedback
         if (postcodeEval.status === "valid") {
           postcodeStatusEl.style.display = "flex";
           postcodeStatusEl.className = "postcode-status " + (postcodeEval.zone === "zoneA" ? "status-zoneA" : "status-zoneB");
           postcodeStatusEl.innerHTML = `
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
               <polyline points="20 6 9 17 4 12"></polyline>
             </svg>
             <span>${postcodeEval.label}</span>
@@ -1717,8 +2117,13 @@
           postcodeStatusEl.style.display = "flex";
           postcodeStatusEl.className = "postcode-status status-out-of-area";
           postcodeStatusEl.innerHTML = `
-            <span>⚠️ Outside our usual Coventry &amp; Warwickshire delivery area.</span>
-            <a href="tel:${PRICING_CONFIG.contactPhoneRaw}">Call ${PRICING_CONFIG.contactPhone} for custom quote</a>
+            <span>⚠️ <strong>${postcodeEval.outcode}</strong> is outside our usual Coventry &amp; Warwickshire delivery area.</span>
+            <a href="tel:${PRICING_CONFIG.contactPhoneRaw}">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              <span>Call ${PRICING_CONFIG.contactPhone} for custom quote</span>
+            </a>
           `;
         } else {
           postcodeStatusEl.style.display = "none";
@@ -1727,13 +2132,15 @@
         // 2. Handle Heavy Waste Size Restrictions
         const isHeavy = state.wasteType === "heavy";
         const heavyNotice = document.getElementById("heavyNotice");
-        heavyNotice.style.display = isHeavy ? "block" : "none";
+        if (heavyNotice) {
+          heavyNotice.style.display = isHeavy ? "flex" : "none";
+        }
 
         const skipCards = document.querySelectorAll("#skipSizeGrid .selectable-card");
         skipCards.forEach((card) => {
           const skipId = card.getAttribute("data-skip");
           const skipConfig = PRICING_CONFIG.skips[skipId];
-          const badge = card.querySelector(".disabled-badge");
+          const badge = card.querySelector(".card-disabled-notice");
 
           if (isHeavy && !skipConfig.allowsHeavy) {
             card.classList.add("disabled");
@@ -1750,24 +2157,22 @@
           syncCardSelection("#skipSizeGrid", "data-skip", "6yd");
         }
 
-        // 3. Price Calculation
+        // 3. Price Display Logic
         if (postcodeEval.status === "out_of_area") {
-          // Show out of area message, NO price
           priceDisplayArea.style.display = "none";
           incompletePostcodeBox.style.display = "none";
           outOfAreaBox.style.display = "block";
           document.getElementById("breakdownList").style.opacity = "0.35";
-          mobilePriceVal.innerHTML = `<span style="font-size:13px;color:#be123c;">Call For Quote</span>`;
+          mobilePriceVal.innerHTML = `<span style="font-size:13px;color:#be123c;font-weight:700;">Call For Quote</span>`;
           return;
         }
 
         if (postcodeEval.status === "invalid" || postcodeEval.status === "empty") {
-          // Incomplete postcode
           priceDisplayArea.style.display = "none";
           incompletePostcodeBox.style.display = "block";
           outOfAreaBox.style.display = "none";
           document.getElementById("breakdownList").style.opacity = "0.35";
-          mobilePriceVal.innerHTML = `<span style="font-size:13px;color:var(--slate-500);">Enter Postcode</span>`;
+          mobilePriceVal.innerHTML = `<span style="font-size:13px;color:var(--slate-500);font-weight:700;">Enter Postcode</span>`;
           return;
         }
 
@@ -1786,19 +2191,19 @@
         const vatAmount = subtotalExVat * PRICING_CONFIG.vatRate;
         const totalIncVat = subtotalExVat + vatAmount;
 
-        // 4. Animate Price Change
+        // 4. Animate Price Change (300ms roll)
         const prevPrice = state.currentPriceTotal;
         const targetPrice = Math.round(totalIncVat);
         state.currentPriceTotal = targetPrice;
 
         animatePrice(prevPrice, targetPrice, 300);
 
-        // Flash panel highlight
-        priceCard.classList.remove("highlight");
+        // Flash panel pulse
+        priceCard.classList.remove("pulse-highlight");
         void priceCard.offsetWidth; // trigger reflow
-        priceCard.classList.add("highlight");
+        priceCard.classList.add("pulse-highlight");
 
-        // 5. Update Breakdown List
+        // 5. Update Itemized Breakdown List
         const formatMoney = (val) => "£" + val.toFixed(2);
 
         document.getElementById("bdSkipName").textContent = skip.name;
@@ -1807,7 +2212,7 @@
         document.getElementById("bdWasteName").textContent = waste.name;
         if (waste.modifier < 0) {
           document.getElementById("bdWastePrice").textContent = "-£" + Math.abs(waste.modifier).toFixed(2);
-          document.getElementById("bdWastePrice").style.color = "var(--emerald-700)";
+          document.getElementById("bdWastePrice").style.color = "var(--emerald-600)";
         } else {
           document.getElementById("bdWastePrice").textContent = "£0.00";
           document.getElementById("bdWastePrice").style.color = "inherit";
@@ -1822,19 +2227,19 @@
           document.getElementById("bdDeliveryPrice").style.color = "inherit";
         }
 
-        document.getElementById("bdPermitName").textContent = state.onRoad ? "Road Permit (Coventry Council)" : "Road Permit";
-        document.getElementById("bdPermitPrice").textContent = state.onRoad ? formatMoney(permitFee) : "None (£0.00)";
+        document.getElementById("bdPermitName").textContent = state.onRoad ? "Council Permit" : "Placement";
+        document.getElementById("bdPermitPrice").textContent = state.onRoad ? formatMoney(permitFee) : "Driveway (Free)";
 
         document.getElementById("bdSubtotal").textContent = formatMoney(subtotalExVat);
         document.getElementById("bdVat").textContent = formatMoney(vatAmount);
         document.getElementById("bdTotal").textContent = formatMoney(totalIncVat);
 
-        // Update mobile bottom bar & drawer
+        // Update mobile bottom bar & slide-up drawer
         mobilePriceVal.innerHTML = `£${targetPrice} <small>inc. VAT</small>`;
         document.getElementById("drawerTotalDisplay").innerHTML = `${formatMoney(totalIncVat)} <span style="font-size: 13px; font-weight: 700; color: var(--slate-500); text-transform: uppercase;">inc. VAT</span>`;
         document.getElementById("drawerBreakdownList").innerHTML = document.getElementById("breakdownList").innerHTML;
 
-        // Debounce aria-live announcement so screen readers aren't overwhelmed
+        // Polite debounced screen reader announcement
         clearTimeout(window.__ariaTimer);
         window.__ariaTimer = setTimeout(() => {
           if (lastAnnouncedPrice !== targetPrice) {
@@ -1848,7 +2253,7 @@
       }
 
       // ========================================================================
-      // COUNT-UP ANIMATION FOR 64PX PRICE
+      // 5. PRICE COUNT-UP ANIMATION (300ms)
       // ========================================================================
       function animatePrice(startVal, endVal, duration = 300) {
         const el = document.getElementById("priceNumber");
@@ -1878,7 +2283,7 @@
       }
 
       // ========================================================================
-      // CARD SELECTION HELPERS
+      // 6. CARD SELECTION HELPERS
       // ========================================================================
       function syncCardSelection(containerSelector, dataAttr, selectedValue) {
         const cards = document.querySelectorAll(`${containerSelector} .selectable-card`);
@@ -1913,11 +2318,35 @@
         });
       }
 
+      // Quick postcode test buttons
+      function setPostcodeSample(pc) {
+        const input = document.getElementById("postcode");
+        if (input) {
+          input.value = pc;
+          state.postcode = pc;
+          document.getElementById("postcodeError").style.display = "none";
+          calculateAndRender();
+        }
+      }
+
+      // Quick date chips
+      function setQuickDate(daysAhead) {
+        const d = new Date();
+        d.setDate(d.getDate() + daysAhead);
+        const str = d.toISOString().split("T")[0];
+        const input = document.getElementById("deliveryDate");
+        if (input) {
+          input.value = str;
+          state.deliveryDate = str;
+          document.getElementById("dateError").style.display = "none";
+        }
+      }
+
       // ========================================================================
-      // INITIALIZATION & EVENT LISTENERS
+      // 7. INITIALIZATION & LISTENERS
       // ========================================================================
       document.addEventListener("DOMContentLoaded", () => {
-        // Postcode Input Debounce
+        // Postcode debounced input
         const postcodeInput = document.getElementById("postcode");
         if (postcodeInput) {
           postcodeInput.addEventListener("input", (e) => {
@@ -1926,7 +2355,7 @@
               state.postcode = e.target.value.trim();
               document.getElementById("postcodeError").style.display = "none";
               calculateAndRender();
-            }, 250);
+            }, 200);
           });
         }
 
@@ -1953,7 +2382,7 @@
           });
         }
 
-        // Name & Phone inputs
+        // Customer Details
         const nameInput = document.getElementById("custName");
         if (nameInput) {
           nameInput.addEventListener("input", (e) => {
@@ -1970,12 +2399,12 @@
           });
         }
 
-        // Initial Calculation on load
+        // Perform initial calculation on load immediately
         calculateAndRender();
       });
 
       // ========================================================================
-      // MOBILE DRAWER OPEN / CLOSE
+      // 8. MOBILE DRAWER CONTROLS
       // ========================================================================
       function openDrawer() {
         document.getElementById("drawerOverlay").classList.add("active");
@@ -1983,14 +2412,14 @@
       }
 
       function closeDrawer(e) {
-        if (!e || e.target.id === "drawerOverlay" || e.target.classList.contains("btn-drawer-close")) {
+        if (!e || e.target.id === "drawerOverlay" || e.target.classList.contains("btn-close-drawer")) {
           document.getElementById("drawerOverlay").classList.remove("active");
           document.body.style.overflow = "";
         }
       }
 
       // ========================================================================
-      // REQUEST SUBMISSION & EMAIL PREVIEW MODAL
+      // 9. SUBMISSION & REALISTIC DISPATCH EMAIL PREVIEW
       // ========================================================================
       function handleRequestSubmit() {
         let hasError = false;
@@ -1999,7 +2428,7 @@
         const postcodeEval = evaluatePostcode(state.postcode);
         const postcodeError = document.getElementById("postcodeError");
         if (postcodeEval.status !== "valid") {
-          postcodeError.textContent = "Please enter a valid Coventry/Warwickshire postcode (e.g. CV6 4AB).";
+          postcodeError.textContent = "Please enter a valid Coventry or Warwickshire postcode (e.g. CV6 4AB).";
           postcodeError.style.display = "block";
           document.getElementById("postcode").focus();
           hasError = true;
@@ -2024,7 +2453,7 @@
         const nameError = document.getElementById("nameError");
         const nameVal = document.getElementById("custName").value.trim();
         if (!nameVal) {
-          nameError.textContent = "Please enter your name.";
+          nameError.textContent = "Please enter your full name.";
           nameError.style.display = "block";
           document.getElementById("custName").focus();
           hasError = true;
@@ -2034,12 +2463,12 @@
           state.name = nameVal;
         }
 
-        // Validate Phone
+        // Validate Phone (Accepts UK phone formats)
         const phoneError = document.getElementById("phoneError");
         const phoneVal = document.getElementById("custPhone").value.trim();
         const ukPhoneRegex = /^(?:\+44\s?|0)(?:[1-9]\d{2,4}\s?\d{3,4}\s?\d{3,4}|[1-9]\d{8,10})$/;
-        if (!phoneVal || !ukPhoneRegex.test(phoneVal.replace(/\s+/g, ""))) {
-          phoneError.textContent = "Please enter a valid contact phone number (e.g. 024 7636 3002).";
+        if (!phoneVal || !ukPhoneRegex.test(phoneVal.replace(/[\s-]/g, ""))) {
+          phoneError.textContent = "Please enter a valid UK contact telephone number (e.g. 024 7636 3002).";
           phoneError.style.display = "block";
           document.getElementById("custPhone").focus();
           hasError = true;

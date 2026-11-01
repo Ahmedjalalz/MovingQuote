@@ -10,6 +10,7 @@ import { UnityWasteQuotePage } from "@/pages/UnityWasteQuotePage";
 import { AldhouseAndSmithQuotePage } from "@/pages/AldhouseAndSmithQuotePage";
 import { FrontlineTransportQuotePage } from "@/pages/FrontlineTransportQuotePage";
 import { BudgetSkipsCoventryQuotePage } from "@/pages/BudgetSkipsCoventryQuotePage";
+import { Roads2RoadsQuotePage } from "@/pages/Roads2RoadsQuotePage";
 
 const ASSURANCES = [
   {
@@ -111,11 +112,30 @@ function checkIsFrontlineRoute(): boolean {
   );
 }
 
+function checkIsRoads2RoadsRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/roads2roads") ||
+    path.startsWith("/r2r") ||
+    hash.includes("roads2roads") ||
+    hash.includes("r2r") ||
+    params.get("page") === "roads2roads" ||
+    params.get("page") === "r2r" ||
+    params.get("route") === "roads2roads" ||
+    params.get("route") === "r2r"
+  );
+}
+
 export function App() {
   const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
   const [isAldhouse, setIsAldhouse] = useState(checkIsAldhouseRoute);
   const [isFrontline, setIsFrontline] = useState(checkIsFrontlineRoute);
   const [isBudgetSkips, setIsBudgetSkips] = useState(checkIsBudgetSkipsRoute);
+  const [isRoads2Roads, setIsRoads2Roads] = useState(checkIsRoads2RoadsRoute);
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
 
   useEffect(() => {
@@ -124,6 +144,7 @@ export function App() {
       setIsAldhouse(checkIsAldhouseRoute());
       setIsFrontline(checkIsFrontlineRoute());
       setIsBudgetSkips(checkIsBudgetSkipsRoute());
+      setIsRoads2Roads(checkIsRoads2RoadsRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
@@ -167,6 +188,11 @@ export function App() {
       // fallback
     }
   };
+
+  // Route: /roads2roads
+  if (isRoads2Roads) {
+    return <Roads2RoadsQuotePage />;
+  }
 
   // Route: /budgetskipscoventry
   if (isBudgetSkips) {
@@ -254,6 +280,26 @@ export function App() {
                       className="mt-5 inline-flex border-b border-accent pb-1 text-sm font-semibold hover:text-accent transition-colors"
                     >
                       021 100 9045
+                    </a>
+                  </div>
+
+                  {/* Route Link to Roads2Roads Couriers */}
+                  <div className="mt-4 p-4 rounded-2xl border border-[#25AAE1]/40 bg-sky-50/70 text-xs text-foreground/85 flex items-center justify-between">
+                    <span>Looking for 24/7 Same-Day Courier &amp; Pallet Freight?</span>
+                    <a
+                      href="/roads2roads"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.history.pushState({}, "", "/roads2roads");
+                        setIsRoads2Roads(true);
+                        setIsFrontline(false);
+                        setIsAldhouse(false);
+                        setIsUnity(false);
+                        window.scrollTo({ top: 0, behavior: "smooth" });
+                      }}
+                      className="font-bold text-[#007cb0] hover:underline flex items-center gap-1"
+                    >
+                      <span>Roads2Roads Couriers →</span>
                     </a>
                   </div>
 
