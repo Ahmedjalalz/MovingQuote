@@ -4,6 +4,14 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/officemovinginternational",
+      "destination": "/officemovinginternational/index.html"
+    },
+    {
+      "source": "/officemovinginternational/(.*)",
+      "destination": "/officemovinginternational/index.html"
+    },
+    {
       "source": "/movemanltd.com",
       "destination": "/movemanltd.com/index.html"
     },

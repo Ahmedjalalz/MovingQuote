@@ -58,6 +58,11 @@ function copyFallbacks(): Plugin {
       if (fs.existsSync(movemanIndex)) {
         fs.copyFileSync(movemanIndex, movemanHtml);
       }
+      const omiIndex = path.join(distDir, "officemovinginternational", "index.html");
+      const omiHtml = path.join(distDir, "officemovinginternational.html");
+      if (fs.existsSync(omiIndex)) {
+        fs.copyFileSync(omiIndex, omiHtml);
+      }
     },
   };
 }
@@ -82,6 +87,7 @@ export default defineConfig({
         radicalcourier: path.resolve(__dirname, "radicalcourier/index.html"),
         "movemanltd.com": path.resolve(__dirname, "movemanltd.com/index.html"),
         movemanltd: path.resolve(__dirname, "movemanltd/index.html"),
+        officemovinginternational: path.resolve(__dirname, "officemovinginternational/index.html"),
       },
     },
   },

@@ -1,6 +1,8 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+  RewriteRule ^officemovinginternational/?$ /officemovinginternational/index.html [L]
+  RewriteRule ^officemovinginternational/(.*)$ /officemovinginternational/index.html [L]
   RewriteRule ^movemanltd\.com/?$ /movemanltd.com/index.html [L]
   RewriteRule ^movemanltd\.com/(.*)$ /movemanltd.com/index.html [L]
   RewriteRule ^movemanltd/?$ /movemanltd/index.html [L]

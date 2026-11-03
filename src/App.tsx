@@ -14,6 +14,7 @@ import { Roads2RoadsQuotePage } from "@/pages/Roads2RoadsQuotePage";
 import { RavensOakCaravanStoragePage } from "@/pages/RavensOakCaravanStoragePage";
 import { RadicalCourierPage } from "@/pages/RadicalCourierPage";
 import { MoveManQuotePage } from "@/pages/MoveManQuotePage";
+import { OfficeMovingInternationalPage } from "@/pages/OfficeMovingInternationalPage";
 
 const ASSURANCES = [
   {
@@ -193,7 +194,26 @@ function checkIsMoveManRoute(): boolean {
   );
 }
 
+function checkIsOmiRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/officemovinginternational") ||
+    path.startsWith("/omi") ||
+    hash.includes("officemovinginternational") ||
+    hash.includes("omi") ||
+    params.get("page") === "officemovinginternational" ||
+    params.get("page") === "omi" ||
+    params.get("route") === "officemovinginternational" ||
+    params.get("route") === "omi"
+  );
+}
+
 export function App() {
+  const [isOmi, setIsOmi] = useState(checkIsOmiRoute);
   const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
   const [isAldhouse, setIsAldhouse] = useState(checkIsAldhouseRoute);
   const [isFrontline, setIsFrontline] = useState(checkIsFrontlineRoute);
@@ -206,6 +226,7 @@ export function App() {
 
   useEffect(() => {
     const handleLocationChange = () => {
+      setIsOmi(checkIsOmiRoute());
       setIsUnity(checkIsUnityRoute());
       setIsAldhouse(checkIsAldhouseRoute());
       setIsFrontline(checkIsFrontlineRoute());
@@ -257,6 +278,11 @@ export function App() {
       // fallback
     }
   };
+
+  // Route: /officemovinginternational
+  if (isOmi) {
+    return <OfficeMovingInternationalPage />;
+  }
 
   // Route: /movemanltd.com
   if (isMoveMan) {
