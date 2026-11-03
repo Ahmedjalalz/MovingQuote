@@ -56,13 +56,13 @@ export const MOVEMAN_MODES: Array<{
   {
     id: "storage_crates",
     label: "Packing & Storage",
-    badge: "Crates & Warehousing",
+    badge: "Crates & Storage",
     icon: Package,
   },
   {
     id: "machinery_clearance",
     label: "Clearance & Recycling",
-    badge: "WEEE & Machinery",
+    badge: "WEEE & Plant",
     icon: Recycle,
   },
 ];
@@ -318,13 +318,13 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
     return (
       <div
         className={cn(
-          "rounded-3xl border border-slate-200/90 bg-white p-7 sm:p-10 md:p-12 shadow-xl ring-1 ring-slate-900/5 animate-in fade-in zoom-in-95 duration-500",
+          "rounded-3xl border border-slate-200/90 bg-white p-5 sm:p-9 md:p-12 shadow-xl ring-1 ring-slate-900/5 animate-in fade-in zoom-in-95 duration-500",
           className
         )}
       >
         <div className="max-w-xl mx-auto text-center space-y-6">
-          <div className="inline-flex size-20 items-center justify-center rounded-full bg-[#8DC63F]/20 text-[#8DC63F] border-2 border-[#8DC63F]">
-            <CheckCircle2 className="size-10" />
+          <div className="inline-flex size-16 sm:size-20 items-center justify-center rounded-full bg-[#8DC63F]/20 text-[#8DC63F] border-2 border-[#8DC63F]">
+            <CheckCircle2 className="size-8 sm:size-10" />
           </div>
 
           <div className="space-y-2">
@@ -334,12 +334,12 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
             <h2 className="font-['Barlow',sans-serif] text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               Thank You, {contactName || "Valued Client"}
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
+            <p className="text-xs sm:text-base text-slate-600 leading-relaxed">
               Your relocation enquiry for <strong>{companyName}</strong> has been assigned to a Senior Move Manager at Move Management Asset Removals Ltd.
             </p>
           </div>
 
-          <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 sm:grid-cols-2 text-left">
+          <dl className="mt-6 grid gap-px overflow-hidden rounded-2xl border border-slate-200 bg-slate-200 grid-cols-1 sm:grid-cols-2 text-left">
             {[
               { term: "Relocation Category", value: MOVEMAN_MODES.find((m) => m.id === activeMode)?.label },
               { term: "Selected Services", value: selectedServices.join(", ") },
@@ -361,7 +361,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
               { term: "Company / Client", value: `${companyName} (${contactName})` },
               { term: "Contact Phone", value: phone },
             ].map((row) => (
-              <div key={row.term} className="bg-white p-4">
+              <div key={row.term} className="bg-white p-3.5 sm:p-4">
                 <dt className="text-xs font-bold tracking-wider text-slate-500 uppercase">
                   {row.term}
                 </dt>
@@ -400,17 +400,17 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "rounded-3xl border border-slate-200/90 bg-white p-6 sm:p-9 md:p-11 shadow-xl ring-1 ring-slate-900/5",
+        "rounded-3xl border border-slate-200/90 bg-white p-4 sm:p-7 md:p-10 shadow-xl ring-1 ring-slate-900/5",
         className
       )}
     >
       {/* 1. Header with Eyebrow, Title and Subtitle */}
-      <div className="space-y-2 pb-6 border-b border-slate-100">
-        <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 border border-slate-200 px-3.5 py-1 text-xs font-bold text-slate-800 uppercase tracking-wider">
+      <div className="space-y-1.5 pb-5 border-b border-slate-100">
+        <div className="inline-flex items-center gap-2 rounded-full bg-slate-100 border border-slate-200 px-3 py-1 text-xs font-bold text-slate-800 uppercase tracking-wider">
           <span className="size-2 rounded-full bg-[#8DC63F] animate-pulse" />
           <span>Move Management Asset Removals Ltd &bull; UK Nationwide</span>
         </div>
-        <h2 className="font-['Barlow',sans-serif] text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+        <h2 className="font-['Barlow',sans-serif] text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">
           Get a Fast Fixed-Price Commercial Quote
         </h2>
         <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-xl">
@@ -418,19 +418,19 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} noValidate className="mt-7 space-y-7">
-        {/* Step 1: Relocation Category Selector (Spacious & Crisp, based on the project's mode design) */}
+      <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-6 sm:space-y-7">
+        {/* Step 1: Relocation Category Selector */}
         <div className="space-y-2.5">
           <div className="flex items-center justify-between">
             <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase">
               1. Select Relocation Category
             </label>
-            <span className="text-xs font-semibold text-slate-500">
+            <span className="hidden xs:inline text-xs font-semibold text-slate-500">
               Click to switch service stream
             </span>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
             {MOVEMAN_MODES.map((item) => {
               const Icon = item.icon;
               const isSelected = activeMode === item.id;
@@ -440,7 +440,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                   type="button"
                   onClick={() => handleModeChange(item.id)}
                   className={cn(
-                    "flex flex-col items-center justify-center p-3 sm:p-3.5 rounded-2xl text-center transition-all duration-200 cursor-pointer min-h-[82px] sm:min-h-[88px] group select-none",
+                    "flex flex-col items-center justify-center p-2.5 sm:p-3.5 rounded-2xl text-center transition-all duration-200 cursor-pointer min-h-[76px] sm:min-h-[86px] group select-none",
                     isSelected
                       ? "border-2 border-[#8DC63F] bg-[#8DC63F]/12 text-slate-950 ring-2 ring-[#8DC63F]/20 shadow-2xs scale-[1.01]"
                       : "border border-slate-200/90 bg-white hover:border-[#8DC63F]/60 hover:bg-slate-50/70 text-slate-700 shadow-2xs"
@@ -448,22 +448,22 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 >
                   <span
                     className={cn(
-                      "size-8.5 rounded-xl flex items-center justify-center mb-1.5 transition-colors",
+                      "size-7.5 sm:size-8.5 rounded-xl flex items-center justify-center mb-1 transition-colors",
                       isSelected
                         ? "bg-[#8DC63F] text-slate-950 shadow-xs"
                         : "bg-slate-100 text-slate-600 group-hover:bg-[#8DC63F]/20 group-hover:text-slate-950"
                     )}
                   >
-                    <Icon className="size-4.5 stroke-[2.2]" />
+                    <Icon className="size-4 sm:size-4.5 stroke-[2.2]" />
                   </span>
 
-                  <span className="text-xs sm:text-[0.8125rem] font-bold text-slate-900 leading-tight block">
+                  <span className="text-xs sm:text-[0.8125rem] font-bold text-slate-900 leading-tight block truncate max-w-full">
                     {item.label}
                   </span>
 
                   <span
                     className={cn(
-                      "text-[0.625rem] sm:text-[0.6875rem] font-medium mt-0.5 block",
+                      "text-[0.625rem] sm:text-[0.6875rem] font-medium mt-0.5 block truncate max-w-full",
                       isSelected ? "text-[#5e8b23] font-semibold" : "text-slate-500"
                     )}
                   >
@@ -475,9 +475,9 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
           </div>
         </div>
 
-        {/* Step 2: Specific Services & Project Scale (Spacious 2-column layout) */}
-        <div className="grid gap-6 sm:grid-cols-2">
-          {/* Specific Services Popover (Multi-select from base project) */}
+        {/* Step 2: Specific Services & Project Scale */}
+        <div className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2">
+          {/* Specific Services Popover */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <label
@@ -504,13 +504,13 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                     type="button"
                     aria-labelledby="moveman-services-label"
                     className={cn(
-                      "flex w-full min-h-[50px] sm:min-h-[52px] items-center justify-between rounded-2xl border bg-white px-4 py-3 text-left text-sm font-medium outline-none transition-all duration-200 hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20 cursor-pointer shadow-2xs",
+                      "flex w-full min-h-[48px] sm:min-h-[52px] items-center justify-between rounded-2xl border bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-left text-sm font-medium outline-none transition-all duration-200 hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20 cursor-pointer shadow-2xs",
                       errors.services ? "border-red-400 focus:border-red-500" : "border-slate-200"
                     )}
                   >
                     <div className="flex flex-1 items-center gap-2 overflow-hidden pr-2">
                       {selectedServices.length === 0 ? (
-                        <span className="text-slate-400 font-normal">
+                        <span className="text-slate-400 font-normal truncate">
                           Select services (choose one or more)...
                         </span>
                       ) : selectedServices.length === 1 ? (
@@ -540,13 +540,13 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 <PopoverContent
                   align="start"
                   sideOffset={6}
-                  className="w-[calc(100vw-2.5rem)] sm:w-[420px] max-w-[460px] p-0 rounded-2xl border border-slate-200/90 bg-white shadow-2xl overflow-hidden z-50 ring-1 ring-slate-900/5"
+                  className="w-[calc(100vw-2rem)] sm:w-[420px] max-w-[460px] p-0 rounded-2xl border border-slate-200/90 bg-white shadow-2xl overflow-hidden z-50 ring-1 ring-slate-900/5"
                 >
-                  <div className="p-3.5 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
-                    <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                  <div className="p-3 sm:p-3.5 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
+                    <span className="text-xs font-bold text-slate-900 uppercase tracking-wider truncate pr-2">
                       {MOVEMAN_MODES.find((m) => m.id === activeMode)?.label} ({selectedServices.length} chosen)
                     </span>
-                    <div className="flex items-center gap-2.5">
+                    <div className="flex items-center gap-2 shrink-0">
                       <button
                         type="button"
                         onClick={selectAllServices}
@@ -568,13 +568,13 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                     </div>
                   </div>
 
-                  <div className="px-3.5 py-1.5 border-b border-slate-100 bg-[#8DC63F]/10">
+                  <div className="px-3 py-1.5 border-b border-slate-100 bg-[#8DC63F]/10">
                     <p className="text-[0.6875rem] font-medium text-slate-800">
                       💡 Check all the service elements your project requires
                     </p>
                   </div>
 
-                  <div className="p-2 space-y-1 max-h-64 overflow-y-auto">
+                  <div className="p-2 space-y-1 max-h-60 sm:max-h-64 overflow-y-auto">
                     {availableServices.map((item) => {
                       const isChecked = selectedServices.includes(item);
                       return (
@@ -585,7 +585,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                           role="checkbox"
                           aria-checked={isChecked}
                           className={cn(
-                            "flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-left text-sm transition-all duration-150 cursor-pointer select-none",
+                            "flex w-full items-center gap-2.5 sm:gap-3 rounded-xl px-2.5 sm:px-3 py-2 sm:py-2.5 text-left text-xs sm:text-sm transition-all duration-150 cursor-pointer select-none",
                             isChecked
                               ? "bg-[#8DC63F]/15 text-slate-950 font-semibold"
                               : "text-slate-700 hover:bg-slate-100 hover:text-slate-950"
@@ -601,7 +601,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                           >
                             {isChecked && <Check className="size-3 stroke-[3]" />}
                           </div>
-                          <span className="flex-1 text-xs sm:text-sm font-medium">{item}</span>
+                          <span className="flex-1 font-medium">{item}</span>
                         </button>
                       );
                     })}
@@ -626,13 +626,13 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
 
               {/* Selected Badges / Chips */}
               {selectedServices.length > 0 && (
-                <div className="mt-2.5 flex flex-wrap gap-1.5">
+                <div className="mt-2 flex flex-wrap gap-1.5">
                   {selectedServices.map((srv) => (
                     <span
                       key={srv}
                       className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 border border-slate-200/90 pl-3 pr-2 py-1 text-xs font-medium text-slate-800"
                     >
-                      <span className="truncate max-w-[220px]">{srv}</span>
+                      <span className="truncate max-w-[180px] sm:max-w-[220px]">{srv}</span>
                       <button
                         type="button"
                         onClick={() => toggleService(srv)}
@@ -675,20 +675,20 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
           </div>
         </div>
 
-        {/* Step 3: Locations & Delivery (Spacious 2-column layout) */}
+        {/* Step 3: Locations & Delivery */}
         <div className="space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b border-slate-100 pb-2.5">
             <span className="text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase">
               Relocation Locations &bull; UK Nationwide
             </span>
 
-            {/* Clean Segmented Delivery Option Pills */}
-            <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
+            {/* Responsive Delivery Option Pills */}
+            <div className="grid grid-cols-3 sm:flex items-center gap-1 bg-slate-100 p-1 rounded-xl border border-slate-200/80 w-full sm:w-auto">
               <button
                 type="button"
                 onClick={() => setDestinationType("address")}
                 className={cn(
-                  "px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer",
+                  "px-2 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer text-center truncate",
                   destinationType === "address"
                     ? "bg-white text-slate-900 shadow-2xs"
                     : "text-slate-600 hover:text-slate-900"
@@ -700,19 +700,19 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 type="button"
                 onClick={() => setDestinationType("storage")}
                 className={cn(
-                  "px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer",
+                  "px-2 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer text-center truncate",
                   destinationType === "storage"
                     ? "bg-[#8DC63F] text-slate-950 shadow-2xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
                 )}
               >
-                MoveMan Storage
+                Storage
               </button>
               <button
                 type="button"
                 onClick={() => setDestinationType("clearance")}
                 className={cn(
-                  "px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer",
+                  "px-2 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer text-center truncate",
                   destinationType === "clearance"
                     ? "bg-[#8DC63F] text-slate-950 shadow-2xs font-extrabold"
                     : "text-slate-600 hover:text-slate-900"
@@ -723,10 +723,10 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
             </div>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 pt-1">
+          <div className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2 pt-1">
             <MoveManLocationField
               label="Collection Address / UK Postcode *"
-              placeholder="e.g. Innovation Way, Stoke-on-Trent ST6 4BF or Manchester M1"
+              placeholder="e.g. Innovation Way, Stoke ST6 4BF or Manchester M1"
               value={pickup}
               onChange={(val) => {
                 setPickup(val);
@@ -751,7 +751,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-2">
                   Destination Facility
                 </label>
-                <div className="min-h-[50px] sm:min-h-[52px] rounded-2xl border border-[#8DC63F]/40 bg-[#8DC63F]/10 px-4 py-3 flex items-center gap-3">
+                <div className="min-h-[48px] sm:min-h-[52px] rounded-2xl border border-[#8DC63F]/40 bg-[#8DC63F]/10 px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-3">
                   <Warehouse className="size-5 text-slate-900 shrink-0" />
                   <p className="text-xs sm:text-[0.8125rem] text-slate-800 font-medium leading-snug">
                     Move into MoveMan secure, CCTV-monitored warehouse storage (Short or Long-Term).
@@ -763,7 +763,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-2">
                   Clearance Destination
                 </label>
-                <div className="min-h-[50px] sm:min-h-[52px] rounded-2xl border border-[#8DC63F]/40 bg-[#8DC63F]/10 px-4 py-3 flex items-center gap-3">
+                <div className="min-h-[48px] sm:min-h-[52px] rounded-2xl border border-[#8DC63F]/40 bg-[#8DC63F]/10 px-3.5 sm:px-4 py-2.5 sm:py-3 flex items-center gap-3">
                   <Recycle className="size-5 text-slate-900 shrink-0" />
                   <p className="text-xs sm:text-[0.8125rem] text-slate-800 font-medium leading-snug">
                     WEEE Certified electronics recycling &amp; zero-to-landfill furniture clearance (No delivery required).
@@ -774,8 +774,8 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
           </div>
         </div>
 
-        {/* Step 4: Building Access & Logistics (Spacious 2-column layout - NO congested 4-column squishing!) */}
-        <div className="grid gap-6 sm:grid-cols-2">
+        {/* Step 4: Building Access & Logistics */}
+        <div className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2">
           <div className="space-y-2">
             <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase">
               Collection Building &amp; Floor Access
@@ -817,8 +817,8 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
           </div>
         </div>
 
-        {/* Step 5: Schedule & Preferred Contact (Spacious 2-column layout) */}
-        <div className="grid gap-6 sm:grid-cols-2">
+        {/* Step 5: Schedule & Preferred Contact */}
+        <div className="grid gap-5 sm:gap-6 grid-cols-1 sm:grid-cols-2">
           {/* Target Move Date */}
           <div className="space-y-2">
             <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase">
@@ -830,13 +830,13 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                   type="button"
                   disabled={isFlexibleDate}
                   className={cn(
-                    "flex w-full min-h-[50px] sm:min-h-[52px] items-center justify-between rounded-2xl border bg-white px-4 py-3 text-left text-sm font-medium outline-none transition-all duration-200 hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20 cursor-pointer shadow-2xs",
+                    "flex w-full min-h-[48px] sm:min-h-[52px] items-center justify-between rounded-2xl border bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-left text-sm font-medium outline-none transition-all duration-200 hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20 cursor-pointer shadow-2xs",
                     isFlexibleDate
                       ? "opacity-60 bg-slate-100 cursor-not-allowed border-slate-200"
                       : "border-slate-200"
                   )}
                 >
-                  <span className={moveDate ? "text-slate-900 font-semibold" : "text-slate-400"}>
+                  <span className={moveDate ? "text-slate-900 font-semibold truncate pr-2" : "text-slate-400 truncate"}>
                     {moveDate ? format(moveDate, "EEEE, d MMMM yyyy") : "Select target date..."}
                   </span>
                   <CalendarDays className="size-4.5 shrink-0 text-[#8DC63F]" />
@@ -859,7 +859,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
               </PopoverContent>
             </Popover>
 
-            <div className="flex items-center justify-between pt-1 text-xs text-slate-600">
+            <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1.5 pt-1 text-xs text-slate-600">
               <label className="flex items-center gap-1.5 cursor-pointer font-medium hover:text-slate-900">
                 <input
                   type="checkbox"
@@ -870,7 +870,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                   }}
                   className="size-3.5 rounded-sm border-slate-300 text-[#8DC63F] accent-[#8DC63F]"
                 />
-                <span>Flexible / Phased Dates</span>
+                <span>Flexible Dates</span>
               </label>
 
               <label className="flex items-center gap-1.5 cursor-pointer font-medium hover:text-slate-900">
@@ -880,7 +880,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                   onChange={(e) => setIsOutOfHours(e.target.checked)}
                   className="size-3.5 rounded-sm border-slate-300 text-[#8DC63F] accent-[#8DC63F]"
                 />
-                <span>Weekend / Night Relocation</span>
+                <span>Weekend / Night</span>
               </label>
             </div>
           </div>
@@ -902,29 +902,29 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
               </MoveManSelectTrigger>
               <MoveManSelectContent>
                 <MoveManSelectItem value="phone">
-                  Phone Call &bull; Quick project discussion
+                  Phone Call &bull; Project discussion
                 </MoveManSelectItem>
                 <MoveManSelectItem value="email">
-                  Email &bull; Itemised commercial proposal
+                  Email &bull; Itemised proposal
                 </MoveManSelectItem>
               </MoveManSelectContent>
             </MoveManSelect>
 
-            <p className="text-[11px] text-slate-500 pt-1">
-              We respond within the same business day to all commercial quote requests.
+            <p className="text-[11px] text-slate-500 pt-0.5">
+              Same business day response guaranteed.
             </p>
           </div>
         </div>
 
-        {/* Step 6: Company & Contact Information (Spacious 2-column layout) */}
-        <div className="border-t border-slate-100 pt-6 space-y-5">
+        {/* Step 6: Company & Contact Information */}
+        <div className="border-t border-slate-100 pt-5 space-y-4">
           <span className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase">
             Organisation &amp; Contact Details
           </span>
 
-          <div className="grid gap-5 sm:grid-cols-2">
+          <div className="grid gap-4 sm:gap-5 grid-cols-1 sm:grid-cols-2">
             <div>
-              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-2">
+              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-1.5">
                 Company / Organisation Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -936,7 +936,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 }}
                 placeholder="e.g. Bet365, NHS Trust, University..."
                 className={cn(
-                  "w-full min-h-[50px] sm:min-h-[52px] rounded-2xl border bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
+                  "w-full min-h-[48px] sm:min-h-[52px] rounded-2xl border bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
                   "hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20",
                   errors.companyName ? "border-red-400 focus:border-red-500" : "border-slate-200"
                 )}
@@ -947,7 +947,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
             </div>
 
             <div>
-              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-2">
+              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-1.5">
                 Contact Person Name <span className="text-red-500">*</span>
               </label>
               <input
@@ -959,7 +959,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 }}
                 placeholder="e.g. Mike Dawson"
                 className={cn(
-                  "w-full min-h-[50px] sm:min-h-[52px] rounded-2xl border bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
+                  "w-full min-h-[48px] sm:min-h-[52px] rounded-2xl border bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
                   "hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20",
                   errors.contactName ? "border-red-400 focus:border-red-500" : "border-slate-200"
                 )}
@@ -970,7 +970,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
             </div>
 
             <div>
-              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-2">
+              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-1.5">
                 Telephone / Mobile Number <span className="text-red-500">*</span>
               </label>
               <input
@@ -983,7 +983,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 }}
                 placeholder="e.g. 0800 246 5642 or 07918 716165"
                 className={cn(
-                  "w-full min-h-[50px] sm:min-h-[52px] rounded-2xl border bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
+                  "w-full min-h-[48px] sm:min-h-[52px] rounded-2xl border bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
                   "hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20",
                   errors.phone ? "border-red-400 focus:border-red-500" : "border-slate-200"
                 )}
@@ -994,7 +994,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
             </div>
 
             <div>
-              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-2">
+              <label className="block text-xs sm:text-[0.8125rem] font-bold tracking-wider text-slate-800 uppercase mb-1.5">
                 Work Email Address <span className="text-red-500">*</span>
               </label>
               <input
@@ -1006,7 +1006,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
                 }}
                 placeholder="you@company.co.uk"
                 className={cn(
-                  "w-full min-h-[50px] sm:min-h-[52px] rounded-2xl border bg-white px-4 py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
+                  "w-full min-h-[48px] sm:min-h-[52px] rounded-2xl border bg-white px-3.5 sm:px-4 py-2.5 sm:py-3 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
                   "hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20",
                   errors.email ? "border-red-400 focus:border-red-500" : "border-slate-200"
                 )}
@@ -1035,7 +1035,7 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
             }}
             placeholder="Tell us about your team size, key dates, access restrictions, or crate hire requirements..."
             className={cn(
-              "w-full rounded-2xl border bg-white p-4 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
+              "w-full rounded-2xl border bg-white p-3.5 sm:p-4 text-sm font-medium text-slate-900 outline-none transition-all duration-200 placeholder:text-slate-400 shadow-2xs",
               "hover:border-slate-400 focus:border-[#8DC63F] focus:ring-4 focus:ring-[#8DC63F]/20",
               errors.notes ? "border-red-400 focus:border-red-500" : "border-slate-200"
             )}
@@ -1050,32 +1050,32 @@ export function MoveManQuoteWizard({ className }: { className?: string }) {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full min-h-[54px] sm:min-h-[58px] inline-flex items-center justify-center gap-3 rounded-2xl bg-[#8DC63F] hover:bg-[#7cb334] text-slate-950 font-extrabold uppercase tracking-wider text-base sm:text-lg shadow-md hover:shadow-lg transition-all active:scale-[0.99] cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+            className="w-full min-h-[50px] sm:min-h-[56px] inline-flex items-center justify-center gap-2.5 sm:gap-3 rounded-2xl bg-[#8DC63F] hover:bg-[#7cb334] text-slate-950 font-extrabold uppercase tracking-wider text-sm sm:text-base md:text-lg shadow-md hover:shadow-lg transition-all active:scale-[0.99] cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
           >
             {isSubmitting ? (
               <>
-                <Loader2 className="size-5 animate-spin" />
+                <Loader2 className="size-4.5 sm:size-5 animate-spin" />
                 <span>Preparing Fixed Proposal...</span>
               </>
             ) : (
               <>
                 <span>Request Free Commercial Proposal</span>
-                <ArrowRight className="size-5" />
+                <ArrowRight className="size-4 sm:size-5" />
               </>
             )}
           </button>
 
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-semibold text-slate-600">
+          <div className="mt-3.5 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs font-semibold text-slate-600">
             <span className="flex items-center gap-1.5">
               <ShieldCheck className="size-4 text-[#8DC63F]" />
               <span>100% Free &bull; Zero Obligation</span>
             </span>
-            <span className="text-slate-300">•</span>
+            <span className="text-slate-300 hidden sm:inline">•</span>
             <span className="flex items-center gap-1.5">
               <Clock className="size-4 text-[#8DC63F]" />
               <span>Same Business Day Response</span>
             </span>
-            <span className="text-slate-300">•</span>
+            <span className="text-slate-300 hidden sm:inline">•</span>
             <span className="flex items-center gap-1.5">
               <Sparkles className="size-4 text-[#8DC63F]" />
               <span>Zero Downtime Guaranteed</span>
