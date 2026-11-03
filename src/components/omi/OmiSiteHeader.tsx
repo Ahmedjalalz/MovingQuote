@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   Phone,
   Mail,
@@ -29,17 +29,8 @@ interface OmiSiteHeaderProps {
 }
 
 export function OmiSiteHeader({ activePage, onNavigate }: OmiSiteHeaderProps) {
-  const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [logoError, setLogoError] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const handleLinkClick = (page: OmiSubPage) => {
     onNavigate(page);
@@ -48,7 +39,7 @@ export function OmiSiteHeader({ activePage, onNavigate }: OmiSiteHeaderProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-50 w-full bg-white shadow-xs transition-all duration-300">
+      <header className="sticky top-0 z-50 w-full bg-white shadow-xs">
         {/* Top Corporate Strip */}
         <div className="bg-[#101B3B] text-white text-[11px] sm:text-xs py-2 px-3 sm:px-6 border-b border-[#1E2E5D]">
           <div className="container mx-auto max-w-7xl flex flex-col sm:flex-row items-center justify-between gap-2">
@@ -91,11 +82,7 @@ export function OmiSiteHeader({ activePage, onNavigate }: OmiSiteHeaderProps) {
         </div>
 
         {/* Main Navigation Bar */}
-        <div
-          className={`border-b border-slate-200 bg-white transition-all ${
-            isScrolled ? "py-2 sm:py-2.5 shadow-sm" : "py-3 sm:py-3.5"
-          }`}
-        >
+        <div className="border-b border-slate-200 bg-white py-3 sm:py-3.5">
           <div className="container mx-auto max-w-7xl flex items-center justify-between px-4 sm:px-6">
             {/* Brand Logo */}
             <button
