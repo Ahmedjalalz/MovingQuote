@@ -60,6 +60,18 @@ export const UK_COMMON_PLACES: Array<{ name: string; area: string; county: strin
   { name: "Redditch", area: "Redditch", county: "Worcestershire", postcode: "B97" },
   { name: "Burton-upon-Trent", area: "Burton", county: "Staffordshire", postcode: "DE14" },
 
+  // Stoke-on-Trent & Staffordshire (Move Management Asset Removals Ltd HQ)
+  { name: "The Genesis Centre, Innovation Way", area: "Stoke-on-Trent", county: "Staffordshire", postcode: "ST6 4BF" },
+  { name: "Stoke-on-Trent City Centre (Hanley)", area: "Stoke-on-Trent", county: "Staffordshire", postcode: "ST1" },
+  { name: "Tunstall", area: "Stoke-on-Trent", county: "Staffordshire", postcode: "ST6" },
+  { name: "Burslem", area: "Stoke-on-Trent", county: "Staffordshire", postcode: "ST6" },
+  { name: "Newcastle-under-Lyme", area: "Newcastle-under-Lyme", county: "Staffordshire", postcode: "ST5" },
+  { name: "Fenton", area: "Stoke-on-Trent", county: "Staffordshire", postcode: "ST4" },
+  { name: "Longton", area: "Stoke-on-Trent", county: "Staffordshire", postcode: "ST3" },
+  { name: "Trentham", area: "Stoke-on-Trent", county: "Staffordshire", postcode: "ST4" },
+  { name: "Keele University Campus", area: "Keele", county: "Staffordshire", postcode: "ST5 5BG" },
+  { name: "Leek", area: "Staffordshire Moorlands", county: "Staffordshire", postcode: "ST13" },
+
   // Cambridge & Cambridgeshire (Aldhouse & Smith home region)
   { name: "Waterbeach", area: "Waterbeach", county: "Cambridgeshire", postcode: "CB25" },
   { name: "Cambridge City Centre", area: "Cambridge", county: "Cambridgeshire", postcode: "CB1 / CB2" },

@@ -1,3 +1,9 @@
+/movemanltd.com          /movemanltd.com/index.html          200
+/movemanltd.com/*        /movemanltd.com/index.html          200
+/movemanltd              /movemanltd/index.html              200
+/movemanltd/*            /movemanltd/index.html              200
+/radicalcourier          /radicalcourier/index.html          200
+/radicalcourier/*        /radicalcourier/index.html          200
 /ravensoakecaravanstorage          /ravensoakecaravanstorage/index.html          200
 /ravensoakecaravanstorage/*        /ravensoakecaravanstorage/index.html          200
 /roads2roads          /roads2roads/index.html          200

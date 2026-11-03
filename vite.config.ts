@@ -43,6 +43,21 @@ function copyFallbacks(): Plugin {
       if (fs.existsSync(ravensIndex)) {
         fs.copyFileSync(ravensIndex, ravensHtml);
       }
+      const radicalIndex = path.join(distDir, "radicalcourier", "index.html");
+      const radicalHtml = path.join(distDir, "radicalcourier.html");
+      if (fs.existsSync(radicalIndex)) {
+        fs.copyFileSync(radicalIndex, radicalHtml);
+      }
+      const movemanComIndex = path.join(distDir, "movemanltd.com", "index.html");
+      const movemanComHtml = path.join(distDir, "movemanltd.com.html");
+      if (fs.existsSync(movemanComIndex)) {
+        fs.copyFileSync(movemanComIndex, movemanComHtml);
+      }
+      const movemanIndex = path.join(distDir, "movemanltd", "index.html");
+      const movemanHtml = path.join(distDir, "movemanltd.html");
+      if (fs.existsSync(movemanIndex)) {
+        fs.copyFileSync(movemanIndex, movemanHtml);
+      }
     },
   };
 }
@@ -64,6 +79,9 @@ export default defineConfig({
         budgetskipscoventry: path.resolve(__dirname, "budgetskipscoventry/index.html"),
         roads2roads: path.resolve(__dirname, "roads2roads/index.html"),
         ravensoakecaravanstorage: path.resolve(__dirname, "ravensoakecaravanstorage/index.html"),
+        radicalcourier: path.resolve(__dirname, "radicalcourier/index.html"),
+        "movemanltd.com": path.resolve(__dirname, "movemanltd.com/index.html"),
+        movemanltd: path.resolve(__dirname, "movemanltd/index.html"),
       },
     },
   },

@@ -12,6 +12,8 @@ import { FrontlineTransportQuotePage } from "@/pages/FrontlineTransportQuotePage
 import { BudgetSkipsCoventryQuotePage } from "@/pages/BudgetSkipsCoventryQuotePage";
 import { Roads2RoadsQuotePage } from "@/pages/Roads2RoadsQuotePage";
 import { RavensOakCaravanStoragePage } from "@/pages/RavensOakCaravanStoragePage";
+import { RadicalCourierPage } from "@/pages/RadicalCourierPage";
+import { MoveManQuotePage } from "@/pages/MoveManQuotePage";
 
 const ASSURANCES = [
   {
@@ -151,6 +153,46 @@ function checkIsRavensOakRoute(): boolean {
   );
 }
 
+function checkIsRadicalRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/radicalcourier") ||
+    path.startsWith("/radical") ||
+    hash.includes("radicalcourier") ||
+    hash.includes("radical") ||
+    params.get("page") === "radicalcourier" ||
+    params.get("page") === "radical" ||
+    params.get("route") === "radicalcourier" ||
+    params.get("route") === "radical"
+  );
+}
+
+function checkIsMoveManRoute(): boolean {
+  if (typeof window === "undefined") return false;
+  const path = window.location.pathname.toLowerCase();
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search.toLowerCase());
+
+  return (
+    path.startsWith("/movemanltd.com") ||
+    path.startsWith("/movemanltd") ||
+    path.startsWith("/moveman") ||
+    hash.includes("movemanltd.com") ||
+    hash.includes("movemanltd") ||
+    hash.includes("moveman") ||
+    params.get("page") === "movemanltd.com" ||
+    params.get("page") === "movemanltd" ||
+    params.get("page") === "moveman" ||
+    params.get("route") === "movemanltd.com" ||
+    params.get("route") === "movemanltd" ||
+    params.get("route") === "moveman"
+  );
+}
+
 export function App() {
   const [isUnity, setIsUnity] = useState(checkIsUnityRoute);
   const [isAldhouse, setIsAldhouse] = useState(checkIsAldhouseRoute);
@@ -158,6 +200,8 @@ export function App() {
   const [isBudgetSkips, setIsBudgetSkips] = useState(checkIsBudgetSkipsRoute);
   const [isRoads2Roads, setIsRoads2Roads] = useState(checkIsRoads2RoadsRoute);
   const [isRavensOak, setIsRavensOak] = useState(checkIsRavensOakRoute);
+  const [isRadical, setIsRadical] = useState(checkIsRadicalRoute);
+  const [isMoveMan, setIsMoveMan] = useState(checkIsMoveManRoute);
   const [activeMode, setActiveMode] = useState<"moving" | "junk">("moving");
 
   useEffect(() => {
@@ -168,6 +212,8 @@ export function App() {
       setIsBudgetSkips(checkIsBudgetSkipsRoute());
       setIsRoads2Roads(checkIsRoads2RoadsRoute());
       setIsRavensOak(checkIsRavensOakRoute());
+      setIsRadical(checkIsRadicalRoute());
+      setIsMoveMan(checkIsMoveManRoute());
     };
 
     window.addEventListener("popstate", handleLocationChange);
@@ -211,6 +257,16 @@ export function App() {
       // fallback
     }
   };
+
+  // Route: /movemanltd.com
+  if (isMoveMan) {
+    return <MoveManQuotePage />;
+  }
+
+  // Route: /radicalcourier
+  if (isRadical) {
+    return <RadicalCourierPage />;
+  }
 
   // Route: /ravensoakecaravanstorage
   if (isRavensOak) {

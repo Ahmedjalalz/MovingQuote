@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460 90" fill="none">
+  <defs>
+    <linearGradient id="radBlueGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="60%" stop-color="#0284C7" />
+      <stop offset="100%" stop-color="#0369A1" />
+    </linearGradient>
+    <linearGradient id="radAccentGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00E5FF" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+    <filter id="radGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0284C7" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Speed Motion / Radical Emblem -->
+  <g transform="translate(10, 10)" filter="url(#radGlow)">
+    <!-- Dynamic Hexagonal / Speed Wing -->
+    <path d="M12 45 L32 10 L56 10 L36 45 L64 45 L30 76 L38 52 L12 45 Z" fill="url(#radAccentGrad)" />
+    <!-- Trailing Motion Chevrons -->
+    <path d="M52 24 L68 24 L56 45 L40 45 Z" fill="#0284C7" opacity="0.8" />
+    <path d="M46 50 L62 50 L50 71 L34 71 Z" fill="#0369A1" opacity="0.6" />
+    <!-- Rapid Dot Indicator -->
+    <circle cx="68" cy="45" r="4" fill="#38BDF8" />
+  </g>
+
+  <!-- Typography -->
+  <g transform="translate(95, 20)">
+    <!-- Primary Brand Name -->
+    <text x="0" y="32" font-family="'Plus Jakarta Sans', 'Segoe UI', -apple-system, sans-serif" font-size="32" font-weight="900" fill="#0F172A" letter-spacing="-0.5">
+      RADICAL
+    </text>
+    <text x="146" y="32" font-family="'Plus Jakarta Sans', 'Segoe UI', -apple-system, sans-serif" font-size="32" font-weight="800" fill="url(#radBlueGrad)" letter-spacing="-0.5">
+      COURIER
+    </text>
+    <!-- Tagline Sub-heading -->
+    <text x="2" y="52" font-family="'Plus Jakarta Sans', 'Segoe UI', -apple-system, sans-serif" font-size="10.5" font-weight="700" fill="#64748B" letter-spacing="2.2">
+      SAME-DAY EXPRESS • TIME-CRITICAL UK
+    </text>
+  </g>
+</svg>

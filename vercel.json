@@ -4,6 +4,30 @@
   "trailingSlash": false,
   "rewrites": [
     {
+      "source": "/movemanltd.com",
+      "destination": "/movemanltd.com/index.html"
+    },
+    {
+      "source": "/movemanltd.com/(.*)",
+      "destination": "/movemanltd.com/index.html"
+    },
+    {
+      "source": "/movemanltd",
+      "destination": "/movemanltd/index.html"
+    },
+    {
+      "source": "/movemanltd/(.*)",
+      "destination": "/movemanltd/index.html"
+    },
+    {
+      "source": "/radicalcourier",
+      "destination": "/radicalcourier/index.html"
+    },
+    {
+      "source": "/radicalcourier/(.*)",
+      "destination": "/radicalcourier/index.html"
+    },
+    {
       "source": "/ravensoakecaravanstorage",
       "destination": "/ravensoakecaravanstorage/index.html"
     },
