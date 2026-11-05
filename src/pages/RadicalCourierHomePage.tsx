@@ -1,23 +1,20 @@
+import { useState } from "react";
 import {
   Truck,
   Clock,
   ShieldCheck,
-  Zap,
-  CheckCircle2,
   Phone,
   ArrowRight,
-  Sparkles,
-  Award,
+  CheckCircle2,
   Star,
   Quote,
   MapPin,
   Package,
   Layers,
+  FileCheck,
+  AlertCircle,
+  Calculator,
   ChevronRight,
-  GraduationCap,
-  FileText,
-  Building,
-  HeartHandshake,
 } from "lucide-react";
 import { RadicalSubPage } from "@/components/radicalcourier/RadicalCourierHeader";
 import { RADICAL_VANS } from "@/components/radicalcourier/RadicalCourierQuoteWizard";
@@ -27,569 +24,532 @@ interface RadicalCourierHomePageProps {
 }
 
 export function RadicalCourierHomePage({ onNavigate }: RadicalCourierHomePageProps) {
-  return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-slate-900 via-[#0B152E] to-slate-900 text-white pt-10 pb-20 lg:pt-16 lg:pb-28">
-        {/* Glow ambient backgrounds */}
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[350px] bg-[#0284C7]/20 blur-[130px] pointer-events-none rounded-full" />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[300px] bg-emerald-500/10 blur-[120px] pointer-events-none rounded-full" />
+  const [quickPickup, setQuickPickup] = useState("");
+  const [quickDelivery, setQuickDelivery] = useState("");
+  const [quickVan, setQuickVan] = useState("small_van");
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Content */}
-            <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sky-500/15 border border-sky-400/30 text-sky-300 text-xs font-bold tracking-wider uppercase backdrop-blur-md">
-                <span className="w-2 h-2 rounded-full bg-sky-400 animate-pulse" />
-                Midlands Hub • UK Nationwide Urgent Delivery
+  const handleQuickQuote = (e: React.FormEvent) => {
+    e.preventDefault();
+    onNavigate("quote");
+  };
+
+  return (
+    <div className="space-y-12 sm:space-y-16 pb-16 bg-white text-slate-900">
+      {/* Hero Section - Realistic, high-contrast British logistics header */}
+      <section className="bg-slate-900 text-white border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10 sm:py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Left Column: Direct value proposition */}
+            <div className="lg:col-span-7 space-y-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-sky-950 border border-sky-800 text-sky-400 text-xs font-bold uppercase tracking-wider">
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                24/7 Same-Day Express Courier • Coventry &amp; UK Nationwide
               </div>
 
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.1] text-white">
-                Same-Day Express Courier.{" "}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-[#38BDF8] to-cyan-300">
-                  Direct to Door.
-                </span>{" "}
-                Zero Subcontracting.
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-tight">
+                Same-Day Delivery. Direct to Door.{" "}
+                <span className="text-sky-400">One Dedicated Driver.</span>
               </h1>
 
-              <p className="text-slate-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                Operating 24/7, 365 days a year from Coventry. From critical Formula 1 automotive components
-                and urgent legal filings to high-value pallets — a single dedicated driver manages your
-                consignment from doorstep collection to recipient handover.
+              <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl">
+                Operating 24/7, 365 days a year from Coventry. Whether it's urgent legal documents,
+                manufacturing components, or heavy palletised freight, the driver who collects your consignment
+                is the exact driver who delivers it directly to the recipient. No hubs, no co-loading, and zero subcontracting.
               </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-                <button
-                  onClick={() => onNavigate("quote")}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0284C7] to-[#0369A1] hover:from-[#0369A1] hover:to-[#075985] text-white font-extrabold text-base shadow-xl shadow-sky-600/30 transition-all transform active:scale-95 cursor-pointer"
-                >
-                  <Sparkles className="w-5 h-5 text-sky-200" />
-                  <span>Get Instant Online Quote</span>
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </button>
+              {/* Trust Badges - Realistic logistics credentials */}
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs">
+                <div className="border border-slate-800 bg-slate-800/50 rounded-lg p-3">
+                  <div className="font-bold text-white flex items-center gap-1.5 mb-1">
+                    <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>No Subcontracting</span>
+                  </div>
+                  <div className="text-slate-400 text-[11px]">100% dedicated point-to-point</div>
+                </div>
 
+                <div className="border border-slate-800 bg-slate-800/50 rounded-lg p-3">
+                  <div className="font-bold text-white flex items-center gap-1.5 mb-1">
+                    <Clock className="w-4 h-4 text-sky-400 shrink-0" />
+                    <span>60-Min Collection</span>
+                  </div>
+                  <div className="text-slate-400 text-[11px]">Across Coventry &amp; Midlands</div>
+                </div>
+
+                <div className="border border-slate-800 bg-slate-800/50 rounded-lg p-3 col-span-2 sm:col-span-1">
+                  <div className="font-bold text-white flex items-center gap-1.5 mb-1">
+                    <Truck className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span>Packets to 6 Pallets</span>
+                  </div>
+                  <div className="text-slate-400 text-[11px]">Small vans to Luton tail lifts</div>
+                </div>
+              </div>
+
+              {/* Call Hotline Callout */}
+              <div className="pt-2 flex flex-wrap items-center gap-4">
                 <a
                   href="tel:02475122465"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/15 text-white font-bold text-base border border-white/20 backdrop-blur-md transition-all"
+                  className="inline-flex items-center gap-2.5 px-5 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-extrabold text-sm transition-colors shadow-sm"
                 >
-                  <Phone className="w-4 h-4 text-sky-400" />
-                  <span>024 7512 2465</span>
+                  <Phone className="w-4 h-4 text-white" />
+                  <span>Call 024 7512 2465 (24/7)</span>
                 </a>
-              </div>
 
-              {/* Guarantees List */}
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-6 border-t border-slate-800/80 text-left">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="text-xs text-slate-300 font-semibold">One Dedicated Driver</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="text-xs text-slate-300 font-semibold">60-Min Collection</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="text-xs text-slate-300 font-semibold">Live GPS Updates</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
-                  <span className="text-xs text-slate-300 font-semibold">No Account Needed</span>
-                </div>
+                <button
+                  onClick={() => onNavigate("quote")}
+                  className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-sm border border-slate-700 transition-colors"
+                >
+                  <Calculator className="w-4 h-4 text-sky-400" />
+                  <span>Online Rate Calculator</span>
+                </button>
               </div>
             </div>
 
-            {/* Right Card / Visual Showcase */}
-            <div className="lg:col-span-5 relative">
-              <div className="rounded-3xl border border-white/15 bg-white/5 backdrop-blur-xl p-3 sm:p-4 shadow-2xl relative">
-                <div className="relative rounded-2xl overflow-hidden aspect-[4/3] group">
-                  <img
-                    src="/radical-hero.jpg"
-                    alt="Radical Courier Rapid Fleet"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    onError={(e) => {
-                      // Fallback image
-                      e.currentTarget.src =
-                        "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop";
-                    }}
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-
-                  {/* Floating live tracking badge */}
-                  <div className="absolute top-4 left-4 bg-slate-900/90 backdrop-blur-md border border-white/20 rounded-xl px-3 py-1.5 flex items-center gap-2 shadow-lg">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                    <span className="text-xs font-bold text-white">Live Midlands Fleet: 18 Drivers Ready</span>
+            {/* Right Column: Direct Quick Quote Form */}
+            <div className="lg:col-span-5">
+              <div className="bg-white text-slate-900 rounded-2xl border border-slate-200 p-6 shadow-xl">
+                <div className="border-b border-slate-100 pb-3 mb-4">
+                  <div className="text-xs font-bold uppercase tracking-wider text-sky-700">
+                    Instant Fixed-Price Estimate
                   </div>
+                  <h2 className="text-xl font-black text-slate-900">
+                    Calculate Your Courier Quote
+                  </h2>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    No account needed. Instant transparent rates calculated per mile.
+                  </p>
+                </div>
 
-                  <div className="absolute bottom-4 left-4 right-4 bg-slate-900/85 backdrop-blur-md border border-white/15 rounded-xl p-3.5 text-xs text-white">
-                    <div className="font-extrabold text-sky-400 text-sm mb-0.5">
-                      Direct Dedicated Transport
-                    </div>
-                    <div className="text-slate-300">
-                      Never co-loaded with other parcels. Straight from your address to the drop-off point.
+                <form onSubmit={handleQuickQuote} className="space-y-3.5 text-xs">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">
+                      Collection Town / Postcode *
+                    </label>
+                    <div className="relative">
+                      <MapPin className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        placeholder="e.g. Coventry CV1, Warwick, Birmingham"
+                        value={quickPickup}
+                        onChange={(e) => setQuickPickup(e.target.value)}
+                        className="w-full rounded-lg border border-slate-300 py-2.5 pl-9 pr-3 text-xs font-medium text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7]"
+                      />
                     </div>
                   </div>
-                </div>
 
-                {/* Key stats banner underneath */}
-                <div className="grid grid-cols-3 gap-2 mt-3 text-center">
-                  <div className="bg-white/5 border border-white/10 rounded-xl py-3">
-                    <div className="text-xl font-black text-sky-400">2007</div>
-                    <div className="text-[10px] text-slate-400 uppercase font-semibold">Established</div>
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">
+                      Delivery Town / Postcode *
+                    </label>
+                    <div className="relative">
+                      <MapPin className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+                      <input
+                        type="text"
+                        placeholder="e.g. London, Manchester, Leeds, Bristol"
+                        value={quickDelivery}
+                        onChange={(e) => setQuickDelivery(e.target.value)}
+                        className="w-full rounded-lg border border-slate-300 py-2.5 pl-9 pr-3 text-xs font-medium text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7]"
+                      />
+                    </div>
                   </div>
-                  <div className="bg-white/5 border border-white/10 rounded-xl py-3">
-                    <div className="text-xl font-black text-emerald-400">99.4%</div>
-                    <div className="text-[10px] text-slate-400 uppercase font-semibold">On-Time Rate</div>
+
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">
+                      Select Vehicle Size
+                    </label>
+                    <select
+                      value={quickVan}
+                      onChange={(e) => setQuickVan(e.target.value)}
+                      className="w-full rounded-lg border border-slate-300 py-2.5 px-3 text-xs font-medium text-slate-900 focus:border-[#0284C7]"
+                    >
+                      <option value="small_van">Small Van (Up to 400kg / 1 Pallet / Envelopes / Boxes)</option>
+                      <option value="midi_swb">Midi SWB (Up to 800kg / 2 Pallets)</option>
+                      <option value="lwb">Long Wheelbase (Up to 1,100kg / 3 Pallets)</option>
+                      <option value="xlwb">Extra Long Wheelbase (Up to 1,100kg / 4 Pallets)</option>
+                      <option value="luton_tail_lift">Luton Box Van with 500kg Tail Lift (Up to 6 Pallets)</option>
+                    </select>
                   </div>
-                  <div className="bg-white/5 border border-white/10 rounded-xl py-3">
-                    <div className="text-xl font-black text-amber-400">0%</div>
-                    <div className="text-[10px] text-slate-400 uppercase font-semibold">Subcontracted</div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      className="w-full py-3 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-extrabold uppercase tracking-wider shadow-sm transition-colors flex items-center justify-center gap-1.5"
+                    >
+                      <span>Proceed to Full Quotation &amp; Pricing</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   </div>
-                </div>
+
+                  <div className="text-[11px] text-slate-500 text-center pt-1 border-t border-slate-100 flex items-center justify-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>Free, no obligation • Reviewed by real transport coordinators</span>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* The 3 Core Industry Showcases from their site */}
+      {/* Assurance Ribbon - Clean British Commercial Standard */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-3xl mx-auto space-y-3 mb-12">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-[#0284C7] text-xs font-extrabold uppercase tracking-wider">
-            Proven Sector Expertise
-          </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
-            Specialized in Time-Critical & High-Consequence Deliveries
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            When standard couriers are too slow, too careless, or rely on hub sorting centres,
-            enterprises trust Radical Courier for end-to-end dedicated delivery.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Automotive & F1 Card */}
-          <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
-            <div>
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src="/radical-automotive.jpg"
-                  alt="Automotive & Formula 1 Support"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800&auto=format&fit=crop";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider bg-sky-500 px-2 py-0.5 rounded-md">
-                    Automotive & Motorsport
-                  </span>
-                  <h3 className="text-xl font-bold mt-1">Automotive & F1 Industry</h3>
-                </div>
-              </div>
-
-              <div className="p-6 space-y-4">
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Trusted by automotive manufacturers and motorsport teams across Silverstone,
-                  Coventry, and the UK for ultra-urgent transport of:
-                </p>
-                <ul className="space-y-2 text-xs font-medium text-slate-800">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0" />
-                    <span>Formula 1 Racing & Trackside Technical Spares</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0" />
-                    <span>Heads-Up Displays (HUD) & Cockpit Electronics</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0" />
-                    <span>Assembly line breakdown critical components</span>
-                  </li>
-                </ul>
-              </div>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 py-4 border-b border-slate-200">
+          <div className="flex items-start gap-3">
+            <div className="p-2 rounded bg-sky-50 text-[#0284C7] shrink-0">
+              <ShieldCheck className="w-5 h-5" />
             </div>
-
-            <div className="px-6 pb-6 pt-2 border-t border-slate-100">
-              <button
-                onClick={() => onNavigate("quote")}
-                className="text-xs font-bold text-[#0284C7] hover:text-[#0369A1] inline-flex items-center gap-1 group-hover:gap-2 transition-all"
-              >
-                Book Automotive Courier <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+            <div className="text-xs">
+              <strong className="text-slate-900 block font-bold">Dedicated Driver Guarantee</strong>
+              <span className="text-slate-600">The person who collects delivers to the recipient. No hand-offs.</span>
             </div>
           </div>
 
-          {/* Legal & Court Card */}
-          <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
-            <div>
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src="/radical-law.jpg"
-                  alt="Legal Documents Courier"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider bg-emerald-600 px-2 py-0.5 rounded-md">
-                    Legal & Judiciary
-                  </span>
-                  <h3 className="text-xl font-bold mt-1">Law & Solicitor Documents</h3>
-                </div>
-              </div>
-
-              <div className="p-6 space-y-4">
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Confidential, tamper-evident handling for law firms, barristers, courts,
-                  and corporate legal departments:
-                </p>
-                <ul className="space-y-2 text-xs font-medium text-slate-800">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Time-sensitive court bundles & filing deadlines</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Solicitor-client signature exchanges with live wait</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                    <span>Full Proof of Delivery (POD) signature verified</span>
-                  </li>
-                </ul>
-              </div>
+          <div className="flex items-start gap-3">
+            <div className="p-2 rounded bg-sky-50 text-[#0284C7] shrink-0">
+              <Clock className="w-5 h-5" />
             </div>
-
-            <div className="px-6 pb-6 pt-2 border-t border-slate-100">
-              <button
-                onClick={() => onNavigate("quote")}
-                className="text-xs font-bold text-emerald-600 hover:text-emerald-700 inline-flex items-center gap-1 group-hover:gap-2 transition-all"
-              >
-                Book Legal Courier <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+            <div className="text-xs">
+              <strong className="text-slate-900 block font-bold">24/7/365 On-Demand</strong>
+              <span className="text-slate-600">Available day, night, weekends &amp; bank holidays UK-wide.</span>
             </div>
           </div>
 
-          {/* Printing & Commercial Publications Card */}
-          <div className="rounded-3xl border border-slate-200 bg-white overflow-hidden shadow-sm hover:shadow-xl transition-all group flex flex-col justify-between">
-            <div>
-              <div className="relative h-48 overflow-hidden">
-                <img
-                  src="/radical-printing.jpg"
-                  alt="Printing and Publications Delivery"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  onError={(e) => {
-                    e.currentTarget.src =
-                      "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop";
-                  }}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="text-[10px] font-extrabold uppercase tracking-wider bg-amber-600 px-2 py-0.5 rounded-md">
-                    Print & Media
-                  </span>
-                  <h3 className="text-xl font-bold mt-1">Printing & Publications</h3>
-                </div>
-              </div>
-
-              <div className="p-6 space-y-4">
-                <p className="text-xs text-slate-600 leading-relaxed">
-                  Time-critical delivery of freshly printed materials directly to exhibition halls,
-                  newsstands, and corporate headquarters:
-                </p>
-                <ul className="space-y-2 text-xs font-medium text-slate-800">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span>Bulk delivery of magazines, journals & programmes</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span>Event promotional merchandise & branded clothing</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-amber-600 shrink-0" />
-                    <span>Palletized print distribution with tail lift offloading</span>
-                  </li>
-                </ul>
-              </div>
+          <div className="flex items-start gap-3">
+            <div className="p-2 rounded bg-sky-50 text-[#0284C7] shrink-0">
+              <FileCheck className="w-5 h-5" />
             </div>
-
-            <div className="px-6 pb-6 pt-2 border-t border-slate-100">
-              <button
-                onClick={() => onNavigate("quote")}
-                className="text-xs font-bold text-amber-600 hover:text-amber-700 inline-flex items-center gap-1 group-hover:gap-2 transition-all"
-              >
-                Book Print Transport <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Other Industries Strip */}
-        <div className="mt-8 rounded-2xl bg-slate-50 border border-slate-200 p-5 text-center text-xs text-slate-600">
-          <span className="font-bold text-slate-900">Additional Specialist Sectors Served: </span>
-          Medical Supplies & Sterile Devices • Housing Providers & Local Authorities • Optical Engineering •
-          Auction Houses • High-Value Jewellery Sellers • Student Campus Relocations.
-        </div>
-      </section>
-
-      {/* "What Makes Us Radical" Section */}
-      <section className="bg-slate-900 text-white py-16 sm:py-24 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
-          <div className="text-center max-w-3xl mx-auto space-y-3 mb-14">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-extrabold uppercase tracking-wider border border-sky-400/30">
-              The Radical Manifesto
-            </div>
-            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-              Why We Are Truly Radical
-            </h2>
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
-              We asked: why do traditional courier companies make you talk to call handlers who just
-              shop your delivery around to anonymous third parties? Here is how we do it differently:
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            {/* The Old / Traditional Way */}
-            <div className="rounded-3xl border border-red-500/30 bg-red-950/20 p-7 space-y-5">
-              <div className="flex items-center gap-2.5 text-red-400 font-extrabold text-sm uppercase tracking-wider">
-                <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
-                What Traditional Couriers Do (We DON'T)
-              </div>
-              <ul className="space-y-4 text-xs text-slate-300">
-                <li className="flex items-start gap-3">
-                  <span className="text-red-400 font-bold shrink-0">✕</span>
-                  <span>
-                    <strong>Waste money on call centres:</strong> Call handlers spend hours trying to
-                    subcontract your job to brokers or random delivery drivers.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-400 font-bold shrink-0">✕</span>
-                  <span>
-                    <strong>Co-loading & multiple hand-offs:</strong> Your urgent parcel is passed
-                    between multiple vans and sorting hubs, multiplying risk of damage or loss.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-400 font-bold shrink-0">✕</span>
-                  <span>
-                    <strong>Zero accountability:</strong> When a delay happens, nobody takes ownership
-                    and you are left stuck on an automated helpline.
-                  </span>
-                </li>
-              </ul>
-            </div>
-
-            {/* The Radical Way */}
-            <div className="rounded-3xl border border-sky-500/40 bg-sky-950/30 p-7 space-y-5 shadow-2xl shadow-sky-900/20">
-              <div className="flex items-center gap-2.5 text-sky-400 font-extrabold text-sm uppercase tracking-wider">
-                <span className="w-2.5 h-2.5 rounded-full bg-sky-400" />
-                The Radical Courier Guarantee (What We DO)
-              </div>
-              <ul className="space-y-4 text-xs text-slate-200">
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Instant pricing & driver availability:</strong> We tell you in moments if we
-                    can do the job, the exact fixed price, and when collection occurs.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>Direct driver name & vehicle registration:</strong> Allocated driver's details
-                    and direct mobile are provided to support your security gates.
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircle2 className="w-4 h-4 text-sky-400 shrink-0 mt-0.5" />
-                  <span>
-                    <strong>WE TAKE 100% OWNERSHIP OF YOUR JOB:</strong> One person manages your delivery
-                    from start to finish. No hand-offs, no excuses.
-                  </span>
-                </li>
-              </ul>
+            <div className="text-xs">
+              <strong className="text-slate-900 block font-bold">Proof of Delivery (POD)</strong>
+              <span className="text-slate-600">Electronic signature captured &amp; emailed immediately.</span>
             </div>
           </div>
 
-          <div className="text-center pt-10">
-            <button
-              onClick={() => onNavigate("about")}
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white text-xs font-bold border border-white/20 transition-all"
-            >
-              <span>Read the Full Story of Radical Courier Service</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </button>
+          <div className="flex items-start gap-3">
+            <div className="p-2 rounded bg-sky-50 text-[#0284C7] shrink-0">
+              <Truck className="w-5 h-5" />
+            </div>
+            <div className="text-xs">
+              <strong className="text-slate-900 block font-bold">Goods in Transit Insured</strong>
+              <span className="text-slate-600">Fully covered with comprehensive goods-in-transit policy.</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Fleet Overview Section */}
+      {/* Real Quote from Founder Neil Carter */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-sky-100 text-[#0284C7] text-xs font-extrabold uppercase tracking-wider">
-              Ready for Any Consignment
+        <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col md:flex-row items-center gap-6 justify-between">
+          <div className="space-y-2 max-w-3xl">
+            <div className="text-xs font-bold uppercase tracking-wider text-[#0284C7]">
+              The Radical Difference
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              Our Versatile Same-Day Fleet
-            </h2>
-            <p className="text-slate-600 text-sm max-w-xl">
-              From nimble urban courier vans to heavy Luton box vans with 500kg hydraulic tail lifts.
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+              "We manage your delivery from start to finish with one dedicated driver."
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+              We don't waste your time with call handlers searching for 3rd-party couriers to sell your job to.
+              We advise you within moments of vehicle availability, provide the allocated driver's name and registration
+              number in advance, and take 100% ownership of your delivery.
             </p>
+            <div className="text-xs font-semibold text-slate-500 pt-1">
+              — Neil Carter, Founder &amp; Director, Radical Courier Service Ltd (Est. 2007, Coventry)
+            </div>
           </div>
 
           <button
-            onClick={() => onNavigate("quote")}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#0284C7] text-white text-xs font-bold hover:bg-[#0369A1] transition-all"
+            onClick={() => onNavigate("about")}
+            className="shrink-0 px-5 py-3 rounded-lg border border-slate-300 bg-white hover:bg-slate-100 text-xs font-bold text-slate-800 transition-colors"
           >
-            <span>Quote Your Vehicle Now</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            Learn More About Us
+          </button>
+        </div>
+      </section>
+
+      {/* Specialist Cargo & Industries (Direct from radicalcourier.co.uk) */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="border-b border-slate-200 pb-4 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-sky-700">
+              What We Transport
+            </div>
+            <h2 className="text-2xl font-black text-slate-900">
+              Sector Logistics &amp; Specialist Deliveries
+            </h2>
+          </div>
+          <span className="text-xs text-slate-500">
+            From envelopes to machinery across Coventry, Warwickshire &amp; the UK
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Automotive & F1 */}
+          <div className="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-xs hover:border-[#0284C7] transition-colors flex flex-col">
+            <div className="h-44 bg-slate-100 overflow-hidden relative">
+              <img
+                src="/radical-automotive.jpg"
+                alt="Automotive & Motorsport Parts"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?q=80&w=800&auto=format&fit=crop";
+                }}
+              />
+              <span className="absolute bottom-2 left-2 bg-slate-900/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                Motorsport &amp; Engineering
+              </span>
+            </div>
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <h3 className="font-extrabold text-base text-slate-900 mb-1">
+                  Automotive &amp; Formula 1 Support
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Time-critical delivery of heads-up displays (HUD), precision trackside spares for F1 teams,
+                  and urgent line-side assembly parts across the Midlands automotive cluster.
+                </p>
+              </div>
+              <button
+                onClick={() => onNavigate("quote")}
+                className="text-xs font-bold text-[#0284C7] inline-flex items-center gap-1 hover:underline pt-2 border-t border-slate-100"
+              >
+                Quote Automotive Delivery <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Legal Documents */}
+          <div className="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-xs hover:border-[#0284C7] transition-colors flex flex-col">
+            <div className="h-44 bg-slate-100 overflow-hidden relative">
+              <img
+                src="/radical-law.jpg"
+                alt="Legal and Confidential Documents"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?q=80&w=800&auto=format&fit=crop";
+                }}
+              />
+              <span className="absolute bottom-2 left-2 bg-slate-900/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                Confidential &amp; Judiciary
+              </span>
+            </div>
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <h3 className="font-extrabold text-base text-slate-900 mb-1">
+                  Legal Documents &amp; Deeds
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Hand-to-hand transit for solicitors and courts. Time-sensitive legal papers, contracts requiring
+                  in-person client signatures, and complete confidentiality guaranteed.
+                </p>
+              </div>
+              <button
+                onClick={() => onNavigate("quote")}
+                className="text-xs font-bold text-[#0284C7] inline-flex items-center gap-1 hover:underline pt-2 border-t border-slate-100"
+              >
+                Quote Legal Courier <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Printing & Publications */}
+          <div className="border border-slate-200 rounded-xl bg-white overflow-hidden shadow-xs hover:border-[#0284C7] transition-colors flex flex-col">
+            <div className="h-44 bg-slate-100 overflow-hidden relative">
+              <img
+                src="/radical-printing.jpg"
+                alt="Printing & Bulk Publications"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=800&auto=format&fit=crop";
+                }}
+              />
+              <span className="absolute bottom-2 left-2 bg-slate-900/90 text-white text-[10px] font-bold px-2 py-0.5 rounded">
+                Print &amp; Exhibitions
+              </span>
+            </div>
+            <div className="p-5 flex-1 flex flex-col justify-between space-y-3">
+              <div>
+                <h3 className="font-extrabold text-base text-slate-900 mb-1">
+                  Printing &amp; Commercial Media
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Direct transport of bulk magazine prints, journals, event brochures, and promotional merchandise
+                  directly to exhibition venues (NEC, London ExCeL) and distribution hubs.
+                </p>
+              </div>
+              <button
+                onClick={() => onNavigate("quote")}
+                className="text-xs font-bold text-[#0284C7] inline-flex items-center gap-1 hover:underline pt-2 border-t border-slate-100"
+              >
+                Quote Print Freight <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Other Industries Tag List */}
+        <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200 text-xs text-slate-600 text-center">
+          <strong>Also regularly transporting:</strong> Medical equipment &amp; laboratory samples, high-value jewellery,
+          auction house valuables, local council documents, and student university relocations.
+        </div>
+      </section>
+
+      {/* Vehicle Fleet Cards - Realistic Van Specifications */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="border-b border-slate-200 pb-4 mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+          <div>
+            <div className="text-xs font-bold uppercase tracking-wider text-sky-700">
+              Vehicle Capacity Guide
+            </div>
+            <h2 className="text-2xl font-black text-slate-900">
+              Our Same-Day Fleet Specifications
+            </h2>
+          </div>
+          <button
+            onClick={() => onNavigate("quote")}
+            className="text-xs font-bold text-[#0284C7] hover:underline flex items-center gap-1"
+          >
+            Calculate Van Pricing <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {RADICAL_VANS.map((van) => (
             <div
               key={van.id}
-              className="rounded-2xl border border-slate-200 bg-white p-5 space-y-3 hover:border-[#0284C7] hover:shadow-lg transition-all flex flex-col justify-between"
+              className="border border-slate-200 rounded-xl bg-white p-4 flex flex-col justify-between hover:border-slate-300 transition-colors"
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-sky-50 text-[#0284C7] flex items-center justify-center mb-3">
-                  <Truck className="w-5 h-5" />
+                <div className="text-xs font-bold text-slate-900 mb-0.5">{van.name}</div>
+                <div className="text-[11px] font-semibold text-[#0284C7] mb-2">
+                  {van.pallets} Pallet{van.pallets > 1 ? "s" : ""} • Payload: {van.payload}
                 </div>
-                <h3 className="font-extrabold text-sm text-slate-900 mb-1">{van.name}</h3>
-                <div className="text-[11px] font-bold text-sky-700 mb-2">
-                  {van.pallets} Pallet{van.pallets > 1 ? "s" : ""} • {van.payload}
+                <div className="bg-slate-50 rounded p-2 text-[11px] text-slate-600 mb-2 font-mono">
+                  L: {van.length} | W: {van.width} | H: {van.height}
                 </div>
-                <p className="text-[11px] text-slate-500 leading-relaxed">{van.idealFor}</p>
+                <p className="text-[11px] text-slate-500 leading-relaxed mb-3">
+                  {van.idealFor}
+                </p>
               </div>
 
-              <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
-                <span className="text-slate-500 text-[10px]">Dimensions</span>
-                <span className="font-bold text-slate-800">{van.length} × {van.width}</span>
-              </div>
+              <button
+                onClick={() => onNavigate("quote")}
+                className="w-full py-2 rounded bg-slate-100 hover:bg-[#0284C7] hover:text-white text-slate-700 text-xs font-bold transition-colors"
+              >
+                Select Van
+              </button>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Real Customer Testimonials (from the original website) */}
-      <section className="bg-slate-50 py-16 sm:py-20 border-y border-slate-200">
+      {/* Authentic Testimonials from their original site */}
+      <section className="bg-slate-50 border-y border-slate-200 py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-2xl mx-auto space-y-2 mb-12">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-extrabold uppercase tracking-wider">
-              Verified Client Feedback
+          <div className="text-center max-w-2xl mx-auto mb-8">
+            <div className="text-xs font-bold uppercase tracking-wider text-sky-700 mb-1">
+              Client Endorsements
             </div>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
-              What Our Customers Say
+            <h2 className="text-2xl font-black text-slate-900">
+              What Real Clients Say About Radical Courier
             </h2>
-            <p className="text-slate-600 text-sm">
-              Long-standing partnerships with Midlands football clubs, manufacturing leaders, and legal executives.
-            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs">
             {/* Coventry City FC */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm space-y-4 flex flex-col justify-between">
+            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="flex items-center gap-1 text-amber-400">
+                <div className="flex items-center gap-1 text-amber-500">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <Quote className="w-8 h-8 text-sky-200" />
-                <p className="text-xs text-slate-700 leading-relaxed italic">
-                  "Neil has been consistent and constant in the level of service delivered.
-                  This has included delivering key documents, on time and in appalling winter conditions.
-                  Like the US Post, Neil always gets through and delivers!"
+                <p className="text-slate-700 italic leading-relaxed">
+                  "Neil has been consistent and constant in the level of service delivered. This has included
+                  delivering key documents, on time and in appalling winter conditions. Like the US Post, Neil always
+                  gets through and delivers!"
                 </p>
               </div>
-              <div className="pt-4 border-t border-slate-100">
-                <div className="font-extrabold text-sm text-slate-900">Coventry City FC</div>
-                <div className="text-[11px] text-slate-500">Official Club Operations</div>
+              <div className="border-t border-slate-100 pt-3 mt-4">
+                <strong className="text-slate-900 block font-bold">Coventry City FC</strong>
+                <span className="text-slate-500 text-[11px]">Club Management Operations</span>
               </div>
             </div>
 
             {/* Craig Watson / Hi-line Industries */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm space-y-4 flex flex-col justify-between">
+            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="flex items-center gap-1 text-amber-400">
+                <div className="flex items-center gap-1 text-amber-500">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <Quote className="w-8 h-8 text-sky-200" />
-                <p className="text-xs text-slate-700 leading-relaxed italic">
+                <p className="text-slate-700 italic leading-relaxed">
                   "Impeccable service from Radical Couriers!! Same day delivery required from Burton on Trent
-                  to central Manchester, first contact made at 11.00am, item was delivered at 3.00pm. 4 Hours
-                  from start to finish and all parties informed item's progress. That's what I call efficient!"
+                  to central Manchester, first contact made at 11.00am, item was delivered at 3.00pm. 4 Hours from
+                  start to finish and all parties informed item's progress. That's what I call efficient!"
                 </p>
               </div>
-              <div className="pt-4 border-t border-slate-100">
-                <div className="font-extrabold text-sm text-slate-900">Craig Watson</div>
-                <div className="text-[11px] text-slate-500">Refrigeration Product Manager, Hi-line Industries</div>
+              <div className="border-t border-slate-100 pt-3 mt-4">
+                <strong className="text-slate-900 block font-bold">Craig Watson</strong>
+                <span className="text-slate-500 text-[11px]">Refrigeration Product Manager, Hi-line Industries</span>
               </div>
             </div>
 
             {/* Mike Johnson */}
-            <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm space-y-4 flex flex-col justify-between">
+            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-xs flex flex-col justify-between">
               <div className="space-y-3">
-                <div className="flex items-center gap-1 text-amber-400">
+                <div className="flex items-center gap-1 text-amber-500">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-amber-400" />
+                    <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <Quote className="w-8 h-8 text-sky-200" />
-                <p className="text-xs text-slate-700 leading-relaxed italic">
+                <p className="text-slate-700 italic leading-relaxed">
                   "Radical Couriers provided an excellent straight to door service that was prompt, reliable
-                  and above all transparent. I was kept up-to-date with regular communications and provided
-                  with an accurate delivery time... item arriving in excellent condition."
+                  and above all transparent. I was kept up-to-date with regular communications and provided with an accurate
+                  delivery time which ensured minimal impact to my day, with my item arriving in excellent condition."
                 </p>
               </div>
-              <div className="pt-4 border-t border-slate-100">
-                <div className="font-extrabold text-sm text-slate-900">Mike Johnson</div>
-                <div className="text-[11px] text-slate-500">Private & B2B Consignment Client</div>
+              <div className="border-t border-slate-100 pt-3 mt-4">
+                <strong className="text-slate-900 block font-bold">Mike Johnson</strong>
+                <span className="text-slate-500 text-[11px]">Private Consignment Client</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Call to Action Banner */}
+      {/* Direct Contact Banner */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="rounded-3xl bg-gradient-to-r from-[#0284C7] via-[#0369A1] to-[#075985] text-white p-8 sm:p-12 shadow-2xl flex flex-col lg:flex-row items-center justify-between gap-8 text-center lg:text-left relative overflow-hidden">
-          <div className="space-y-3 max-w-2xl relative z-10">
-            <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
-              Ready to Experience Truly Radical Courier Service?
-            </h2>
-            <p className="text-sky-100 text-sm sm:text-base leading-relaxed">
-              No account required. Calculate your instant quote right now, or speak directly with our
-              24/7 dispatch desk for immediate collection within 60 minutes.
+        <div className="bg-slate-900 text-white rounded-2xl p-6 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-1 text-center md:text-left">
+            <div className="text-xs font-bold text-sky-400 uppercase tracking-wider">
+              24/7 Operations Desk
+            </div>
+            <h3 className="text-xl sm:text-2xl font-black">
+              Need an Urgent Courier Dispatched Today?
+            </h3>
+            <p className="text-xs text-slate-300 max-w-lg">
+              We have experienced drivers available across Coventry, Warwick, Birmingham, Rugby,
+              and Leamington ready to collect and deliver immediately.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 relative z-10 shrink-0">
-            <button
-              onClick={() => onNavigate("quote")}
-              className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white text-slate-900 font-black text-sm shadow-xl hover:bg-slate-100 transition-all cursor-pointer"
-            >
-              Calculate Online Quote
-            </button>
+          <div className="flex flex-wrap items-center justify-center gap-3 shrink-0">
             <a
               href="tel:02475122465"
-              className="w-full sm:w-auto px-7 py-4 rounded-2xl bg-sky-950/40 text-white font-bold text-sm border border-white/20 hover:bg-sky-950/60 transition-all flex items-center justify-center gap-2"
+              className="px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition-colors flex items-center gap-2"
             >
-              <Phone className="w-4 h-4 text-sky-300" />
+              <Phone className="w-4 h-4" />
               <span>024 7512 2465</span>
             </a>
+
+            <button
+              onClick={() => onNavigate("quote")}
+              className="px-6 py-3 rounded-lg bg-white text-slate-900 text-xs font-bold hover:bg-slate-100 transition-colors"
+            >
+              Get Online Quote
+            </button>
           </div>
         </div>
       </section>

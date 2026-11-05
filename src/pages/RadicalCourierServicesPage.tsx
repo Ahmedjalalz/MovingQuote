@@ -8,13 +8,8 @@ import {
   CheckCircle2,
   Clock,
   ArrowRight,
-  Package,
-  Layers,
-  Sparkles,
   Phone,
-  FileText,
-  UserCheck,
-  HelpCircle,
+  FileCheck,
 } from "lucide-react";
 import { RadicalSubPage } from "@/components/radicalcourier/RadicalCourierHeader";
 import { RADICAL_VANS } from "@/components/radicalcourier/RadicalCourierQuoteWizard";
@@ -30,387 +25,280 @@ export function RadicalCourierServicesPage({
   const [activeTab, setActiveTab] = useState<"urgent" | "scheduled" | "student">("urgent");
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
-      {/* Header Banner */}
-      <section className="bg-gradient-to-b from-slate-900 via-[#0B152E] to-slate-900 text-white py-14 sm:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-wider border border-sky-400/30">
-            Dedicated Same-Day Logistics
+    <div className="space-y-12 sm:space-y-16 pb-16 bg-white text-slate-900">
+      {/* Page Header */}
+      <section className="bg-slate-900 text-white border-b border-slate-800 py-10 sm:py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-3 text-center sm:text-left">
+          <div className="text-xs font-bold uppercase tracking-wider text-sky-400">
+            Radical Courier Service Ltd • Operations Guide
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-            Our Delivery Services & Fleet
+          <h1 className="text-3xl sm:text-4xl font-black text-white">
+            Our Same-Day Delivery Services
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Every Radical delivery is handled directly by a single allocated driver.
-            No sorting hubs, no co-loading, and zero risk of your items passing through multiple hands.
+          <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            Every delivery is managed by a single allocated driver from start to finish.
+            No sorting hubs, no co-loading, and no subcontracting to external couriers.
           </p>
         </div>
       </section>
 
-      {/* The 3 Core Delivery Formats */}
+      {/* The 3 Core Delivery Services (from radicalcourier.co.uk) */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-            Three Tailored Delivery Formats
-          </h2>
-          <p className="text-slate-600 text-xs sm:text-sm">
-            Whether it's an emergency same-day dispatch or a planned campus move, we have you covered.
-          </p>
+        {/* Tab Buttons */}
+        <div className="flex border-b border-slate-200 mb-8 overflow-x-auto">
+          <button
+            onClick={() => setActiveTab("urgent")}
+            className={cn(
+              "px-5 py-3 text-xs font-bold border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap",
+              activeTab === "urgent"
+                ? "border-[#0284C7] text-[#0284C7]"
+                : "border-transparent text-slate-600 hover:text-slate-900"
+            )}
+          >
+            <Zap className="w-4 h-4 text-amber-500" />
+            <span>1. Urgent Same-Day (On Demand)</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("scheduled")}
+            className={cn(
+              "px-5 py-3 text-xs font-bold border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap",
+              activeTab === "scheduled"
+                ? "border-[#0284C7] text-[#0284C7]"
+                : "border-transparent text-slate-600 hover:text-slate-900"
+            )}
+          >
+            <Calendar className="w-4 h-4 text-sky-600" />
+            <span>2. Same-Day Scheduled (Planned Routes)</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("student")}
+            className={cn(
+              "px-5 py-3 text-xs font-bold border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap",
+              activeTab === "student"
+                ? "border-[#0284C7] text-[#0284C7]"
+                : "border-transparent text-slate-600 hover:text-slate-900"
+            )}
+          >
+            <GraduationCap className="w-4 h-4 text-emerald-600" />
+            <span>3. Student Accommodation Moves</span>
+          </button>
         </div>
 
-        {/* Tab Switcher */}
-        <div className="flex justify-center mb-10">
-          <div className="inline-flex p-1.5 rounded-2xl bg-slate-100 border border-slate-200">
-            <button
-              onClick={() => setActiveTab("urgent")}
-              className={cn(
-                "px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2",
-                activeTab === "urgent"
-                  ? "bg-white text-[#0284C7] shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              )}
-            >
-              <Zap className="w-4 h-4 text-amber-500" />
-              <span>1. Urgent Same-Day On Demand</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("scheduled")}
-              className={cn(
-                "px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2",
-                activeTab === "scheduled"
-                  ? "bg-white text-[#0284C7] shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              )}
-            >
-              <Calendar className="w-4 h-4 text-[#0284C7]" />
-              <span>2. Scheduled & Multi-Drop</span>
-            </button>
-
-            <button
-              onClick={() => setActiveTab("student")}
-              className={cn(
-                "px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2",
-                activeTab === "student"
-                  ? "bg-white text-[#0284C7] shadow-sm"
-                  : "text-slate-600 hover:text-slate-900"
-              )}
-            >
-              <GraduationCap className="w-4 h-4 text-emerald-600" />
-              <span>3. Student Accommodation Moves</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Tab Content 1: Urgent Same-Day */}
+        {/* Tab 1 Content: Urgent Same-Day */}
         {activeTab === "urgent" && (
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-in fade-in duration-300">
-            <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-extrabold uppercase">
-                <Zap className="w-3.5 h-3.5" />
-                Time-Critical Emergency Logistics
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7 space-y-4">
+              <h2 className="text-2xl font-black text-slate-900">
                 Urgent Same-Day On-Demand Courier
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                When every minute counts, our dedicated Coventry & Midlands dispatch team locates the
-                nearest driver and sends them directly to your collection point within 60 minutes.
-                Your goods travel non-stop straight to the destination door.
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Collection and delivery are carried out by one dedicated driver on the same day.
+                Ideal for time-critical situations where failure to deliver on schedule causes major
+                operational disruption.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Single Dedicated Driver</span>
-                    <span className="text-slate-500">The person who collects delivers to the recipient</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Direct Driver Mobile Phone</span>
-                    <span className="text-slate-500">Call your driver directly for real-time traffic updates</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Driver Reg For Security</span>
-                    <span className="text-slate-500">Provided in advance to clear site security gates</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Immediate Digital POD</span>
-                    <span className="text-slate-500">Instant signed proof of delivery emailed to you</span>
-                  </div>
-                </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 text-xs">
+                <div className="font-bold text-slate-900">Key Service Features:</div>
+                <ul className="space-y-2 text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>60-Minute Response:</strong> Nearest driver dispatched across Coventry, Warwick, Birmingham, Rugby, or Leamington.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Driver Name &amp; Direct Mobile:</strong> Provided in advance so you can contact the driver directly during transit.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Vehicle Registration Advance Notice:</strong> Supplied for factory security gates and legal chambers.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Electronic Signature POD:</strong> Proof of delivery captured digitally upon handover.</span>
+                  </li>
+                </ul>
               </div>
 
               <div className="pt-2">
                 <button
                   onClick={() => onNavigate("quote")}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold shadow-md transition-all cursor-pointer"
+                  className="px-5 py-2.5 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold transition-colors inline-flex items-center gap-1.5"
                 >
-                  <span>Book Urgent Delivery Now</span>
+                  <span>Book Urgent Delivery</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
-              <div className="font-bold text-sm text-slate-900">Urgent Courier Scenarios:</div>
-              <ul className="space-y-3 text-xs text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>Factory assembly breakdown machine parts</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>Motorsport trackside components (Silverstone / Donington)</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>Emergency legal bundles for court filings</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>Urgent medical specimens and hospital devices</span>
-                </li>
+            <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 text-xs">
+              <strong className="text-slate-900 block font-bold text-sm">Typical Urgent Consignments:</strong>
+              <ul className="space-y-2 text-slate-600">
+                <li>• Breakdown machine spares &amp; engineering tooling</li>
+                <li>• Heads-up displays and urgent automotive components</li>
+                <li>• Time-sensitive court files and signed solicitor contracts</li>
+                <li>• Emergency hospital medical equipment and specimens</li>
+                <li>• Urgent passports, visas, and keys</li>
               </ul>
-              <div className="rounded-xl bg-white p-3.5 border border-slate-200 text-xs text-slate-700">
-                <strong>Emergency Helpline:</strong> Need dispatch right now? Call our 24/7 hotline at{" "}
-                <a href="tel:02475122465" className="text-[#0284C7] font-bold hover:underline">
-                  024 7512 2465
-                </a>
+              <div className="border-t border-slate-200 pt-3 text-slate-700">
+                <strong>Urgent hotline:</strong> Call <a href="tel:02475122465" className="text-[#0284C7] font-bold">024 7512 2465</a> for live vehicle allocation.
               </div>
             </div>
           </div>
         )}
 
-        {/* Tab Content 2: Scheduled */}
+        {/* Tab 2 Content: Scheduled */}
         {activeTab === "scheduled" && (
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-in fade-in duration-300">
-            <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-[#0284C7] text-xs font-extrabold uppercase">
-                <Calendar className="w-3.5 h-3.5" />
-                Planned Routes & Multi-Drop Logistics
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
-                Same-Day Scheduled & Contract Deliveries
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                For routine business runs, inter-depot stock transfers, trade exhibitions, or planned
-                future date collections. Lock in your dedicated vehicle and driver ahead of time for
-                seamless execution.
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7 space-y-4">
+              <h2 className="text-2xl font-black text-slate-900">
+                Scheduled &amp; Planned Regular Deliveries
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                For routine business runs, inter-depot stock transfers, trade exhibitions, or deliveries where
+                collection and drop-off occur on planned future dates. Vehicles can be reserved in advance.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Specific Time Slots</span>
-                    <span className="text-slate-500">Fixed collection and delivery booking windows</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Weekly / Daily Contract Runs</span>
-                    <span className="text-slate-500">Regular dedicated driver familiar with your sites</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Pallet Tail-Lift Capabilities</span>
-                    <span className="text-slate-500">Up to 6 standard pallets with hydraulic offload</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Corporate Account Terms</span>
-                    <span className="text-slate-500">Monthly consolidated billing & preferred rates</span>
-                  </div>
-                </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 text-xs">
+                <div className="font-bold text-slate-900">Key Service Features:</div>
+                <ul className="space-y-2 text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
+                    <span><strong>Pre-Booked Time Slots:</strong> Guaranteed arrival windows to suit factory and warehouse shifts.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
+                    <span><strong>Contract Routes:</strong> Daily or weekly dedicated drivers familiar with your sites and loading bays.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
+                    <span><strong>Pallet Tail Lift Offloading:</strong> Up to 6 pallets with 500kg hydraulic tail lift assistance.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-sky-600 shrink-0 mt-0.5" />
+                    <span><strong>30-Day Invoicing:</strong> Consolidated monthly VAT statements for approved business accounts.</span>
+                  </li>
+                </ul>
               </div>
 
               <div className="pt-2">
                 <button
                   onClick={() => onNavigate("quote")}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold shadow-md transition-all cursor-pointer"
+                  className="px-5 py-2.5 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold transition-colors inline-flex items-center gap-1.5"
                 >
-                  <span>Schedule Delivery Route</span>
+                  <span>Schedule Courier Route</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
-              <div className="font-bold text-sm text-slate-900">Ideal For:</div>
-              <ul className="space-y-3 text-xs text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>Scheduled manufacturing replenishment to assembly plants</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>B2B wholesale deliveries across Warwickshire & West Midlands</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>Exhibition freight transport to the NEC Birmingham or London ExCeL</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-sky-500" />
-                  <span>Next-day planned collections with guaranteed delivery dates</span>
-                </li>
+            <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 text-xs">
+              <strong className="text-slate-900 block font-bold text-sm">Typical Scheduled Contracts:</strong>
+              <ul className="space-y-2 text-slate-600">
+                <li>• Regular inter-branch stock distribution</li>
+                <li>• Bulk print magazine and catalog releases</li>
+                <li>• Exhibition materials to the NEC Birmingham or London ExCeL</li>
+                <li>• Planned next-day collections with specific handover windows</li>
               </ul>
             </div>
           </div>
         )}
 
-        {/* Tab Content 3: Student Move */}
+        {/* Tab 3 Content: Student Move */}
         {activeTab === "student" && (
-          <div className="rounded-3xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 items-center animate-in fade-in duration-300">
-            <div className="lg:col-span-7 space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-extrabold uppercase">
-                <GraduationCap className="w-3.5 h-3.5" />
-                University & Campus Relocation
-              </div>
-              <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
-                Student Accommodation & Belongings Move
-              </h3>
-              <p className="text-slate-600 text-sm leading-relaxed">
-                As featured on our official service offerings: where a student needs to relocate between
-                home and university campus accommodation (such as Warwick University, Coventry University,
-                or UK-wide), we are able to transport both person and personal belongings directly door to door.
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7 space-y-4">
+              <h2 className="text-2xl font-black text-slate-900">
+                Student Accommodation &amp; Belongings Moves
+              </h2>
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                As detailed on our official website: where a student needs to relocate between home and
+                university accommodation, we are able to move both person and belongings together.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Move Person & Belongings</span>
-                    <span className="text-slate-500">Travel alongside your suitcases, computers & luggage</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Direct Campus Delivery</span>
-                    <span className="text-slate-500">Straight to your halls of residence or student flat</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Spacious Clean Vans</span>
-                    <span className="text-slate-500">Room for desks, clothing racks, sports kit & bedding</span>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-2.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900 block">Fixed Clear Student Pricing</span>
-                    <span className="text-slate-500">No unexpected surcharges or hidden fuel add-ons</span>
-                  </div>
-                </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 text-xs">
+                <div className="font-bold text-slate-900">Student Relocation Benefits:</div>
+                <ul className="space-y-2 text-slate-700">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Travel With Your Luggage:</strong> Passenger ride-along to university halls.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Direct Campus Delivery:</strong> Door to door with no transfers or lost bags.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Clean, Spacious Vans:</strong> Ample room for desks, desktop PCs, suitcases, and bedding.</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                    <span><strong>Fixed Clear Prices:</strong> No surprise add-ons.</span>
+                  </li>
+                </ul>
               </div>
 
               <div className="pt-2">
                 <button
                   onClick={() => onNavigate("quote")}
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md transition-all cursor-pointer"
+                  className="px-5 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors inline-flex items-center gap-1.5"
                 >
-                  <span>Request Student Relocation Quote</span>
+                  <span>Get Student Move Quote</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
 
-            <div className="lg:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-200 space-y-4">
-              <div className="font-bold text-sm text-slate-900">Popular Universities Served:</div>
-              <ul className="space-y-3 text-xs text-slate-600">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                  <span>University of Warwick (Gibbet Hill / Westwood / Campus)</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                  <span>Coventry University & Technology Park student flats</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                  <span>University of Birmingham & Aston University</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
-                  <span>Loughborough, Leicester & Nottingham campuses</span>
-                </li>
+            <div className="lg:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3 text-xs">
+              <strong className="text-slate-900 block font-bold text-sm">Key Universities Regularly Served:</strong>
+              <ul className="space-y-2 text-slate-600">
+                <li>• University of Warwick (Coventry campus / Gibbet Hill)</li>
+                <li>• Coventry University &amp; Technology Park</li>
+                <li>• University of Birmingham &amp; Aston University</li>
+                <li>• Loughborough, Leicester &amp; Nottingham universities</li>
+                <li>• UK-wide home to campus relocations</li>
               </ul>
             </div>
           </div>
         )}
       </section>
 
-      {/* Complete Vehicle Fleet Specifications */}
+      {/* Fleet Table - Industrial, Tabular, Clear */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="text-center max-w-2xl mx-auto mb-10 space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-            Radical Courier Vehicle Fleet Specifications
+        <div className="border-b border-slate-200 pb-3 mb-6">
+          <h2 className="text-2xl font-black text-slate-900">
+            Vehicle Fleet Load Capacities
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm">
-            Payload capacities and maximum cargo dimensions across our fleet.
+          <p className="text-xs text-slate-600">
+            Maximum load dimensions, weight, and pallet count across our vehicle sizes.
           </p>
         </div>
 
-        <div className="overflow-x-auto rounded-3xl border border-slate-200 shadow-sm bg-white">
-          <table className="w-full text-left border-collapse text-xs">
-            <thead>
-              <tr className="bg-slate-900 text-white">
-                <th className="py-4 px-5 font-bold uppercase tracking-wider text-[11px]">Vehicle Class</th>
-                <th className="py-4 px-4 font-bold uppercase tracking-wider text-[11px]">Dimensions (L × W × H)</th>
-                <th className="py-4 px-4 font-bold uppercase tracking-wider text-[11px]">Payload Capacity</th>
-                <th className="py-4 px-4 font-bold uppercase tracking-wider text-[11px]">Pallets</th>
-                <th className="py-4 px-5 font-bold uppercase tracking-wider text-[11px]">Best Suited For</th>
-                <th className="py-4 px-4 font-bold uppercase tracking-wider text-[11px] text-right">Action</th>
+        <div className="overflow-x-auto border border-slate-200 rounded-xl">
+          <table className="w-full text-left text-xs">
+            <thead className="bg-slate-900 text-white">
+              <tr>
+                <th className="py-3 px-4 font-bold">Vehicle Class</th>
+                <th className="py-3 px-4 font-bold">Dimensions (L × W × H)</th>
+                <th className="py-3 px-4 font-bold">Max Payload</th>
+                <th className="py-3 px-4 font-bold">Pallets</th>
+                <th className="py-3 px-4 font-bold">Ideal Consignment</th>
+                <th className="py-3 px-4 font-bold text-right">Rate</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-slate-100 font-medium">
-              {RADICAL_VANS.map((v) => (
-                <tr key={v.id} className="hover:bg-slate-50 transition-colors">
-                  <td className="py-4 px-5 font-extrabold text-slate-900 flex items-center gap-2">
-                    <Truck className="w-4 h-4 text-[#0284C7]" />
-                    <span>{v.name}</span>
-                  </td>
-                  <td className="py-4 px-4 text-slate-700">
-                    {v.length} × {v.width} × {v.height}
-                  </td>
-                  <td className="py-4 px-4 font-bold text-slate-900">{v.payload}</td>
-                  <td className="py-4 px-4">
-                    <span className="font-bold text-[#0284C7] bg-sky-50 px-2 py-0.5 rounded-md">
-                      {v.pallets} Pallet{v.pallets > 1 ? "s" : ""}
-                    </span>
-                  </td>
-                  <td className="py-4 px-5 text-slate-600 max-w-xs">{v.idealFor}</td>
-                  <td className="py-4 px-4 text-right">
+              {RADICAL_VANS.map((van) => (
+                <tr key={van.id} className="hover:bg-slate-50">
+                  <td className="py-3.5 px-4 font-bold text-slate-900">{van.name}</td>
+                  <td className="py-3.5 px-4 text-slate-700 font-mono">{van.length} × {van.width} × {van.height}</td>
+                  <td className="py-3.5 px-4 font-semibold text-slate-800">{van.payload}</td>
+                  <td className="py-3.5 px-4 font-bold text-[#0284C7]">{van.pallets} Pallet{van.pallets > 1 ? "s" : ""}</td>
+                  <td className="py-3.5 px-4 text-slate-600">{van.idealFor}</td>
+                  <td className="py-3.5 px-4 text-right">
                     <button
                       onClick={() => onNavigate("quote")}
-                      className="px-3 py-1.5 rounded-lg bg-sky-50 text-[#0284C7] hover:bg-[#0284C7] hover:text-white font-bold transition-all"
+                      className="px-3 py-1 rounded bg-slate-100 hover:bg-[#0284C7] hover:text-white text-slate-800 font-bold transition-colors"
                     >
                       Quote
                     </button>
@@ -419,33 +307,6 @@ export function RadicalCourierServicesPage({
               ))}
             </tbody>
           </table>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="rounded-3xl bg-slate-900 text-white p-8 sm:p-12 text-center space-y-4">
-          <h3 className="text-2xl sm:text-3xl font-black">
-            Have a Bespoke Logistics Requirement?
-          </h3>
-          <p className="text-slate-300 text-xs sm:text-sm max-w-xl mx-auto">
-            Need multiple drops, round-trip return journeys, or contract pricing?
-            Our operations director is available 24/7.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <button
-              onClick={() => onNavigate("quote")}
-              className="px-6 py-3.5 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white font-bold text-xs"
-            >
-              Get Instant Online Quote
-            </button>
-            <button
-              onClick={() => onNavigate("contact")}
-              className="px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20"
-            >
-              Contact Operations Team
-            </button>
-          </div>
         </div>
       </section>
     </div>

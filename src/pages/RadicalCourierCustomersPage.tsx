@@ -1,18 +1,13 @@
 import { useState } from "react";
 import {
   User,
-  Lock,
   Building,
   ShieldCheck,
   CheckCircle2,
-  FileText,
   Search,
   ArrowRight,
-  Sparkles,
-  Truck,
-  CreditCard,
-  MapPin,
-  Clock,
+  FileText,
+  Lock,
 } from "lucide-react";
 import { RadicalSubPage } from "@/components/radicalcourier/RadicalCourierHeader";
 import { toast } from "sonner";
@@ -24,260 +19,194 @@ interface RadicalCourierCustomersPageProps {
 export function RadicalCourierCustomersPage({
   onNavigate,
 }: RadicalCourierCustomersPageProps) {
-  const [activeTab, setActiveTab] = useState<"login" | "register" | "track">("track");
-
-  // Tracking State
-  const [trackingNumber, setTrackingNumber] = useState("");
-  const [trackingResult, setTrackingResult] = useState<any>(null);
-  const [isTracking, setIsTracking] = useState(false);
+  const [activeTab, setActiveTab] = useState<"login" | "account" | "pod">("login");
 
   // Login State
-  const [loginEmail, setLoginEmail] = useState("");
-  const [loginPassword, setLoginPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoggingIn, setIsLoggingIn] = useState(false);
 
-  // Corporate Register State
-  const [compName, setCompName] = useState("");
-  const [contactPerson, setContactPerson] = useState("");
-  const [compEmail, setCompEmail] = useState("");
-  const [compPhone, setCompPhone] = useState("");
-  const [estMonthlySpend, setEstMonthlySpend] = useState("£500 - £2,000");
+  // Corporate Application
+  const [companyName, setCompanyName] = useState("");
+  const [regNumber, setRegNumber] = useState("");
+  const [contactName, setContactName] = useState("");
+  const [billingEmail, setBillingEmail] = useState("");
+  const [billingPhone, setBillingPhone] = useState("");
+  const [monthlySpend, setMonthlySpend] = useState("£500 - £2,000 / month");
+  const [accountApplied, setAccountApplied] = useState(false);
 
-  const handleTrack = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!trackingNumber.trim()) {
-      toast.error("Please enter a consignment reference or postcode.");
-      return;
-    }
-
-    setIsTracking(true);
-    setTimeout(() => {
-      setIsTracking(false);
-      setTrackingResult({
-        ref: trackingNumber.toUpperCase(),
-        status: "Active In Transit",
-        driverName: "Neil C. (Dedicated Driver)",
-        vehicle: "Ford Transit LWB (Reg: VK23 ***)",
-        pickup: "Coventry CV1 (Collected 11:15 AM)",
-        destination: "London EC1 (Estimated Delivery 1:45 PM)",
-        progress: 75,
-        updated: "2 minutes ago (M40 Southbound)",
-      });
-      toast.success("Consignment located! Displaying live tracking telemetry.");
-    }, 600);
-  };
+  // POD Search
+  const [podRef, setPodRef] = useState("");
+  const [podFound, setPodFound] = useState<any>(null);
+  const [isSearching, setIsSearching] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoggingIn(true);
     setTimeout(() => {
       setIsLoggingIn(false);
-      toast.success("Welcome back! Loading account orders and invoice history...");
+      toast.success("Welcome back! Loading account dashboard...");
       onNavigate("quote");
-    }, 700);
+    }, 600);
   };
 
-  const handleRegisterAccount = (e: React.FormEvent) => {
+  const handleAccountApply = (e: React.FormEvent) => {
     e.preventDefault();
-    toast.success("Corporate 30-day invoice account request received. A business coordinator will contact you.");
+    if (!companyName || !contactName || !billingEmail || !billingPhone) {
+      toast.error("Please fill in all required company details.");
+      return;
+    }
+    setAccountApplied(true);
+    toast.success("Credit account application received. Our accounts team will review within 24 hours.");
+  };
+
+  const handlePodSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!podRef.trim()) {
+      toast.error("Please enter a consignment reference (e.g. RAD-84291).");
+      return;
+    }
+    setIsSearching(true);
+    setTimeout(() => {
+      setIsSearching(false);
+      setPodFound({
+        ref: podRef.toUpperCase(),
+        date: "Today, Same-Day Service",
+        status: "Delivered & Signed",
+        signedBy: "J. Davies (Front Desk Reception)",
+        time: "14:22 GMT",
+        vehicle: "Ford Transit LWB (Dedicated Driver Neil C.)",
+        origin: "Coventry CV1",
+        destination: "London EC1",
+      });
+      toast.success("Consignment record retrieved.");
+    }, 500);
   };
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
-      {/* Header Banner */}
-      <section className="bg-gradient-to-b from-slate-900 via-[#0B152E] to-slate-900 text-white py-14 sm:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-wider border border-sky-400/30">
-            Client Portal & Live Telemetry
+    <div className="space-y-12 sm:space-y-16 pb-16 bg-white text-slate-900">
+      {/* Header */}
+      <section className="bg-slate-900 text-white border-b border-slate-800 py-10 sm:py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-3 text-center sm:text-left">
+          <div className="text-xs font-bold uppercase tracking-wider text-sky-400">
+            Client Portal &amp; Account Management
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
-            Customer Portal & Consignment Tracking
+          <h1 className="text-3xl sm:text-4xl font-black text-white">
+            Customer Login &amp; Business Accounts
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Track active same-day deliveries, manage corporate 30-day credit accounts, and access
-            instant Proof of Delivery (POD) signatures.
+          <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            Sign in to manage recurring bookings, apply for a 30-day corporate credit account,
+            or look up electronic Proof of Delivery (POD) signatures.
           </p>
         </div>
       </section>
 
-      {/* Main Interactive Hub */}
+      {/* Main Content Area */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6">
-        {/* Tab Buttons */}
-        <div className="flex justify-center mb-8">
-          <div className="inline-flex p-1.5 rounded-2xl bg-slate-100 border border-slate-200">
-            <button
-              onClick={() => setActiveTab("track")}
-              className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                activeTab === "track" ? "bg-white text-[#0284C7] shadow-sm" : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Search className="w-4 h-4 text-[#0284C7]" />
-              <span>Live Consignment Tracking</span>
-            </button>
+        {/* Sub-Tabs */}
+        <div className="flex border-b border-slate-200 mb-8 overflow-x-auto text-xs">
+          <button
+            onClick={() => setActiveTab("login")}
+            className={`px-5 py-3 font-bold border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+              activeTab === "login"
+                ? "border-[#0284C7] text-[#0284C7]"
+                : "border-transparent text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            <User className="w-4 h-4 text-[#0284C7]" />
+            <span>Customer Sign In</span>
+          </button>
 
-            <button
-              onClick={() => setActiveTab("login")}
-              className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                activeTab === "login" ? "bg-white text-[#0284C7] shadow-sm" : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <User className="w-4 h-4 text-[#0284C7]" />
-              <span>Customer Sign In</span>
-            </button>
+          <button
+            onClick={() => setActiveTab("account")}
+            className={`px-5 py-3 font-bold border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+              activeTab === "account"
+                ? "border-[#0284C7] text-[#0284C7]"
+                : "border-transparent text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            <Building className="w-4 h-4 text-emerald-600" />
+            <span>Apply for 30-Day Credit Account</span>
+          </button>
 
-            <button
-              onClick={() => setActiveTab("register")}
-              className={`px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-2 ${
-                activeTab === "register" ? "bg-white text-[#0284C7] shadow-sm" : "text-slate-600 hover:text-slate-900"
-              }`}
-            >
-              <Building className="w-4 h-4 text-emerald-600" />
-              <span>Open Business Account</span>
-            </button>
-          </div>
+          <button
+            onClick={() => setActiveTab("pod")}
+            className={`px-5 py-3 font-bold border-b-2 transition-colors flex items-center gap-2 whitespace-nowrap ${
+              activeTab === "pod"
+                ? "border-[#0284C7] text-[#0284C7]"
+                : "border-transparent text-slate-600 hover:text-slate-900"
+            }`}
+          >
+            <Search className="w-4 h-4 text-slate-600" />
+            <span>Proof of Delivery (POD) Search</span>
+          </button>
         </div>
 
-        {/* Tab 1: Live Tracking */}
-        {activeTab === "track" && (
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm space-y-6 animate-in fade-in duration-200">
-            <div className="border-b border-slate-100 pb-4 text-center sm:text-left">
-              <h3 className="text-xl font-bold text-slate-900">Track an Active Consignment</h3>
-              <p className="text-xs text-slate-500">
-                Enter your Radical Job Reference (e.g. RAD-84291) or destination postcode
-              </p>
-            </div>
-
-            <form onSubmit={handleTrack} className="flex flex-col sm:flex-row gap-3">
-              <div className="relative flex-1">
-                <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
-                <input
-                  type="text"
-                  placeholder="e.g. RAD-49210 or CV1..."
-                  value={trackingNumber}
-                  onChange={(e) => setTrackingNumber(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-white py-3 pl-10 pr-4 text-sm font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
-                />
-              </div>
-              <button
-                type="submit"
-                disabled={isTracking}
-                className="px-6 py-3 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold shadow-md transition-all shrink-0 cursor-pointer"
-              >
-                {isTracking ? "Locating..." : "Track Now"}
-              </button>
-            </form>
-
-            {/* Tracking Result Mockup */}
-            {trackingResult && (
-              <div className="rounded-2xl border border-sky-100 bg-sky-50/60 p-6 space-y-4 animate-in slide-in-from-top duration-300">
-                <div className="flex flex-wrap items-center justify-between gap-2 border-b border-sky-100 pb-3">
-                  <div>
-                    <span className="text-[10px] font-black uppercase tracking-wider text-sky-700 block">
-                      Consignment Telemetry
-                    </span>
-                    <span className="text-lg font-black text-slate-900">{trackingResult.ref}</span>
-                  </div>
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
-                    {trackingResult.status}
-                  </span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
-                  <div>
-                    <span className="text-slate-500 block">Dedicated Driver:</span>
-                    <span className="font-bold text-slate-900">{trackingResult.driverName}</span>
-                    <span className="text-slate-500 block">{trackingResult.vehicle}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 block">Current Position:</span>
-                    <span className="font-bold text-slate-900">{trackingResult.updated}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 block">Collection Point:</span>
-                    <span className="font-semibold text-slate-800">{trackingResult.pickup}</span>
-                  </div>
-                  <div>
-                    <span className="text-slate-500 block">Direct Handover To:</span>
-                    <span className="font-semibold text-slate-800">{trackingResult.destination}</span>
-                  </div>
-                </div>
-
-                {/* Progress Bar */}
-                <div className="space-y-1.5 pt-2">
-                  <div className="flex items-center justify-between text-xs text-slate-600 font-semibold">
-                    <span>In Transit</span>
-                    <span>75% Completed</span>
-                  </div>
-                  <div className="w-full h-2.5 rounded-full bg-sky-200 overflow-hidden">
-                    <div className="h-full bg-[#0284C7] rounded-full transition-all duration-1000 w-3/4" />
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Tab 2: Login */}
+        {/* Tab 1: Login */}
         {activeTab === "login" && (
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm space-y-6 animate-in fade-in duration-200">
-            <div className="border-b border-slate-100 pb-4 text-center sm:text-left">
-              <h3 className="text-xl font-bold text-slate-900">Sign In to Your Customer Account</h3>
-              <p className="text-xs text-slate-500">Access saved delivery addresses and volume discount rates</p>
+          <div className="border border-slate-200 rounded-xl p-6 bg-white space-y-4 max-w-md mx-auto text-xs">
+            <div className="border-b border-slate-100 pb-3">
+              <h2 className="text-lg font-black text-slate-900">Sign In to Your Account</h2>
+              <span className="text-slate-500">Access saved delivery addresses and preferential rates</span>
             </div>
 
-            <form onSubmit={handleLogin} className="space-y-4 max-w-md mx-auto">
+            <form onSubmit={handleLogin} className="space-y-3">
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                  Email Address
-                </label>
+                <label className="font-bold text-slate-700 block mb-1">Email Address</label>
                 <input
                   type="email"
                   placeholder="name@company.co.uk"
-                  value={loginEmail}
-                  onChange={(e) => setLoginEmail(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
                   required
                 />
               </div>
 
               <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                  Password
-                </label>
+                <label className="font-bold text-slate-700 block mb-1">Password</label>
                 <input
                   type="password"
                   placeholder="••••••••"
-                  value={loginPassword}
-                  onChange={(e) => setLoginPassword(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
                   required
                 />
               </div>
 
-              <div className="flex items-center justify-between text-xs pt-1">
-                <label className="flex items-center gap-2 cursor-pointer text-slate-600">
+              <div className="flex items-center justify-between pt-1">
+                <label className="flex items-center gap-1.5 cursor-pointer text-slate-600">
                   <input type="checkbox" className="rounded text-[#0284C7]" defaultChecked />
                   <span>Remember me</span>
                 </label>
-                <a href="#reset" onClick={(e) => { e.preventDefault(); toast.info("Password reset instructions will be sent to your email."); }} className="text-[#0284C7] hover:underline font-semibold">
+                <a
+                  href="#reset"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    toast.info("Password reset instructions sent to your email.");
+                  }}
+                  className="text-[#0284C7] hover:underline"
+                >
                   Forgot password?
                 </a>
               </div>
 
-              <button
-                type="submit"
-                disabled={isLoggingIn}
-                className="w-full py-3 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold shadow-md transition-all cursor-pointer"
-              >
-                {isLoggingIn ? "Authenticating..." : "Sign In to Account"}
-              </button>
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={isLoggingIn}
+                  className="w-full py-2.5 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold transition-colors"
+                >
+                  {isLoggingIn ? "Signing In..." : "Sign In"}
+                </button>
+              </div>
 
-              <div className="text-center pt-2">
+              <div className="text-center pt-2 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => onNavigate("quote")}
-                  className="text-xs text-slate-500 hover:text-slate-800 underline"
+                  className="text-slate-600 hover:text-slate-900 underline"
                 >
                   Return to quote calculator without logging in
                 </button>
@@ -286,100 +215,180 @@ export function RadicalCourierCustomersPage({
           </div>
         )}
 
-        {/* Tab 3: Corporate Account Application */}
-        {activeTab === "register" && (
-          <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm space-y-6 animate-in fade-in duration-200">
-            <div className="border-b border-slate-100 pb-4 text-center sm:text-left">
-              <h3 className="text-xl font-bold text-slate-900">Open a Corporate 30-Day Credit Account</h3>
-              <p className="text-xs text-slate-500">
-                Unlock monthly VAT invoice consolidation, preferential volume mileage rates, and priority dispatch
+        {/* Tab 2: 30-Day Credit Account Application */}
+        {activeTab === "account" && (
+          <div className="border border-slate-200 rounded-xl p-6 bg-white space-y-4 text-xs">
+            <div className="border-b border-slate-100 pb-3">
+              <h2 className="text-lg font-black text-slate-900">
+                Open a 30-Day Business Credit Account
+              </h2>
+              <p className="text-slate-600">
+                For regular commercial shippers across Warwickshire, the Midlands, and UK nationwide.
+                Enjoy consolidated monthly VAT billing and preferential mileage tariff rates.
               </p>
             </div>
 
-            <form onSubmit={handleRegisterAccount} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                    Company Registered Name *
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Midlands Engineering Ltd"
-                    value={compName}
-                    onChange={(e) => setCompName(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
-                    required
-                  />
+            {accountApplied ? (
+              <div className="text-center py-8 space-y-2">
+                <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-6 h-6" />
                 </div>
-
-                <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                    Accounts Contact Person *
-                  </label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Sarah Jenkins"
-                    value={contactPerson}
-                    onChange={(e) => setContactPerson(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
-                    required
-                  />
-                </div>
+                <h3 className="text-base font-bold text-slate-900">Application Lodged</h3>
+                <p className="text-slate-600 max-w-sm mx-auto">
+                  Thank you, {contactName}. Our credit control team will verify company details
+                  and email your account terms and pricing schedule to <strong>{billingEmail}</strong>.
+                </p>
               </div>
+            ) : (
+              <form onSubmit={handleAccountApply} className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Company Registered Name *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Midlands Engineering Ltd"
+                      value={companyName}
+                      onChange={(e) => setCompanyName(e.target.value)}
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+                      required
+                    />
+                  </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                    Accounts Billing Email *
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="invoices@company.co.uk"
-                    value={compEmail}
-                    onChange={(e) => setCompEmail(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
-                    required
-                  />
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Company Reg / VAT Number</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. 01234567 / GB 123 4567 89"
+                      value={regNumber}
+                      onChange={(e) => setRegNumber(e.target.value)}
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Accounts Contact Name *</label>
+                    <input
+                      type="text"
+                      placeholder="e.g. Sarah Jenkins"
+                      value={contactName}
+                      onChange={(e) => setContactName(e.target.value)}
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Billing Email *</label>
+                    <input
+                      type="email"
+                      placeholder="invoices@company.co.uk"
+                      value={billingEmail}
+                      onChange={(e) => setBillingEmail(e.target.value)}
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+                      required
+                    />
+                  </div>
+
+                  <div>
+                    <label className="font-bold text-slate-700 block mb-1">Direct Phone *</label>
+                    <input
+                      type="tel"
+                      placeholder="e.g. 024 7600 0000"
+                      value={billingPhone}
+                      onChange={(e) => setBillingPhone(e.target.value)}
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+                      required
+                    />
+                  </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                    Direct Phone Number *
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="e.g. 024 7600 0000"
-                    value={compPhone}
-                    onChange={(e) => setCompPhone(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
-                    required
-                  />
+                  <label className="font-bold text-slate-700 block mb-1">Estimated Monthly Courier Volume</label>
+                  <select
+                    value={monthlySpend}
+                    onChange={(e) => setMonthlySpend(e.target.value)}
+                    className="w-full rounded-lg border border-slate-300 py-2 px-2.5 text-xs font-medium text-slate-900"
+                  >
+                    <option value="Under £500 / month">Occasional (Under £500 / month)</option>
+                    <option value="£500 - £2,000 / month">Regular (£500 - £2,000 / month)</option>
+                    <option value="£2,000 - £5,000 / month">High Volume (£2,000 - £5,000 / month)</option>
+                    <option value="£5,000+ / month">Contract &amp; Daily Routes (£5,000+ / month)</option>
+                  </select>
                 </div>
-              </div>
 
-              <div>
-                <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                  Estimated Monthly Courier Spend
-                </label>
-                <select
-                  value={estMonthlySpend}
-                  onChange={(e) => setEstMonthlySpend(e.target.value)}
-                  className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
-                >
-                  <option value="Under £500">Occasional (Under £500 / month)</option>
-                  <option value="£500 - £2,000">Regular (£500 - £2,000 / month)</option>
-                  <option value="£2,000 - £5,000">High Volume (£2,000 - £5,000 / month)</option>
-                  <option value="£5,000+">Enterprise & Daily Routes (£5,000+ / month)</option>
-                </select>
-              </div>
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold transition-colors"
+                  >
+                    Submit Credit Account Application
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        )}
 
+        {/* Tab 3: POD Search */}
+        {activeTab === "pod" && (
+          <div className="border border-slate-200 rounded-xl p-6 bg-white space-y-4 text-xs">
+            <div className="border-b border-slate-100 pb-3">
+              <h2 className="text-lg font-black text-slate-900">
+                Proof of Delivery (POD) Search
+              </h2>
+              <p className="text-slate-600">
+                Look up completed or in-transit delivery records by your Radical Reference number.
+              </p>
+            </div>
+
+            <form onSubmit={handlePodSearch} className="flex gap-2">
+              <input
+                type="text"
+                placeholder="e.g. RAD-84291"
+                value={podRef}
+                onChange={(e) => setPodRef(e.target.value)}
+                className="flex-1 rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+              />
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md transition-all cursor-pointer"
+                disabled={isSearching}
+                className="px-5 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs transition-colors shrink-0"
               >
-                Apply for 30-Day Credit Account
+                {isSearching ? "Searching..." : "Look Up"}
               </button>
             </form>
+
+            {podFound && (
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 mt-4">
+                <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+                  <span className="font-mono font-bold text-slate-900 text-sm">{podFound.ref}</span>
+                  <span className="font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded text-[11px]">
+                    {podFound.status}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 text-slate-700">
+                  <div>
+                    <span className="text-slate-500 block">Signed By:</span>
+                    <strong>{podFound.signedBy}</strong>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block">Delivered At:</span>
+                    <strong>{podFound.time} ({podFound.date})</strong>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block">Route:</span>
+                    <span>{podFound.origin} → {podFound.destination}</span>
+                  </div>
+                  <div>
+                    <span className="text-slate-500 block">Driver:</span>
+                    <span>{podFound.vehicle}</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </section>

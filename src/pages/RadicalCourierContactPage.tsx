@@ -6,11 +6,8 @@ import {
   Clock,
   ShieldCheck,
   Send,
-  MessageSquare,
-  Sparkles,
-  ArrowRight,
   CheckCircle2,
-  AlertCircle,
+  Calculator,
 } from "lucide-react";
 import { RadicalSubPage } from "@/components/radicalcourier/RadicalCourierHeader";
 import { toast } from "sonner";
@@ -41,178 +38,159 @@ export function RadicalCourierContactPage({
     setTimeout(() => {
       setIsSubmitting(false);
       setSent(true);
-      toast.success("Enquiry sent directly to Coventry dispatch!");
-    }, 600);
+      toast.success("Enquiry sent to Coventry dispatch control.");
+    }, 500);
   };
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
-      {/* Header Banner */}
-      <section className="bg-gradient-to-b from-slate-900 via-[#0B152E] to-slate-900 text-white py-14 sm:py-20 relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-bold uppercase tracking-wider border border-sky-400/30">
-            24/7 Operations Desk
+    <div className="space-y-12 sm:space-y-16 pb-16 bg-white text-slate-900">
+      {/* Header */}
+      <section className="bg-slate-900 text-white border-b border-slate-800 py-10 sm:py-14">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-3 text-center sm:text-left">
+          <div className="text-xs font-bold uppercase tracking-wider text-sky-400">
+            24/7 Dispatch Control • Coventry Operations
           </div>
-          <h1 className="text-3xl sm:text-5xl font-black tracking-tight text-white">
+          <h1 className="text-3xl sm:text-4xl font-black text-white">
             Contact Radical Courier Service
           </h1>
-          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Our Coventry dispatch controllers are on duty 24 hours a day, 7 days a week, 365 days a year.
-            Reach out by phone, email, or send an enquiry below.
+          <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
+            Our Coventry dispatch team is available 24 hours a day, 7 days a week, 365 days a year.
+            Whether you need urgent collection within the hour or advice on vehicle sizing, reach out directly.
           </p>
         </div>
       </section>
 
-      {/* Contact Cards Grid */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      {/* Main Grid */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           {/* Phone */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm text-center space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-sky-50 text-[#0284C7] flex items-center justify-center mx-auto">
-              <Phone className="w-6 h-6" />
+          <div className="border border-slate-200 rounded-xl p-5 bg-white text-xs space-y-2">
+            <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <Phone className="w-4 h-4 text-[#0284C7]" />
+              <span>24/7 Telephone Hotline</span>
             </div>
-            <h3 className="font-extrabold text-base text-slate-900">24/7 Phone Hotline</h3>
-            <p className="text-xs text-slate-500">
-              Immediate answer from real coordinators — never an offshore call center.
-            </p>
+            <p className="text-slate-600">Immediate response from our Coventry operations controllers:</p>
             <a
               href="tel:02475122465"
-              className="inline-block text-lg font-black text-[#0284C7] hover:underline"
+              className="text-base font-extrabold text-[#0284C7] block hover:underline"
             >
               024 7512 2465
             </a>
           </div>
 
           {/* Email */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm text-center space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
-              <Mail className="w-6 h-6" />
+          <div className="border border-slate-200 rounded-xl p-5 bg-white text-xs space-y-2">
+            <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <Mail className="w-4 h-4 text-[#0284C7]" />
+              <span>Operations &amp; Billing Email</span>
             </div>
-            <h3 className="font-extrabold text-base text-slate-900">Dispatch Email</h3>
-            <p className="text-xs text-slate-500">
-              Quotes, proof of delivery requests & billing inquiries.
-            </p>
+            <p className="text-slate-600">Quotations, POD receipts, and accounts:</p>
             <a
               href="mailto:info@radicalcourier.co.uk"
-              className="inline-block text-sm font-black text-emerald-700 hover:underline"
+              className="text-sm font-bold text-slate-900 block hover:underline truncate"
             >
               info@radicalcourier.co.uk
             </a>
           </div>
 
-          {/* Registered Office */}
-          <div className="rounded-3xl border border-slate-200 bg-white p-7 shadow-sm text-center space-y-3">
-            <div className="w-12 h-12 rounded-2xl bg-slate-100 text-slate-700 flex items-center justify-center mx-auto">
-              <MapPin className="w-6 h-6" />
+          {/* Office Address */}
+          <div className="border border-slate-200 rounded-xl p-5 bg-white text-xs space-y-2">
+            <div className="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <MapPin className="w-4 h-4 text-[#0284C7]" />
+              <span>Registered Office</span>
             </div>
-            <h3 className="font-extrabold text-base text-slate-900">Coventry Operations Hub</h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-slate-600">
               38 Crossway Road, Green Lane, Coventry, CV3 6JP
             </p>
-            <div className="text-xs font-bold text-slate-700">
-              Serving West Midlands & UK Nationwide
-            </div>
+            <span className="text-slate-500 text-[11px] block">Company No. 06143596</span>
           </div>
         </div>
 
-        {/* Contact Form & Emergency Box */}
+        {/* Contact Form & Urgent Dispatch Card */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          <div className="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-sm">
+          <div className="lg:col-span-7 border border-slate-200 rounded-xl p-6 bg-white shadow-xs text-xs space-y-4">
+            <div className="border-b border-slate-100 pb-3">
+              <h2 className="text-base font-bold text-slate-900">Send an Enquiry</h2>
+              <span className="text-slate-500">For instant pricing, please use our online quote calculator</span>
+            </div>
+
             {sent ? (
-              <div className="text-center py-12 space-y-4">
-                <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-8 h-8" />
+              <div className="text-center py-8 space-y-2">
+                <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-6 h-6" />
                 </div>
-                <h3 className="text-2xl font-black text-slate-900">Message Delivered</h3>
-                <p className="text-slate-600 text-xs sm:text-sm max-w-md mx-auto">
-                  Thank you, {name}. Our Coventry control desk has received your note and will reply
-                  promptly via {email} or {phone}.
+                <h3 className="text-base font-bold text-slate-900">Enquiry Received</h3>
+                <p className="text-slate-600 max-w-sm mx-auto">
+                  Thank you, {name}. A member of our operations team will reply to you promptly.
                 </p>
                 <button
                   onClick={() => setSent(false)}
-                  className="px-5 py-2.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-50"
+                  className="px-4 py-2 rounded-lg border border-slate-300 text-slate-700 font-bold hover:bg-slate-50 mt-2"
                 >
                   Send Another Message
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="border-b border-slate-100 pb-3">
-                  <h3 className="text-lg font-bold text-slate-900">Send an Online Enquiry</h3>
-                  <p className="text-xs text-slate-500">
-                    For booking an urgent collection right now, please use our online quote calculator
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                      Your Name *
-                    </label>
+                    <label className="font-bold text-slate-700 block mb-1">Your Name *</label>
                     <input
                       type="text"
                       placeholder="e.g. David Miller"
                       value={name}
                       onChange={(e) => setName(e.target.value)}
-                      className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                      Contact Phone *
-                    </label>
+                    <label className="font-bold text-slate-700 block mb-1">Telephone Number *</label>
                     <input
                       type="tel"
                       placeholder="e.g. 07123 456789"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
                       required
                     />
                   </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                      Email Address *
-                    </label>
+                    <label className="font-bold text-slate-700 block mb-1">Email Address *</label>
                     <input
                       type="email"
                       placeholder="e.g. name@company.co.uk"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                      Subject / Consignment Type
-                    </label>
+                    <label className="font-bold text-slate-700 block mb-1">Subject</label>
                     <input
                       type="text"
-                      placeholder="e.g. Urgent machine part / Contract quote"
+                      placeholder="e.g. Urgent Delivery / Account Query"
                       value={subject}
                       onChange={(e) => setSubject(e.target.value)}
-                      className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
+                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="text-xs font-bold uppercase tracking-wider text-slate-700 block mb-1">
-                    Your Message / Delivery Requirements *
-                  </label>
+                  <label className="font-bold text-slate-700 block mb-1">Message / Consignment Details *</label>
                   <textarea
                     rows={4}
-                    placeholder="Tell us about collection & delivery locations, package size, weight, or dates..."
+                    placeholder="Provide details on pickup location, destination, cargo size, or requirements..."
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
-                    className="w-full rounded-xl border border-slate-200 bg-white py-2.5 px-3.5 text-xs font-medium text-slate-900 shadow-xs focus:border-[#0284C7] focus:ring-2 focus:ring-[#0284C7]/20"
+                    className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
                     required
                   />
                 </div>
@@ -221,53 +199,49 @@ export function RadicalCourierContactPage({
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-7 py-3 rounded-xl bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold transition-colors"
                   >
-                    <Send className="w-3.5 h-3.5" />
-                    <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
+                    {isSubmitting ? "Sending..." : "Submit Message"}
                   </button>
 
                   <button
                     type="button"
                     onClick={() => onNavigate("quote")}
-                    className="w-full sm:w-auto px-6 py-3 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all"
+                    className="w-full sm:w-auto px-4 py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-colors"
                   >
-                    Switch to Instant Quote Calculator
+                    Calculate Instant Online Quote
                   </button>
                 </div>
               </form>
             )}
           </div>
 
-          {/* Urgent Dispatch Right Callout */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 space-y-4 shadow-xl">
-              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
-                <Clock className="w-4 h-4" />
-                Urgent 60-Minute Collections
-              </div>
-              <h3 className="text-xl font-bold">Need a Courier Dispatched Right Now?</h3>
-              <p className="text-xs text-slate-300 leading-relaxed">
-                If your requirement is time-critical, do not wait for email replies. Call our 24-hour
-                desk directly so we can locate the nearest active driver in your area:
+          {/* Urgent Dispatch Advice */}
+          <div className="lg:col-span-5 space-y-4 text-xs">
+            <div className="border border-slate-200 rounded-xl p-5 bg-slate-50 space-y-2">
+              <strong className="text-slate-900 block font-bold text-sm">
+                Need Immediate Collection?
+              </strong>
+              <p className="text-slate-600 leading-relaxed">
+                If your requirement is time-critical or requires vehicle allocation within 60 minutes,
+                please telephone our 24-hour operations desk directly rather than waiting for an email reply.
               </p>
               <a
                 href="tel:02475122465"
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white font-extrabold text-sm shadow-md transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs mt-2"
               >
-                <Phone className="w-4 h-4" />
+                <Phone className="w-3.5 h-3.5 text-sky-400" />
                 <span>Call 024 7512 2465</span>
               </a>
             </div>
 
-            <div className="rounded-3xl bg-sky-50/70 border border-sky-100 p-6 space-y-3 text-xs text-slate-700">
-              <div className="font-bold text-sky-950 flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#0284C7]" />
+            <div className="border border-slate-200 rounded-xl p-5 bg-white space-y-2">
+              <strong className="text-slate-900 block font-bold text-sm">
                 Direct Driver Assurance
-              </div>
-              <p className="leading-relaxed">
-                We confirm the name and vehicle registration of your driver in advance.
-                You are welcome to liaise directly with the driver via mobile during transit.
+              </strong>
+              <p className="text-slate-600 leading-relaxed">
+                We capture delivery time and the full name of the receiving person. You will be made aware
+                of the driver's name and mobile number to enable direct live updates during transit.
               </p>
             </div>
           </div>
