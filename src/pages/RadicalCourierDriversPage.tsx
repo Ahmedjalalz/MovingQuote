@@ -47,240 +47,291 @@ export function RadicalCourierDriversPage({
   };
 
   return (
-    <div className="space-y-12 sm:space-y-16 pb-16 bg-white text-slate-900">
-      {/* Header */}
-      <section className="bg-slate-900 text-white border-b border-slate-800 py-10 sm:py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 space-y-3 text-center sm:text-left">
-          <div className="text-xs font-bold uppercase tracking-wider text-sky-400">
-            Owner-Drivers &amp; Courier Fleet Network
-          </div>
-          <h1 className="text-3xl sm:text-4xl font-black text-white">
-            Drive with Radical Courier Service
+    <div className="bg-white text-slate-900">
+      {/* Page Header */}
+      <section className="bg-slate-900 text-white border-b border-slate-800 py-14 sm:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <span className="text-xs font-semibold uppercase tracking-wider text-sky-400">
+            Owner-Drivers &amp; Courier Fleet
+          </span>
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white mt-3 tracking-tight">
+            Drive with Radical Courier
           </h1>
-          <p className="text-slate-300 text-xs sm:text-sm max-w-2xl leading-relaxed">
-            If you are based in or near Coventry, Warwickshire, or the West Midlands and have access to
-            your own van or motorcycle, we offer transparent rates, speedy payments, and direct support.
+          <p className="text-slate-300 text-sm sm:text-base max-w-2xl mt-4 leading-relaxed">
+            If you are based in Coventry, Warwickshire, or across the West Midlands and operate your own van
+            or courier motorcycle, we offer transparent rates, prompt direct payments, and dedicated dispatch support.
           </p>
         </div>
       </section>
 
-      {/* Driver Advantages (Direct from radicalcourier.co.uk) */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <div className="border border-slate-200 rounded-xl p-4 bg-white text-xs space-y-1.5">
-            <div className="font-bold text-slate-900 text-sm">Mobile Phone App</div>
-            <p className="text-slate-600">Available job notifications sent directly to your phone with full details.</p>
-          </div>
-
-          <div className="border border-slate-200 rounded-xl p-4 bg-white text-xs space-y-1.5">
-            <div className="font-bold text-slate-900 text-sm">Transparent Pay</div>
-            <p className="text-slate-600">See the exact mileage and payment due to you before you accept any job.</p>
-          </div>
-
-          <div className="border border-slate-200 rounded-xl p-4 bg-white text-xs space-y-1.5">
-            <div className="font-bold text-slate-900 text-sm">Speedy Payments</div>
-            <p className="text-slate-600">Prompt payments directly into your bank account with complete statements.</p>
-          </div>
-
-          <div className="border border-slate-200 rounded-xl p-4 bg-white text-xs space-y-1.5">
-            <div className="font-bold text-slate-900 text-sm">Live Job Support</div>
-            <p className="text-slate-600">Direct telephone support from our Coventry operations desk while on the road.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Requirements & Application Form */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Requirements */}
-          <div className="lg:col-span-5 space-y-4 text-xs">
-            <h2 className="text-xl font-black text-slate-900">
-              Driver Requirements
-            </h2>
-            <p className="text-slate-600 leading-relaxed">
-              To register as a driver with Radical Courier Service, you will need:
-            </p>
-
-            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-3">
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Vehicle:</strong> Van (Small Van, SWB, LWB, XLWB, or Luton) or courier motorcycle.</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Insurance:</strong> Appropriate Hire &amp; Reward courier insurance, Goods in Transit, and Public Liability.</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Documentation:</strong> Valid UK Driving Licence and current vehicle MOT.</span>
-              </div>
-              <div className="flex items-start gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                <span><strong>Mobile Device:</strong> Android smartphone to run the Radical Courier driver application.</span>
-              </div>
-            </div>
-
-            <p className="text-slate-500 text-[11px]">
-              Registration is completely free with no recurring subscription or sign-up fees.
-            </p>
-          </div>
-
-          {/* Right Column: Registration Form */}
-          <div className="lg:col-span-7 bg-white border border-slate-200 rounded-xl p-6 shadow-xs">
-            {isRegistered ? (
-              <div className="text-center py-8 space-y-3">
-                <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-black text-slate-900">Application Received</h3>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto">
-                  Thank you, {driverName}. A member of our fleet team will review your application and
-                  contact you at <strong>{driverPhone}</strong> to complete onboarding and app configuration.
-                </p>
-                <button
-                  onClick={() => setIsRegistered(false)}
-                  className="px-4 py-2 rounded-lg border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-50"
-                >
-                  Submit Another Profile
-                </button>
-              </div>
-            ) : (
-              <form onSubmit={handleRegister} className="space-y-3 text-xs">
-                <div className="border-b border-slate-100 pb-2 mb-2">
-                  <h3 className="text-base font-bold text-slate-900">Driver Registration Form</h3>
-                  <span className="text-[11px] text-slate-500">Free registration for owner-drivers</span>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Full Name *</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. John Smith"
-                      value={driverName}
-                      onChange={(e) => setDriverName(e.target.value)}
-                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Mobile Telephone *</label>
-                    <input
-                      type="tel"
-                      placeholder="e.g. 07123 456789"
-                      value={driverPhone}
-                      onChange={(e) => setDriverPhone(e.target.value)}
-                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Email Address *</label>
-                    <input
-                      type="email"
-                      placeholder="e.g. driver@domain.co.uk"
-                      value={driverEmail}
-                      onChange={(e) => setDriverEmail(e.target.value)}
-                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Home Base / Postcode *</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. Coventry, Rugby, Leamington"
-                      value={baseTown}
-                      onChange={(e) => setBaseTown(e.target.value)}
-                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="font-bold text-slate-700 block mb-1">Vehicle Type</label>
-                  <select
-                    value={vehicleType}
-                    onChange={(e) => setVehicleType(e.target.value)}
-                    className="w-full rounded-lg border border-slate-300 py-2 px-2.5 text-xs font-medium text-slate-900"
-                  >
-                    <option value="Small Van">Small Van (Citroen Berlingo, Transit Connect)</option>
-                    <option value="Short Wheelbase">Midi / Short Wheelbase (SWB)</option>
-                    <option value="Long Wheelbase">Long Wheelbase (LWB / Sprinter)</option>
-                    <option value="Extra Long Wheelbase">Extra Long Wheelbase (XLWB)</option>
-                    <option value="Luton Tail Lift">Luton Van with 500kg Tail Lift</option>
-                    <option value="Motorcycle">Courier Motorcycle</option>
-                  </select>
-                </div>
-
-                <div className="pt-1">
-                  <label className="flex items-center gap-2 cursor-pointer text-slate-700">
-                    <input
-                      type="checkbox"
-                      checked={hasInsurance}
-                      onChange={(e) => setHasInsurance(e.target.checked)}
-                      className="w-4 h-4 rounded text-[#0284C7]"
-                    />
-                    <span>I confirm I hold valid courier insurance, current MOT, and UK licence.</span>
-                  </label>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full py-2.5 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-bold transition-colors"
-                  >
-                    {isSubmitting ? "Submitting Application..." : "Submit Driver Application"}
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Radical Driver Android App (Actual Download & Install Guide from radicalcourier.co.uk) */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="border border-slate-200 rounded-xl bg-slate-50 p-6 space-y-4 text-xs">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 pb-4">
-            <div>
-              <div className="text-xs font-bold uppercase tracking-wider text-sky-700">
-                Official Driver Application
-              </div>
-              <h3 className="text-lg font-black text-slate-900">
-                Radical Courier Android Mobile App (APK)
-              </h3>
-              <p className="text-slate-600 text-xs mt-0.5">
-                Install our dedicated Android driver application to receive live job dispatch alerts.
+      {/* 3 Driver Benefits */}
+      <section className="py-12 border-b border-slate-100 bg-slate-50/60">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white border border-slate-200/80 rounded-xl p-6 space-y-2">
+              <h3 className="text-base font-bold text-slate-900">Transparent Pricing</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                See exact mileage, route details, and agreed compensation before you accept any job. No hidden fees.
               </p>
             </div>
 
-            <a
-              href="https://firebasestorage.googleapis.com/v0/b/radicalcourierservice-210212.appspot.com/o/RadApp%2FRadicalCourier31.apk?alt=media&token=aa6f741f-2c3d-4ff6-ae76-5245a74a91a7"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs shrink-0 transition-colors shadow-xs"
-            >
-              <Download className="w-4 h-4" />
-              <span>Download Radical Courier APK</span>
-            </a>
-          </div>
+            <div className="bg-white border border-slate-200/80 rounded-xl p-6 space-y-2">
+              <h3 className="text-base font-bold text-slate-900">Prompt Weekly Payments</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Direct transfers into your UK bank account with itemised self-billing remittance statements.
+              </p>
+            </div>
 
-          <div className="space-y-2 text-slate-700">
-            <strong className="text-slate-900 font-bold block">Installation Instructions:</strong>
-            <ol className="list-decimal pl-4 space-y-1 text-slate-600">
-              <li>Click the button above to download the <code className="bg-white px-1.5 py-0.5 rounded border border-slate-200">RadicalCourier31.apk</code> file to your device.</li>
-              <li>When prompted by Android, go to Settings and allow installs from your browser / Files app ("Allow from this source").</li>
-              <li>Tap Install on the prompt to complete setup.</li>
-              <li>Open the app and sign in with your confirmed driver credentials.</li>
-            </ol>
+            <div className="bg-white border border-slate-200/80 rounded-xl p-6 space-y-2">
+              <h3 className="text-base font-bold text-slate-900">Dedicated Mobile App</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Receive live dispatches, upload recipient signatures, and update delivery milestones straight from your phone.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Requirements & Registration Form */}
+      <section className="py-16 sm:py-20">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left: Driver Criteria */}
+            <div className="lg:col-span-5 space-y-6">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-sky-700">
+                  Fleet Criteria
+                </span>
+                <h2 className="text-2xl font-bold text-slate-900 mt-1">
+                  Driver Requirements
+                </h2>
+                <p className="text-sm text-slate-600 mt-2 leading-relaxed">
+                  To join our owner-driver network, you will need the following items in place:
+                </p>
+              </div>
+
+              <div className="space-y-4 text-sm text-slate-700">
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-slate-900 block font-semibold">Your Own Vehicle</strong>
+                    <span className="text-slate-500 text-xs">Van (Small, SWB, LWB, XLWB, Luton) or courier motorcycle</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-slate-900 block font-semibold">Courier Insurance</strong>
+                    <span className="text-slate-500 text-xs">Hire &amp; Reward, Goods in Transit, and Public Liability</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-slate-900 block font-semibold">Documentation</strong>
+                    <span className="text-slate-500 text-xs">Valid UK Driving Licence and current MOT certificate</span>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="text-slate-900 block font-semibold">Android Smartphone</strong>
+                    <span className="text-slate-500 text-xs">Compatible with the Radical Courier dispatch application</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200/80 text-xs text-slate-600 leading-relaxed">
+                <strong>Note:</strong> Registration is 100% free with no recurring subscription or sign-up fees.
+              </div>
+            </div>
+
+            {/* Right: Registration Form */}
+            <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 space-y-6">
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900 tracking-tight">
+                  Driver Application Form
+                </h3>
+                <p className="text-sm text-slate-500 mt-1">
+                  Complete the details below to join our Coventry &amp; Midlands courier network.
+                </p>
+              </div>
+
+              {isRegistered ? (
+                <div className="py-10 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                    <CheckCircle2 className="w-6 h-6" />
+                  </div>
+                  <h4 className="text-lg font-bold text-slate-900">Application Submitted</h4>
+                  <p className="text-sm text-slate-600 max-w-sm mx-auto">
+                    Thank you, {driverName}. A fleet coordinator will contact you at {driverPhone} to
+                    verify insurance and complete app setup.
+                  </p>
+                  <button
+                    onClick={() => setIsRegistered(false)}
+                    className="px-5 py-2.5 rounded-lg border border-slate-300 text-sm font-semibold text-slate-700 hover:bg-slate-50 mt-2"
+                  >
+                    Submit Another Profile
+                  </button>
+                </div>
+              ) : (
+                <form onSubmit={handleRegister} className="space-y-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                        Full Name *
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="John Smith"
+                        value={driverName}
+                        onChange={(e) => setDriverName(e.target.value)}
+                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                        Mobile Telephone *
+                      </label>
+                      <input
+                        type="tel"
+                        placeholder="07123 456789"
+                        value={driverPhone}
+                        onChange={(e) => setDriverPhone(e.target.value)}
+                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                        Email Address *
+                      </label>
+                      <input
+                        type="email"
+                        placeholder="driver@domain.co.uk"
+                        value={driverEmail}
+                        onChange={(e) => setDriverEmail(e.target.value)}
+                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                        Home Base / Town *
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Coventry, Warwick, Rugby, etc."
+                        value={baseTown}
+                        onChange={(e) => setBaseTown(e.target.value)}
+                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                      Vehicle Type
+                    </label>
+                    <select
+                      value={vehicleType}
+                      onChange={(e) => setVehicleType(e.target.value)}
+                      className="w-full rounded-lg border border-slate-300 py-2.5 px-3 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
+                    >
+                      <option value="Small Van">Small Van (Citroen Berlingo, Transit Connect)</option>
+                      <option value="Short Wheelbase">Midi / Short Wheelbase (SWB)</option>
+                      <option value="Long Wheelbase">Long Wheelbase (LWB / Sprinter)</option>
+                      <option value="Extra Long Wheelbase">Extra Long Wheelbase (XLWB)</option>
+                      <option value="Luton Tail Lift">Luton Van with 500kg Tail Lift</option>
+                      <option value="Motorcycle">Courier Motorcycle</option>
+                    </select>
+                  </div>
+
+                  <div className="pt-2">
+                    <label className="flex items-center gap-2.5 cursor-pointer text-xs text-slate-700">
+                      <input
+                        type="checkbox"
+                        checked={hasInsurance}
+                        onChange={(e) => setHasInsurance(e.target.checked)}
+                        className="w-4 h-4 rounded text-[#0284C7]"
+                      />
+                      <span>I confirm I hold valid courier insurance, current MOT, and UK licence.</span>
+                    </label>
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className="w-full py-3 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-sm font-bold transition-colors"
+                    >
+                      {isSubmitting ? "Submitting Application..." : "Submit Driver Application"}
+                    </button>
+                  </div>
+                </form>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Dedicated Driver Android App (Direct Download) */}
+      <section className="py-16 sm:py-20 border-t border-slate-100 bg-slate-50/60">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6">
+          <div className="bg-white border border-slate-200/80 rounded-2xl p-6 sm:p-8 space-y-6">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-sky-700">
+                  Official Mobile Dispatch
+                </span>
+                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mt-1">
+                  Radical Courier Android Driver App
+                </h3>
+                <p className="text-sm text-slate-600 mt-1">
+                  Download our Android APK to receive live job dispatch notifications on the road.
+                </p>
+              </div>
+
+              <a
+                href="https://firebasestorage.googleapis.com/v0/b/radicalcourierservice-210212.appspot.com/o/RadApp%2FRadicalCourier31.apk?alt=media&token=aa6f741f-2c3d-4ff6-ae76-5245a74a91a7"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white font-bold text-sm shrink-0 transition-colors shadow-xs"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download APK</span>
+              </a>
+            </div>
+
+            <div className="border-t border-slate-100 pt-6">
+              <span className="text-xs font-bold text-slate-900 uppercase tracking-wider block mb-3">
+                Quick Installation Steps
+              </span>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs text-slate-600">
+                <div className="bg-slate-50 rounded-xl p-4 space-y-1">
+                  <strong className="text-slate-900 block font-semibold">1. Download APK</strong>
+                  <span>Tap the download button above on your Android smartphone.</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-4 space-y-1">
+                  <strong className="text-slate-900 block font-semibold">2. Allow Install</strong>
+                  <span>Enable "Install Unknown Apps" in your device settings if prompted.</span>
+                </div>
+                <div className="bg-slate-50 rounded-xl p-4 space-y-1">
+                  <strong className="text-slate-900 block font-semibold">3. Log In</strong>
+                  <span>Open the app and sign in with your confirmed driver credentials.</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

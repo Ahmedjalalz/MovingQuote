@@ -3,17 +3,12 @@ import {
   Truck,
   Calendar,
   Clock,
-  MapPin,
   ShieldCheck,
   CheckCircle2,
   Phone,
-  Mail,
   Zap,
   GraduationCap,
-  Layers,
-  ChevronRight,
   ArrowRight,
-  Info,
 } from "lucide-react";
 import { RadicalLocationField } from "./RadicalLocationField";
 import { cn } from "@/lib/utils";
@@ -45,7 +40,7 @@ export const RADICAL_VANS: VanOption[] = [
     pallets: 1,
     baseRatePerMile: 1.35,
     minCharge: 55,
-    idealFor: "Urgent documents, medical vials, cartons & 1 small pallet",
+    idealFor: "Envelopes, urgent documents, cartons & 1 small pallet",
   },
   {
     id: "midi_swb",
@@ -58,7 +53,7 @@ export const RADICAL_VANS: VanOption[] = [
     pallets: 2,
     baseRatePerMile: 1.65,
     minCharge: 75,
-    idealFor: "Up to 2 pallets, automotive parts, machinery spares & trade goods",
+    idealFor: "Up to 2 pallets, automotive parts & machinery spares",
   },
   {
     id: "lwb",
@@ -71,7 +66,7 @@ export const RADICAL_VANS: VanOption[] = [
     pallets: 3,
     baseRatePerMile: 1.95,
     minCharge: 95,
-    idealFor: "3 standard pallets, engineering equipment, bulky commercial goods",
+    idealFor: "3 standard pallets, commercial freight & bulky items",
   },
   {
     id: "xlwb",
@@ -84,7 +79,7 @@ export const RADICAL_VANS: VanOption[] = [
     pallets: 4,
     baseRatePerMile: 2.25,
     minCharge: 125,
-    idealFor: "Up to 4 pallets, 4m lengths/pipes, high-volume cargo",
+    idealFor: "Up to 4 pallets, 4m lengths/pipes & high-cube cargo",
   },
   {
     id: "luton_tail_lift",
@@ -97,20 +92,17 @@ export const RADICAL_VANS: VanOption[] = [
     pallets: 6,
     baseRatePerMile: 2.45,
     minCharge: 145,
-    idealFor: "Up to 6 pallets, heavy pallet truck freight, student house moves",
+    idealFor: "Up to 6 pallets, heavy pallet truck freight & student moves",
   },
 ];
 
 export type DeliveryType = "asap" | "planned" | "student";
 
-// Realistic UK road mileage approximation between key regions/cities from Coventry hub
 function estimateUkDistance(from: string, to: string): number {
   if (!from || !to) return 35;
-
   const f = from.toLowerCase();
   const t = to.toLowerCase();
 
-  // Local Coventry & surrounding Warwickshire
   if (
     (f.includes("coventry") && t.includes("coventry")) ||
     (f.includes("cv") && t.includes("cv"))
@@ -118,7 +110,6 @@ function estimateUkDistance(from: string, to: string): number {
     return 12;
   }
 
-  // Key transport corridors from Coventry / West Midlands
   const distances: Record<string, number> = {
     birmingham: 22,
     leamington: 11,
@@ -147,7 +138,6 @@ function estimateUkDistance(from: string, to: string): number {
     }
   }
 
-  // Heuristic based on string characters
   let hash = 0;
   for (let i = 0; i < f.length; i++) hash += f.charCodeAt(i);
   for (let i = 0; i < t.length; i++) hash += t.charCodeAt(i);
@@ -169,91 +159,78 @@ export function RadicalCourierQuoteWizard({
   const [selectedVanId, setSelectedVanId] = useState<string>(initialVanId);
   const selectedVan = RADICAL_VANS.find((v) => v.id === selectedVanId) || RADICAL_VANS[0];
 
-  // Delivery Format
+  // Delivery Urgency
   const [deliveryType, setDeliveryType] = useState<DeliveryType>(initialDeliveryType);
   const [scheduledDateTime, setScheduledDateTime] = useState<string>("");
 
-  // Collection Details
+  // Route Details
   const [pickupLocation, setPickupLocation] = useState("");
   const [pickupBuilding, setPickupBuilding] = useState("");
   const [pickupContactName, setPickupContactName] = useState("");
   const [pickupContactPhone, setPickupContactPhone] = useState("");
 
-  // Delivery Details
   const [deliveryLocation, setDeliveryLocation] = useState("");
   const [deliveryBuilding, setDeliveryBuilding] = useState("");
   const [deliveryContactName, setDeliveryContactName] = useState("");
   const [deliveryContactPhone, setDeliveryContactPhone] = useState("");
 
-  // Consignment & Notes
+  // Cargo Information
+  const [palletCount, setPalletCount] = useState("0");
+  const [cargoWeightKg, setCargoWeightKg] = useState("");
   const [cargoDescription, setCargoDescription] = useState("");
-  const [palletCount, setPalletCount] = useState<string>("1");
-  const [cargoWeightKg, setCargoWeightKg] = useState<string>("");
-  const [industrySector, setIndustrySector] = useState<string>("general");
-  const [isAccountHolder, setIsAccountHolder] = useState<boolean>(false);
   const [clientEmail, setClientEmail] = useState("");
+  const [isAccountHolder, setIsAccountHolder] = useState(false);
 
-  // Errors & UI state
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  // Submission State
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [bookingConfirmed, setBookingConfirmed] = useState(false);
   const [bookingReference, setBookingReference] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  // Distance and Cost Calculation
-  const estimatedMiles = useMemo(() => {
-    return estimateUkDistance(pickupLocation, deliveryLocation);
-  }, [pickupLocation, deliveryLocation]);
-
+  // Pricing Calculation
   const pricingBreakdown = useMemo(() => {
-    let mileageRate = selectedVan.baseRatePerMile;
-    let distanceCost = estimatedMiles * mileageRate;
+    const miles = estimateUkDistance(pickupLocation, deliveryLocation);
+    const mileageCost = miles * selectedVan.baseRatePerMile;
+    const baseVehiclePrice = Math.max(selectedVan.minCharge, mileageCost);
 
-    // Minimum charge check
-    if (distanceCost < selectedVan.minCharge) {
-      distanceCost = selectedVan.minCharge;
-    }
+    let multiplier = 1.0;
+    if (deliveryType === "asap") multiplier = 1.15; // 15% urgent priority dispatch
+    if (deliveryType === "student") multiplier = 0.95; // 5% student concession
 
-    // Urgent ASAP modifier (+15% for immediate 60-min priority dispatch)
-    const urgencyMultiplier = deliveryType === "asap" ? 1.15 : 1.0;
-    const subtotal = distanceCost * urgencyMultiplier;
-
-    // 10% discount for corporate account holders
+    const subtotal = baseVehiclePrice * multiplier;
     const accountDiscount = isAccountHolder ? subtotal * 0.1 : 0;
     const netTotal = subtotal - accountDiscount;
-
-    // Standard UK VAT (20%)
     const vat = netTotal * 0.2;
     const grossTotal = netTotal + vat;
 
     return {
-      miles: estimatedMiles,
-      mileageRate,
-      subtotal,
+      miles,
+      mileageRate: selectedVan.baseRatePerMile,
+      baseVehiclePrice,
       accountDiscount,
       netTotal,
       vat,
       grossTotal,
     };
-  }, [estimatedMiles, selectedVan, deliveryType, isAccountHolder]);
+  }, [pickupLocation, deliveryLocation, selectedVan, deliveryType, isAccountHolder]);
 
-  // Validation
-  const validate = (): boolean => {
+  const validate = () => {
     const errs: Record<string, string> = {};
 
-    if (!pickupLocation.trim()) errs.pickupLocation = "Pickup town or postcode is required";
-    if (!pickupContactName.trim()) errs.pickupContactName = "Pickup contact name is required";
-    if (!pickupContactPhone.trim()) errs.pickupContactPhone = "Contact phone number is required";
+    if (!pickupLocation.trim()) errs.pickupLocation = "Pickup town or postcode required";
+    if (!pickupContactName.trim()) errs.pickupContactName = "Contact name required";
+    if (!pickupContactPhone.trim()) errs.pickupContactPhone = "Contact phone required";
 
-    if (!deliveryLocation.trim()) errs.deliveryLocation = "Delivery town or postcode is required";
-    if (!deliveryContactName.trim()) errs.deliveryContactName = "Delivery contact name is required";
-    if (!deliveryContactPhone.trim()) errs.deliveryContactPhone = "Delivery contact phone is required";
+    if (!deliveryLocation.trim()) errs.deliveryLocation = "Delivery town or postcode required";
+    if (!deliveryContactName.trim()) errs.deliveryContactName = "Recipient name required";
+    if (!deliveryContactPhone.trim()) errs.deliveryContactPhone = "Recipient phone required";
 
     if (!clientEmail.trim() || !clientEmail.includes("@")) {
-      errs.clientEmail = "A valid email is required to send your quotation summary";
+      errs.clientEmail = "Valid email required for quote confirmation";
     }
 
     if (deliveryType === "planned" && !scheduledDateTime) {
-      errs.scheduledDateTime = "Please select your required collection date and time";
+      errs.scheduledDateTime = "Please select a date and time";
     }
 
     setErrors(errs);
@@ -275,76 +252,62 @@ export function RadicalCourierQuoteWizard({
       setBookingReference(ref);
       setBookingConfirmed(true);
       toast.success("Quote generated! Reference: " + ref);
-    }, 600);
+    }, 500);
   };
 
   return (
     <div className={cn("w-full max-w-5xl mx-auto", className)}>
       {bookingConfirmed ? (
-        /* Confirmation Card */
-        <div className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 text-center shadow-sm space-y-6">
-          <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border-2 border-emerald-200">
-            <CheckCircle2 className="w-8 h-8" />
+        /* Confirmation Receipt */
+        <div className="bg-white rounded-2xl border border-slate-200/80 p-8 sm:p-12 text-center space-y-6">
+          <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200">
+            <CheckCircle2 className="w-7 h-7" />
           </div>
 
           <div className="space-y-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-500">
-              Quotation &amp; Dispatch Request
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900">
-              Booking Request Received
+            <h2 className="text-2xl font-bold text-slate-900">
+              Quotation Confirmed
             </h2>
-            <p className="text-sm text-slate-600 max-w-lg mx-auto">
-              Your quotation reference number is{" "}
-              <strong className="text-[#0284C7] font-mono text-base">{bookingReference}</strong>.
-              A confirmation email has been logged to <strong>{clientEmail}</strong>.
+            <p className="text-sm text-slate-600">
+              Reference number: <strong className="text-[#0284C7] font-mono text-base">{bookingReference}</strong>
             </p>
           </div>
 
-          <div className="max-w-xl mx-auto bg-slate-50 border border-slate-200 rounded-xl p-5 text-left text-xs space-y-3">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-              <span className="text-slate-600 font-semibold">Allocated Vehicle:</span>
-              <span className="font-bold text-slate-900">{selectedVan.name}</span>
+          <div className="max-w-md mx-auto bg-slate-50 border border-slate-200/80 rounded-xl p-6 text-left text-sm space-y-3">
+            <div className="flex justify-between border-b border-slate-200/80 pb-2.5">
+              <span className="text-slate-500">Vehicle</span>
+              <strong className="text-slate-900">{selectedVan.name}</strong>
             </div>
-
-            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
-              <span className="text-slate-600 font-semibold">Delivery Type:</span>
-              <span className="font-bold text-sky-700 uppercase">
-                {deliveryType === "asap" ? "Urgent Same-Day (Within 60 mins)" : deliveryType === "student" ? "Student Move" : `Scheduled: ${scheduledDateTime}`}
+            <div className="flex justify-between border-b border-slate-200/80 pb-2.5">
+              <span className="text-slate-500">Service</span>
+              <strong className="text-slate-900 uppercase text-xs tracking-wider">
+                {deliveryType === "asap" ? "Urgent Same-Day" : deliveryType === "student" ? "Student Move" : "Scheduled"}
+              </strong>
+            </div>
+            <div className="flex justify-between border-b border-slate-200/80 pb-2.5">
+              <span className="text-slate-500">Route</span>
+              <span className="text-slate-800 font-medium truncate max-w-[220px]">
+                {pickupLocation} → {deliveryLocation}
               </span>
             </div>
-
-            <div className="grid grid-cols-2 gap-3 border-b border-slate-200 pb-3">
-              <div>
-                <span className="text-slate-500 block">Collection:</span>
-                <span className="font-bold text-slate-900">{pickupLocation}</span>
-                <span className="text-slate-600 block">{pickupContactName} ({pickupContactPhone})</span>
-              </div>
-              <div>
-                <span className="text-slate-500 block">Delivery:</span>
-                <span className="font-bold text-slate-900">{deliveryLocation}</span>
-                <span className="text-slate-600 block">{deliveryContactName} ({deliveryContactPhone})</span>
-              </div>
-            </div>
-
-            <div className="flex items-baseline justify-between pt-1">
-              <div>
-                <span className="text-sm font-bold text-slate-900 block">Total Estimated Price:</span>
-                <span className="text-[11px] text-slate-500">Includes 20% VAT (approx {pricingBreakdown.miles} miles)</span>
-              </div>
+            <div className="flex justify-between items-baseline pt-1">
+              <span className="font-bold text-slate-900">Estimated Total:</span>
               <span className="text-2xl font-black text-[#0284C7]">
                 £{pricingBreakdown.grossTotal.toFixed(2)}
               </span>
+            </div>
+            <div className="text-xs text-slate-500 text-right">
+              Includes 20% VAT (approx {pricingBreakdown.miles} road miles)
             </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
             <a
               href="tel:02475122465"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition-colors"
+              className="px-6 py-3 rounded-lg bg-sky-600 hover:bg-sky-500 text-white text-sm font-bold transition-colors inline-flex items-center gap-2"
             >
               <Phone className="w-4 h-4" />
-              <span>Call Dispatch to Confirm: 024 7512 2465</span>
+              <span>Call Dispatch: 024 7512 2465</span>
             </a>
 
             <button
@@ -352,39 +315,32 @@ export function RadicalCourierQuoteWizard({
                 setBookingConfirmed(false);
                 setBookingReference("");
               }}
-              className="px-6 py-3 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-bold transition-colors"
+              className="px-5 py-3 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-semibold transition-colors"
             >
-              Calculate Another Quote
+              New Calculation
             </button>
           </div>
         </div>
       ) : (
         /* Quotation Form */
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Header Bar */}
-          <div className="border-b border-slate-200 pb-4">
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900">
-              Online Quotation &amp; Fixed-Price Tariff
+        <form onSubmit={handleSubmit} className="space-y-8">
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">
+              Courier Quotation Calculator
             </h1>
-            <p className="text-xs sm:text-sm text-slate-600 mt-1">
-              Complete the collection and delivery details below to obtain an instant fixed quote.
-              No account required.
+            <p className="text-sm text-slate-600 mt-1">
+              Instant fixed pricing based on official vehicle mileage rates. No account required.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-            {/* Left 8 Cols: Input Steps */}
+            {/* Left 8 Columns: Form Steps */}
             <div className="lg:col-span-8 space-y-6">
               {/* Step 1: Vehicle Size Selection */}
-              <div className="bg-white rounded-xl border border-slate-200 p-5 space-y-4">
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 space-y-4">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-3">
-                  <div className="flex items-center gap-2">
-                    <span className="w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">
-                      1
-                    </span>
-                    <h2 className="text-base font-bold text-slate-900">Select Vehicle Size</h2>
-                  </div>
-                  <span className="text-[11px] text-slate-500">Choose capacity according to payload</span>
+                  <h2 className="text-base font-bold text-slate-900">1. Select Vehicle Size</h2>
+                  <span className="text-xs text-slate-500">Pick by weight &amp; pallets</span>
                 </div>
 
                 <div className="space-y-2.5">
@@ -395,34 +351,30 @@ export function RadicalCourierQuoteWizard({
                         key={van.id}
                         onClick={() => setSelectedVanId(van.id)}
                         className={cn(
-                          "cursor-pointer rounded-lg border p-3.5 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3",
+                          "cursor-pointer rounded-xl border p-4 transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm",
                           isSelected
-                            ? "border-[#0284C7] bg-sky-50/50 ring-1 ring-[#0284C7]"
-                            : "border-slate-200 hover:border-slate-300 bg-white"
+                            ? "border-[#0284C7] bg-sky-50/40 ring-1 ring-[#0284C7]"
+                            : "border-slate-200/80 hover:border-slate-300"
                         )}
                       >
                         <div className="flex items-center gap-3">
                           <input
                             type="radio"
-                            name="vehicle_size"
+                            name="vehicle"
                             checked={isSelected}
                             onChange={() => setSelectedVanId(van.id)}
                             className="w-4 h-4 text-[#0284C7]"
                           />
                           <div>
-                            <div className="font-bold text-sm text-slate-900">{van.name}</div>
-                            <div className="text-[11px] text-slate-500">{van.idealFor}</div>
+                            <span className="font-bold text-slate-900">{van.name}</span>
+                            <span className="text-slate-500 block text-xs mt-0.5">{van.idealFor}</span>
                           </div>
                         </div>
 
-                        <div className="flex items-center gap-4 text-xs shrink-0 self-end sm:self-center font-mono">
-                          <span className="text-slate-600">
-                            {van.length} × {van.width}
-                          </span>
-                          <span className="font-semibold text-slate-800">
-                            {van.payload}
-                          </span>
-                          <span className="font-bold text-sky-800 bg-sky-100 px-2 py-0.5 rounded text-[11px]">
+                        <div className="flex items-center gap-3 text-xs font-medium text-slate-600 shrink-0 self-end sm:self-center">
+                          <span className="font-mono">{van.length} × {van.width}</span>
+                          <span className="font-semibold text-slate-800">{van.payload}</span>
+                          <span className="text-[#0284C7] font-semibold bg-sky-100/70 px-2.5 py-1 rounded-md">
                             {van.pallets} Pallet{van.pallets > 1 ? "s" : ""}
                           </span>
                         </div>
@@ -432,84 +384,78 @@ export function RadicalCourierQuoteWizard({
                 </div>
               </div>
 
-              {/* Step 2: Delivery Type */}
-              <div className="bg-white rounded-xl border border-slate-200 p-5 space-y-4">
-                <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                  <span className="w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">
-                    2
-                  </span>
-                  <h2 className="text-base font-bold text-slate-900">Delivery Type &amp; Urgency</h2>
-                </div>
+              {/* Step 2: Delivery Urgency */}
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 space-y-4">
+                <h2 className="text-base font-bold text-slate-900 border-b border-slate-100 pb-3">
+                  2. Delivery Type
+                </h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <label
                     onClick={() => setDeliveryType("asap")}
                     className={cn(
-                      "cursor-pointer rounded-lg border p-3.5 transition-all flex flex-col justify-between",
+                      "cursor-pointer rounded-xl border p-4 transition-all text-sm space-y-1.5",
                       deliveryType === "asap"
-                        ? "border-[#0284C7] bg-sky-50/50 ring-1 ring-[#0284C7]"
-                        : "border-slate-200 hover:border-slate-300"
+                        ? "border-[#0284C7] bg-sky-50/40 ring-1 ring-[#0284C7]"
+                        : "border-slate-200/80 hover:border-slate-300"
                     )}
                   >
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 font-bold text-slate-900">
                       <Zap className="w-4 h-4 text-amber-500" />
-                      <strong className="text-xs text-slate-900">ASAP Same-Day</strong>
+                      <span>ASAP Same-Day</span>
                     </div>
-                    <span className="text-[11px] text-slate-500">
-                      Immediate dispatch. Collection within 60 minutes.
+                    <span className="text-xs text-slate-500 block">
+                      Collected within 60 mins
                     </span>
                   </label>
 
                   <label
                     onClick={() => setDeliveryType("planned")}
                     className={cn(
-                      "cursor-pointer rounded-lg border p-3.5 transition-all flex flex-col justify-between",
+                      "cursor-pointer rounded-xl border p-4 transition-all text-sm space-y-1.5",
                       deliveryType === "planned"
-                        ? "border-[#0284C7] bg-sky-50/50 ring-1 ring-[#0284C7]"
-                        : "border-slate-200 hover:border-slate-300"
+                        ? "border-[#0284C7] bg-sky-50/40 ring-1 ring-[#0284C7]"
+                        : "border-slate-200/80 hover:border-slate-300"
                     )}
                   >
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 font-bold text-slate-900">
                       <Calendar className="w-4 h-4 text-sky-600" />
-                      <strong className="text-xs text-slate-900">Specific Date/Time</strong>
+                      <span>Specific Date/Time</span>
                     </div>
-                    <span className="text-[11px] text-slate-500">
-                      Planned future collection date and time window.
+                    <span className="text-xs text-slate-500 block">
+                      Scheduled collection window
                     </span>
                   </label>
 
                   <label
                     onClick={() => setDeliveryType("student")}
                     className={cn(
-                      "cursor-pointer rounded-lg border p-3.5 transition-all flex flex-col justify-between",
+                      "cursor-pointer rounded-xl border p-4 transition-all text-sm space-y-1.5",
                       deliveryType === "student"
-                        ? "border-[#0284C7] bg-sky-50/50 ring-1 ring-[#0284C7]"
-                        : "border-slate-200 hover:border-slate-300"
+                        ? "border-[#0284C7] bg-sky-50/40 ring-1 ring-[#0284C7]"
+                        : "border-slate-200/80 hover:border-slate-300"
                     )}
                   >
-                    <div className="flex items-center gap-2 mb-1">
+                    <div className="flex items-center gap-2 font-bold text-slate-900">
                       <GraduationCap className="w-4 h-4 text-emerald-600" />
-                      <strong className="text-xs text-slate-900">Student Move</strong>
+                      <span>Student Move</span>
                     </div>
-                    <span className="text-[11px] text-slate-500">
-                      Moving student belongings + passenger to campus.
+                    <span className="text-xs text-slate-500 block">
+                      Move person + belongings
                     </span>
                   </label>
                 </div>
 
                 {deliveryType === "planned" && (
-                  <div className="pt-2 text-xs">
-                    <label className="font-bold text-slate-700 block mb-1">
-                      Required Collection Date &amp; Time *
+                  <div className="pt-2">
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                      Collection Date &amp; Time
                     </label>
                     <input
                       type="datetime-local"
                       value={scheduledDateTime}
                       onChange={(e) => setScheduledDateTime(e.target.value)}
-                      className={cn(
-                        "w-full sm:w-72 rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900",
-                        errors.scheduledDateTime && "border-red-500"
-                      )}
+                      className="w-full sm:w-72 rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
                     />
                     {errors.scheduledDateTime && (
                       <p className="text-red-500 mt-1 text-xs">{errors.scheduledDateTime}</p>
@@ -518,192 +464,118 @@ export function RadicalCourierQuoteWizard({
                 )}
               </div>
 
-              {/* Step 3: Collection & Delivery Route */}
-              <div className="bg-white rounded-xl border border-slate-200 p-5 space-y-5">
-                <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                  <span className="w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">
-                    3
-                  </span>
-                  <h2 className="text-base font-bold text-slate-900">Collection &amp; Delivery Details</h2>
-                </div>
+              {/* Step 3: Route Details */}
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 space-y-5">
+                <h2 className="text-base font-bold text-slate-900 border-b border-slate-100 pb-3">
+                  3. Collection &amp; Delivery Locations
+                </h2>
 
-                {/* Collection Point */}
-                <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-3 text-xs">
-                  <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                    <span>Collection Details (Point A)</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {/* Collection */}
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                      Collection (Point A)
+                    </div>
                     <RadicalLocationField
-                      label="Pickup Town or Postcode"
-                      placeholder="e.g. Coventry CV1, Warwick, Birmingham"
+                      label="Town or Postcode"
+                      placeholder="e.g. Coventry CV1"
                       value={pickupLocation}
                       onChange={setPickupLocation}
                       error={errors.pickupLocation}
                       required
                     />
-
                     <div>
-                      <label className="font-bold text-slate-700 block mb-1">
-                        Building / Company / Street
-                      </label>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">Building / Address</label>
                       <input
                         type="text"
-                        placeholder="e.g. Unit 4, Crossway Road"
+                        placeholder="e.g. Unit 4, Industrial Park"
                         value={pickupBuilding}
                         onChange={(e) => setPickupBuilding(e.target.value)}
-                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3 text-xs font-medium text-slate-900"
+                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
                       />
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="font-bold text-slate-700 block mb-1">
-                        Pickup Contact Name *
-                      </label>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">Contact Name *</label>
                       <input
                         type="text"
-                        placeholder="Person handing over goods"
+                        placeholder="Contact at collection"
                         value={pickupContactName}
                         onChange={(e) => setPickupContactName(e.target.value)}
-                        className={cn(
-                          "w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900",
-                          errors.pickupContactName && "border-red-500"
-                        )}
+                        className={cn("w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden", errors.pickupContactName && "border-red-500")}
                       />
-                      {errors.pickupContactName && (
-                        <p className="text-red-500 mt-0.5">{errors.pickupContactName}</p>
-                      )}
                     </div>
-
                     <div>
-                      <label className="font-bold text-slate-700 block mb-1">
-                        Pickup Phone Number *
-                      </label>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">Contact Phone *</label>
                       <input
                         type="tel"
-                        placeholder="For driver collection arrival"
+                        placeholder="Mobile for driver"
                         value={pickupContactPhone}
                         onChange={(e) => setPickupContactPhone(e.target.value)}
-                        className={cn(
-                          "w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900",
-                          errors.pickupContactPhone && "border-red-500"
-                        )}
+                        className={cn("w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden", errors.pickupContactPhone && "border-red-500")}
                       />
-                      {errors.pickupContactPhone && (
-                        <p className="text-red-500 mt-0.5">{errors.pickupContactPhone}</p>
-                      )}
                     </div>
                   </div>
-                </div>
 
-                {/* Delivery Point */}
-                <div className="p-4 rounded-lg bg-slate-50 border border-slate-200 space-y-3 text-xs">
-                  <div className="font-bold text-slate-900 flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-red-500" />
-                    <span>Delivery Details (Point B)</span>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {/* Delivery */}
+                  <div className="space-y-3">
+                    <div className="text-xs font-bold text-slate-900 uppercase tracking-wider">
+                      Delivery (Point B)
+                    </div>
                     <RadicalLocationField
-                      label="Delivery Town or Postcode"
-                      placeholder="e.g. London, Manchester, Leeds"
+                      label="Town or Postcode"
+                      placeholder="e.g. London, Birmingham"
                       value={deliveryLocation}
                       onChange={setDeliveryLocation}
                       error={errors.deliveryLocation}
                       required
                     />
-
                     <div>
-                      <label className="font-bold text-slate-700 block mb-1">
-                        Recipient Building / Company / Street
-                      </label>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">Building / Address</label>
                       <input
                         type="text"
                         placeholder="e.g. Reception, High Street"
                         value={deliveryBuilding}
                         onChange={(e) => setDeliveryBuilding(e.target.value)}
-                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3 text-xs font-medium text-slate-900"
+                        className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
                       />
                     </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <div>
-                      <label className="font-bold text-slate-700 block mb-1">
-                        Recipient Contact Name *
-                      </label>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">Recipient Name *</label>
                       <input
                         type="text"
-                        placeholder="Person receiving delivery"
+                        placeholder="Person receiving goods"
                         value={deliveryContactName}
                         onChange={(e) => setDeliveryContactName(e.target.value)}
-                        className={cn(
-                          "w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900",
-                          errors.deliveryContactName && "border-red-500"
-                        )}
+                        className={cn("w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden", errors.deliveryContactName && "border-red-500")}
                       />
-                      {errors.deliveryContactName && (
-                        <p className="text-red-500 mt-0.5">{errors.deliveryContactName}</p>
-                      )}
                     </div>
-
                     <div>
-                      <label className="font-bold text-slate-700 block mb-1">
-                        Recipient Phone Number *
-                      </label>
+                      <label className="text-xs font-semibold text-slate-700 block mb-1.5">Recipient Phone *</label>
                       <input
                         type="tel"
-                        placeholder="For delivery call / SMS"
+                        placeholder="Delivery notification phone"
                         value={deliveryContactPhone}
                         onChange={(e) => setDeliveryContactPhone(e.target.value)}
-                        className={cn(
-                          "w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900",
-                          errors.deliveryContactPhone && "border-red-500"
-                        )}
+                        className={cn("w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden", errors.deliveryContactPhone && "border-red-500")}
                       />
-                      {errors.deliveryContactPhone && (
-                        <p className="text-red-500 mt-0.5">{errors.deliveryContactPhone}</p>
-                      )}
                     </div>
                   </div>
                 </div>
               </div>
 
               {/* Step 4: Cargo Details */}
-              <div className="bg-white rounded-xl border border-slate-200 p-5 space-y-4 text-xs">
-                <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-                  <span className="w-6 h-6 rounded-full bg-slate-900 text-white text-xs font-bold flex items-center justify-center">
-                    4
-                  </span>
-                  <h2 className="text-base font-bold text-slate-900">Cargo &amp; Package Notes</h2>
-                </div>
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 space-y-4">
+                <h2 className="text-base font-bold text-slate-900 border-b border-slate-100 pb-3">
+                  4. Cargo Information
+                </h2>
 
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="font-bold text-slate-700 block mb-1">Sector Type</label>
-                    <select
-                      value={industrySector}
-                      onChange={(e) => setIndustrySector(e.target.value)}
-                      className="w-full rounded-lg border border-slate-300 py-2 px-2.5 text-xs font-medium text-slate-900"
-                    >
-                      <option value="general">Commercial Freight</option>
-                      <option value="automotive">Automotive &amp; F1 Spares</option>
-                      <option value="legal">Legal &amp; Court Papers</option>
-                      <option value="medical">Medical / Hospital Supplies</option>
-                      <option value="printing">Printed Media / Bulk Magazines</option>
-                      <option value="student">Student Belongings</option>
-                    </select>
-                  </div>
-
-                  <div>
-                    <label className="font-bold text-slate-700 block mb-1">Pallet Count</label>
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">Pallet Count</label>
                     <select
                       value={palletCount}
                       onChange={(e) => setPalletCount(e.target.value)}
-                      className="w-full rounded-lg border border-slate-300 py-2 px-2.5 text-xs font-medium text-slate-900"
+                      className="w-full rounded-lg border border-slate-300 py-2.5 px-3 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
                     >
                       <option value="0">0 (Boxes / Documents / Loose items)</option>
                       <option value="1">1 Standard Pallet</option>
@@ -715,62 +587,56 @@ export function RadicalCourierQuoteWizard({
                   </div>
 
                   <div>
-                    <label className="font-bold text-slate-700 block mb-1">Approx Weight (kg)</label>
+                    <label className="text-xs font-semibold text-slate-700 block mb-1.5">Approx Weight (kg)</label>
                     <input
                       type="number"
-                      placeholder="e.g. 20, 150, 500"
+                      placeholder="e.g. 50, 200, 600"
                       value={cargoWeightKg}
                       onChange={(e) => setCargoWeightKg(e.target.value)}
-                      className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+                      className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="font-bold text-slate-700 block mb-1">
-                    Package Description / Special Handling Notes
+                  <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                    Package Description or Instructions
                   </label>
-                  <textarea
-                    rows={2}
-                    placeholder="Enter parcel dimensions, reference numbers, or delivery notes..."
+                  <input
+                    type="text"
+                    placeholder="e.g. 2 boxes machine parts, delivery to rear loading bay"
                     value={cargoDescription}
                     onChange={(e) => setCargoDescription(e.target.value)}
-                    className="w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900"
+                    className="w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden"
                   />
                 </div>
 
-                <div className="pt-2 border-t border-slate-100">
-                  <label className="font-bold text-slate-700 block mb-1">
-                    Email Address (For Quote Breakdown &amp; Dispatch Confirmation) *
+                <div>
+                  <label className="text-xs font-semibold text-slate-700 block mb-1.5">
+                    Confirmation Email Address *
                   </label>
                   <input
                     type="email"
                     placeholder="name@company.co.uk"
                     value={clientEmail}
                     onChange={(e) => setClientEmail(e.target.value)}
-                    className={cn(
-                      "w-full rounded-lg border border-slate-300 py-2 px-3 text-xs font-medium text-slate-900",
-                      errors.clientEmail && "border-red-500"
-                    )}
+                    className={cn("w-full rounded-lg border border-slate-300 py-2.5 px-3.5 text-sm text-slate-900 focus:border-[#0284C7] focus:ring-1 focus:ring-[#0284C7] outline-hidden", errors.clientEmail && "border-red-500")}
                   />
                   {errors.clientEmail && (
-                    <p className="text-red-500 mt-0.5">{errors.clientEmail}</p>
+                    <p className="text-red-500 mt-1 text-xs">{errors.clientEmail}</p>
                   )}
                 </div>
               </div>
             </div>
 
-            {/* Right 4 Cols: Fixed-Price Summary Sticky Card */}
-            <div className="lg:col-span-4 sticky top-20 space-y-4 text-xs">
-              <div className="bg-white rounded-xl border-2 border-slate-300 p-5 shadow-xs space-y-4">
+            {/* Right 4 Columns: Receipt Sidebar */}
+            <div className="lg:col-span-4 sticky top-24 space-y-4">
+              <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm space-y-5">
                 <div className="border-b border-slate-100 pb-3">
-                  <div className="text-xs font-bold uppercase tracking-wider text-slate-500">
-                    Official Tariff Summary
-                  </div>
-                  <h3 className="text-base font-black text-slate-900">Quotation Breakdown</h3>
+                  <h3 className="font-bold text-base text-slate-900">Quotation Summary</h3>
                 </div>
 
-                <div className="space-y-2 text-slate-600">
+                <div className="space-y-3 text-sm text-slate-600">
                   <div className="flex justify-between">
                     <span>Vehicle:</span>
                     <strong className="text-slate-900">{selectedVan.shortName}</strong>
@@ -778,46 +644,44 @@ export function RadicalCourierQuoteWizard({
 
                   <div className="flex justify-between">
                     <span>Service:</span>
-                    <strong className="text-slate-900 uppercase">
+                    <strong className="text-slate-900 uppercase text-xs tracking-wider">
                       {deliveryType === "asap" ? "Urgent Same-Day" : deliveryType === "student" ? "Student Move" : "Scheduled"}
                     </strong>
                   </div>
 
                   <div className="flex justify-between">
-                    <span>Estimated Distance:</span>
+                    <span>Est. Distance:</span>
                     <strong className="text-slate-900">
-                      {pickupLocation && deliveryLocation ? `${pricingBreakdown.miles} road miles` : "—"}
+                      {pickupLocation && deliveryLocation ? `${pricingBreakdown.miles} miles` : "—"}
                     </strong>
                   </div>
 
                   <div className="flex justify-between">
-                    <span>Mileage Tariff:</span>
+                    <span>Tariff Rate:</span>
                     <span className="font-mono text-slate-900">£{pricingBreakdown.mileageRate.toFixed(2)} / mi</span>
                   </div>
 
                   {isAccountHolder && (
-                    <div className="flex justify-between text-emerald-600 font-bold">
-                      <span>Account Customer Discount:</span>
+                    <div className="flex justify-between text-emerald-600 font-semibold">
+                      <span>Account Discount:</span>
                       <span>-£{pricingBreakdown.accountDiscount.toFixed(2)}</span>
                     </div>
                   )}
                 </div>
 
-                {/* Account checkbox */}
-                <label className="flex items-center gap-2 p-2.5 rounded bg-slate-50 border border-slate-200 cursor-pointer">
+                <label className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 border border-slate-200/80 cursor-pointer">
                   <input
                     type="checkbox"
                     checked={isAccountHolder}
                     onChange={(e) => setIsAccountHolder(e.target.checked)}
                     className="w-4 h-4 rounded text-[#0284C7]"
                   />
-                  <span className="text-[11px] text-slate-700">
-                    Approved 30-day invoice account holder
+                  <span className="text-xs text-slate-700">
+                    Apply 30-day corporate account rate
                   </span>
                 </label>
 
-                {/* Price breakdown */}
-                <div className="border-t border-slate-200 pt-3 space-y-1.5">
+                <div className="border-t border-slate-200/80 pt-4 space-y-2 text-sm">
                   <div className="flex justify-between text-slate-600">
                     <span>Net Amount:</span>
                     <span className="font-mono font-bold text-slate-900">£{pricingBreakdown.netTotal.toFixed(2)}</span>
@@ -826,8 +690,8 @@ export function RadicalCourierQuoteWizard({
                     <span>VAT (20%):</span>
                     <span className="font-mono font-bold text-slate-900">£{pricingBreakdown.vat.toFixed(2)}</span>
                   </div>
-                  <div className="flex justify-between items-baseline border-t border-slate-200 pt-2">
-                    <span className="font-bold text-slate-900 text-sm">Total Payable:</span>
+                  <div className="flex justify-between items-baseline border-t border-slate-200/80 pt-3">
+                    <span className="font-bold text-slate-900">Total Payable:</span>
                     <span className="text-2xl font-black text-[#0284C7]">
                       £{pricingBreakdown.grossTotal.toFixed(2)}
                     </span>
@@ -837,24 +701,18 @@ export function RadicalCourierQuoteWizard({
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full py-3 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-xs font-extrabold uppercase tracking-wider transition-colors shadow-xs"
+                  className="w-full py-3.5 rounded-lg bg-[#0284C7] hover:bg-[#0369A1] text-white text-sm font-bold transition-colors"
                 >
-                  {isSubmitting ? "Submitting Request..." : "Confirm & Dispatch"}
+                  {isSubmitting ? "Generating..." : "Confirm & Dispatch"}
                 </button>
-
-                <div className="text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5 pt-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>Fixed price quote • No unexpected fuel surcharges</span>
-                </div>
               </div>
 
-              {/* 24/7 Helpline */}
-              <div className="bg-slate-900 text-white rounded-xl p-4 text-xs space-y-1 text-center">
-                <div className="font-bold text-sky-400">Prefer to book by phone?</div>
-                <div className="text-slate-300">Speak directly with Coventry operations:</div>
+              {/* Direct Telephone Hotline */}
+              <div className="bg-slate-900 text-white rounded-2xl p-5 text-center space-y-1">
+                <span className="text-slate-400 block text-xs">Direct 24/7 Dispatch Hotline:</span>
                 <a
                   href="tel:02475122465"
-                  className="inline-block text-base font-black text-white hover:text-sky-300 mt-1"
+                  className="text-lg font-bold text-white hover:text-sky-300 block"
                 >
                   024 7512 2465
                 </a>

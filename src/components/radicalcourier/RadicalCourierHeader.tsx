@@ -49,33 +49,23 @@ export function RadicalCourierHeader({
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white border-b border-slate-200 shadow-xs">
-      {/* Top Utility Bar - Industrial / Commercial British Courier style */}
-      <div className="bg-slate-900 text-slate-200 text-xs py-2 px-4 sm:px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-3 text-xs">
-            <span className="inline-flex items-center gap-1.5 font-bold text-sky-400">
-              <span className="w-2 h-2 rounded-full bg-emerald-400" />
-              24/7 Same-Day Express
-            </span>
-            <span className="text-slate-600 hidden sm:inline">|</span>
-            <span className="hidden sm:inline-flex items-center gap-1 text-slate-300">
-              <ShieldCheck className="w-3.5 h-3.5 text-sky-400" />
-              Dedicated Driver Direct to Door — No Subcontracting
-            </span>
-            <span className="text-slate-600 hidden md:inline">|</span>
-            <span className="hidden md:inline-flex items-center gap-1 text-slate-400">
-              <MapPin className="w-3.5 h-3.5 text-slate-400" />
-              Coventry, Warwickshire & UK Nationwide
-            </span>
+      {/* Top Utility Bar - Clean, minimal British logistics bar */}
+      <div className="bg-slate-900 text-slate-300 text-xs py-2 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 shrink-0" />
+            <span className="font-semibold text-slate-200">24/7 Same-Day Express Dispatch</span>
+            <span className="text-slate-600 hidden sm:inline">•</span>
+            <span className="text-slate-400 hidden sm:inline">Coventry, Midlands &amp; UK Nationwide</span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs ml-auto sm:ml-0">
-            <span className="hidden lg:inline text-slate-400">Need urgent collection?</span>
+          <div className="flex items-center gap-3">
+            <span className="text-slate-400 hidden md:inline">Operations Control:</span>
             <a
               href="tel:02475122465"
-              className="inline-flex items-center gap-1.5 text-white font-extrabold hover:text-sky-300 transition-colors bg-sky-600/30 px-2.5 py-0.5 rounded border border-sky-500/40 text-xs tracking-wide"
+              className="inline-flex items-center gap-1.5 font-bold text-white hover:text-sky-300 transition-colors"
             >
-              <Phone className="w-3 h-3 text-sky-400" />
+              <Phone className="w-3.5 h-3.5 text-sky-400" />
               <span>024 7512 2465</span>
             </a>
           </div>
